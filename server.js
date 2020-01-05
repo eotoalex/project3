@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const path = require("path");
 const axios = require("axios");
 const app = express();
-const cheerio = require("cheerio");
 const PORT = process.env.PORT || 3001;
 const Users = require('./model/Users')
 const jwt = require('jsonwebtoken')
@@ -13,6 +12,7 @@ const crimeLocationsController = require('./controllers/crimeLocationController'
 const newsFeedController = require('./controllers/newsFeedController');
 const geocodeController = require('./controllers/geocodeController');
 const polyline = require( 'google-polyline' )
+var Userspass = require('./routes/Users');
 
 // Defining middleware
 app.use(express.urlencoded({ extended: true }));
@@ -29,15 +29,12 @@ db.on("error", function(err){
 console.log(err);
 });
 
-app.get("/add/user", function(){
-    Users.find({} ,function(err, data){
-        if(err) {console.log(err)}
-
-        console.log(data)
-        res.json(data)
-    });
+app.get("/add/user", function(req,res){
+  Users.find({}, function(err, data){
+    if(err){console.log(err)}
+    res.json(data);
+  });
 });
-var Userspass = require('./routes/Users');
 
 app.use('/', Userspass)
 // This route posts the saved books to the database.
@@ -61,38 +58,37 @@ app.post("/add/user", function(req, res) {
 });
 
 app.post('/register', (req, res) => {
-    console.log("connectin")
-    const today = new Date()
-    const userData = {
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      email: req.body.email,
-      password: req.body.password,
-      created: today
-    }
-  
-    Users.findOne({
-      email: req.body.email
-    })
+  console.log("connectin")
+  const today = new Date()
+  const userData = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    password: req.body.password,
+    created: today
+  };
+  Users.findOne({
+    email: req.body.email
+  })
+  .then(user => {
+    if (!user) {
+      userData.password = req.body.password
+      Users.create(userData)
       .then(user => {
-        if (!user) {
-            //console.log(userData);
-            userData.password = req.body.password
-            Users.create(userData)
-              .then(user => {
-                res.json({ status: user.email + 'Registered!' + userData})
-              })
-              .catch(err => {
-                res.send('error: ' + err)
-              })
-        } else {
-          res.json({ error: 'User already exists' })
-        }
+        res.json({ status: user.email + 'Registered!' + userData})
       })
       .catch(err => {
         res.send('error: ' + err)
       })
+    } else {
+        res.json({ error: 'User already exists' })
+      }
   })
+  .catch(err => {
+    res.send('error: ' + err)
+  })
+});
+
 // This route queiries all books currently saved in the books database.
 app.get("/api", (req, res) => {
     Users.find({}).then((result) => {

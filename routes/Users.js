@@ -2,7 +2,7 @@ const express = require('express')
 const users = express.Router()
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
-
+const testUser = require('../model/Users')
 const User = require('./User')
 users.use(cors())
 
@@ -23,7 +23,6 @@ users.post('/register', (req, res) => {
   })
     .then(user => {
       if (!user) {
-        
           userData.password = "pass"
           User.create(userData)
             .then(user => {
@@ -67,6 +66,14 @@ users.post('/login', (req, res) => {
     .catch(err => {
       res.send('error: ' + err)
     })
+})
+
+users.get('/all/users', (req,res) => {
+  User.find({})
+  .then((result) => {
+    console.log(res)
+    res.send(result);
+});  
 })
 
 users.get('/profile', (req, res) => {
