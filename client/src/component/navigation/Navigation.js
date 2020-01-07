@@ -28,10 +28,10 @@ class Navigation extends React.Component{
         await this.getUsrLocale(this.loadCrimeLocale)
         await this.grabCrimeData()
         await this.loadCrimeLocale(this.state.crimeLocations)
-        const crimeNews = await axios.get("/scrapeNews")
-        this.setState({
-            crimeNews : crimeNews.data
-        }); 
+        // const crimeNews = await axios.get("/scrapeNews")
+        // this.setState({
+        //     crimeNews : crimeNews.data
+        // }); 
     }
     loadCrimeLocale(arr) {
         let locale = arr;
@@ -65,7 +65,6 @@ class Navigation extends React.Component{
         this.setState({
             [name]: value
         });
-
     }
 
     handleFormSubmit = (event) => {
@@ -84,15 +83,14 @@ class Navigation extends React.Component{
     render() {
         return (
         <div className="container">
-            <p className="navigation_btn">Test tab</p>
-            <div className="overlay">
+            {/* <div className="overlay">
                 <iframe src="www.youtube.com" width="80%"></iframe>
-            </div>
-            <Container> 
-                <Slider className="slider" crimeNews={this.state.crimeNews} />
+            </div> */}
+            <Container className="container2"> 
+                {/* <Slider className="slider" crimeNews={this.state.crimeNews} /> */}
                 <Destination className="destination" handleInputChange={this.handleInputChange} handleFormSubmit={this.handleFormSubmit} />
-                
                 <Maps 
+                    className="mapper"
                     coor={
                     this.state.crimeLocations.map(function(item){
                     return {lat:item.latitude, lng:item.longitude}})}
@@ -102,6 +100,7 @@ class Navigation extends React.Component{
                     criminalLocales={this.state.crimeLocations}
                     usrCurrentLocation={this.state.usrLocation}
                 > 
+                
                 </Maps> 
             </Container>          
         </div>

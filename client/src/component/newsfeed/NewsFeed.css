@@ -1,6 +1,15 @@
 .card-header{
-    z-index:-1
+    /* z-index:-1; */
+    
 }
 .card-body{
-    position:absolute;
+    display:none;
+    
+}
+.card {
+    background-color: rgb(21, 109, 112);
+    height:30%;
+    color:white;
+    
+    
 }

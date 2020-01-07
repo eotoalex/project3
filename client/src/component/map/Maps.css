@@ -1,8 +1,44 @@
-/* I am not sure why I cannot style the maps position in this page. */
-
 .google-map {
-  overflow: hidden; 
-  margin:"auto";
+  margin:auto;
+  display:block;
+  overflow:hidden;
   position:relative; 
-  /* display:none; */
+  /* visibility:hidden;
+  display:none; */
+}
+.slider{
+ 
+        height:50%;
+        width:100%;
+        position: relative;
+        top:20%; 
+        font:white;
+}
+
+@media(max-width:376px){
+  .slider{
+ 
+    height:12%;
+    position: fixed;
+    bottom: 10%;
+    right:0;
+    left:0;
+    width: 100%;
+    z-index:1;
+
+}
+}
+
+@media (min-width: 377px) and (max-width: 412px) {
+  .slider{
+ 
+    height:12%;
+    position: fixed;
+    bottom: 10%;
+    right:0;
+    left:0;
+    width: 100%;
+    z-index:1;
+
+}
 }
