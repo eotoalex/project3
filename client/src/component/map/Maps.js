@@ -133,8 +133,8 @@ class Maps extends React.Component {
               position={this.props.usrLocale}
               icon={this.markerIcon}
               />
+              <Slider className="slider" crimeNews={this.state.crimeNews} />
           </Map>
-          <Slider className="slider" crimeNews={this.state.crimeNews} />
         </div>
       );
     };

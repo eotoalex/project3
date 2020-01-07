@@ -24,17 +24,4 @@
     margin:0;
 }
 
-/* @media(max-width:376px){
-    .card-body{
-        display:flex;
-        position:fixed;
-        top:12.4%;
-        background:rgb(21, 109, 112);
-        width:91.5%;
-        margin-right: 60%;
-        
-    }
-    .card{
-        background-color: rgb(21, 109, 112);
-    }
-} */
+

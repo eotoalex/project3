@@ -12,8 +12,8 @@ handleCardClick = (e) => {
     let cardDisplay = this._card_body.style.display;
     this._card_body.focus();
     if(cardDisplay !== "flex"){
-        this._card_body.style.display ="inherit"
-    } else if (cardDisplay === "inherit"){
+        this._card_body.style.display ="flex"
+    } else if (cardDisplay === "flex"){
         this._card_body.style.display ="none"
         } 
 }
