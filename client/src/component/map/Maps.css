@@ -5,40 +5,14 @@
   position:relative; 
   /* visibility:hidden;
   display:none; */
+  /* width:100%; */
 }
 .slider{
- 
-        height:50%;
-        width:100%;
-        position: relative;
-        top:20%; 
-        font:white;
+  height:50%;
+  width:100%;
+  position: relative;
+  top:20%; 
+  font:white;
 }
 
-@media(max-width:376px){
-  .slider{
- 
-    height:12%;
-    position: fixed;
-    bottom: 10%;
-    right:0;
-    left:0;
-    width: 100%;
-    z-index:1;
 
-}
-}
-
-@media (min-width: 377px) and (max-width: 412px) {
-  .slider{
- 
-    height:12%;
-    position: fixed;
-    bottom: 10%;
-    right:0;
-    left:0;
-    width: 100%;
-    z-index:1;
-
-}
-}
