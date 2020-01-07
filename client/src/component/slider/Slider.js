@@ -10,9 +10,11 @@ function Slider(props){
                 <div className="col-md-8 offset-md-2 col-sm-12">
                 <Carousel 
                 className="carousel"
-                controls={true}
+                // controls={false}
                 indicators={false}
-                touch={true}>
+                // touch={true}
+                autoPlay={true}
+                stopOnHover={true}>
                     {props.crimeNews.map(news => (
                         <Carousel.Item>
                             <NewsFeed title={news.title} headline={news.headline} href={news.href}></NewsFeed>
