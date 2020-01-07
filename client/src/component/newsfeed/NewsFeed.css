@@ -1,15 +1,40 @@
-.card-header{
-    /* z-index:-1; */
+/* .card-header{
     
-}
+    
+} */
 .card-body{
     display:none;
+    padding:0px;
+    margin:0px;
+    border:0;
+    height:100%;
+    font-size:95%;
+    position:relative;
     
 }
 .card {
     background-color: rgb(21, 109, 112);
-    height:30%;
-    color:white;
-    
-    
+    margin:0;
+    color:white; 
 }
+.card-header{
+    padding:5px;
+    height:100%;
+    width:100%;
+    margin:0;
+}
+
+/* @media(max-width:376px){
+    .card-body{
+        display:flex;
+        position:fixed;
+        top:12.4%;
+        background:rgb(21, 109, 112);
+        width:91.5%;
+        margin-right: 60%;
+        
+    }
+    .card{
+        background-color: rgb(21, 109, 112);
+    }
+} */

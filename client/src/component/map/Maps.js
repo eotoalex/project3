@@ -73,7 +73,6 @@ class Maps extends React.Component {
         let points = []
         if (status === 'OK'){
           points = res.routes[0].overview_path;
-          
            polylineOptions.push( {
             path: points,
             geodesic: true,
@@ -104,7 +103,6 @@ class Maps extends React.Component {
         );
       });
       return(
-        
         <div>   
           <Map
             className="google-map"
@@ -135,9 +133,6 @@ class Maps extends React.Component {
               position={this.props.usrLocale}
               icon={this.markerIcon}
               />
-          
-          
-          
           </Map>
           <Slider className="slider" crimeNews={this.state.crimeNews} />
         </div>

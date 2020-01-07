@@ -11,10 +11,9 @@ handleCardClick = (e) => {
     e.preventDefault();
     let cardDisplay = this._card_body.style.display;
     this._card_body.focus();
-    console.log("this click event works!")
     if(cardDisplay !== "flex"){
-        this._card_body.style.display ="flex"
-    } else if (cardDisplay === "flex"){
+        this._card_body.style.display ="inherit"
+    } else if (cardDisplay === "inherit"){
         this._card_body.style.display ="none"
         } 
 }
@@ -41,5 +40,4 @@ render(){
     );
     }
 }
-
 export default NewsFeed;
