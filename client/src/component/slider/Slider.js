@@ -4,10 +4,15 @@ import NewsFeed from "../newsfeed/NewsFeed";
 import "./Slider.css";
 
 function Slider(props){
+
         return (
             <div className="slider-container">
                 <div className="col-md-8 offset-md-2 col-sm-12">
-                <Carousel className="slider">
+                <Carousel 
+                className="carousel"
+                controls={true}
+                indicators={false}
+                touch={true}>
                     {props.crimeNews.map(news => (
                         <Carousel.Item>
                             <NewsFeed title={news.title} headline={news.headline} href={news.href}></NewsFeed>

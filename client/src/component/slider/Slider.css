@@ -1,13 +1,12 @@
-/* .slider-container{
-    z-index:-1;
-} */
-
-.slider{
-    height: 200px;
+.carousel-control-next{
+    right:-5%;
+}
+.carousel-control-prev{
+    left:-5%;
 }
 
 @media only screen and (max-width: 600px) {
-    .slider{
+    .carousel{
         max-height: 100px;
     }
 }

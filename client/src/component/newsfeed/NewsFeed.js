@@ -5,27 +5,27 @@ let cardBodyStyles;
 class NewsFeed extends React.Component{
     constructor(props) {
         super(props)
-        this.state = {
-           
-        }}
-    handleCardClick = (e) => {
-        e.preventDefault();
-        let cardPosition = this._card_body.style.position;
-        this._card_body.focus();
-        if(this._card_body.style.position !== "relative"){
-            this._card_body.style.position ="relative"
-        } else if (cardPosition === "relative"){
-            this._card_body.style.position ="absolute"
-          } 
-    }
-    handleReadClick = (e) => {
-        e.preventDefault();
-        window.location.href = "https://www.nydailynews.com" + this.props.href;
-    }
+        this.state = { 
+    }} 
+handleCardClick = (e) => {
+    e.preventDefault();
+    let cardDisplay = this._card_body.style.display;
+    this._card_body.focus();
+    console.log("this click event works!")
+    if(cardDisplay !== "flex"){
+        this._card_body.style.display ="flex"
+    } else if (cardDisplay === "flex"){
+        this._card_body.style.display ="none"
+        } 
+}
+handleReadClick = (e) => {
+    e.preventDefault();
+    window.location.href = "https://www.nydailynews.com" + this.props.href;
+}
 render(){
     return (
-        <div >
-            <div classname="card" >
+        <div className='card-container'>
+            <div className="card" >
                 <div className="card-header" onClick={this.handleCardClick}>
                     {this.props.title}
                 </div>
@@ -39,7 +39,7 @@ render(){
             </div>
         </div>
     );
-}
+    }
 }
 
 export default NewsFeed;

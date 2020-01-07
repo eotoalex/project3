@@ -1,4 +1,6 @@
     .container {
+        height:100%;
+        width:100%;
         display:unset;
         max-width:-8%;
         max-height: 10%;
@@ -8,16 +10,7 @@
         position:static;
         top:0;
     }
-/* .container {
-    position: relative;
-    width: 50%;
-  } */
-/*   
-  .iframe {
-    display: block;
-    width: 100%;
-    height: auto;
-  } */
+  
   .overlay {
     position: absolute;
     bottom: 0;
@@ -29,15 +22,18 @@
     height: 100%;
     transition: .5s ease;
   }
-  .container:hover .overlay {
+  /* .container:hover .overlay {
     width: 100%;
-  }
+  } */
   .destination{
-      display:none;
+    display:none;
   }
-  .container:hover .slider {
-      visibility:hidden;
-  }
+  /* .slider {
+    display:none;
+  } */
+  /* .container:hover .slider {
+    visibility:hidden;
+  } */
   .navigation_btn {
     float:left;
   }

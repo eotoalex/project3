@@ -1,5 +1,7 @@
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import Slider from "../slider/Slider";
+import axios from "axios"
 import './Maps.css';
 
 const mapStyles = {
@@ -7,20 +9,28 @@ const mapStyles = {
   height:"100vh",
   // pointerEvents:"none",
 };
-
+ 
 class Maps extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
         map:[],
-        coords:[]    
+        coords:[],   
+        crimeNews:[] || 'Loading...' 
     }
   }
   // User icon image, sized for the map.
   markerIcon = {
     url:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFiVpCGq6a1uRuvpBvmybCdTrbu-LzbRQyLMF7JR_JUudoEb8FQ&s",
     scaledSize: new this.props.google.maps.Size(40, 40)
+  }
+
+  async componentDidMount () {
+    const crimeNews = await axios.get("/scrapeNews")
+        this.setState({
+            crimeNews : crimeNews.data
+        });   
   }
 
   setsRoute = (mapProps, map) => {
@@ -31,6 +41,7 @@ class Maps extends React.Component {
     // set the state to retain the instance of the map we have rendered.
     if(map !== undefined){
     this.setState({map:map})
+    console.log(map)
     }
     let mapObj = this.state.map;
     if(this.props.destination.length !== 0){
@@ -38,26 +49,6 @@ class Maps extends React.Component {
     console.log("We have an address", lat,lng)
     } else {console.log("There is nothing in the props for destination!")}
     console.log("map OUTSIDE STATE",map)
-  }
-
-  wayPointsObj = () => {
-    let locations = [];
-    // console.log("Crime data =>>", this.props.criminalLocales);
-    // console.log("User location =>>", this.props.usrCurrentLocation);
-    // How do I find the crime data that will manipulate the route. (DONE)
-    // How does location assess location????? (FORMAT LIKE THE POST OFFICE.Street,borough,city,zip)
-    // I would need a for loop to push each object to the locations array. (FILTER METHOD)
-    // Can I return the locations array as just an array? (YES Done already and it works)
-    // Now I need to take into consideratin where the crimes happened around the user and give an alert.
-    // Based on the crime data the user location needs to be mapped in terms of miles in relation to this data, so that we know how to route around the criminal locations.
-    // I can use a filter method that creates a new array of nearest criminal locations.
-    // then check the waypoint against all crime data locations nearest the the user.
-    // The create a waypoint that is not near any of the crime locations nearest the user. 25 is the limit!
-    locations.push({
-      location:"42nd street Broadway,new york, ny ",
-      stopover:false,
-    }); 
-    return (locations)
   }
   
    polyLineClosure = (polylineOptions,map) => {
@@ -95,9 +86,7 @@ class Maps extends React.Component {
         console.log("error ", status)
       }
       this.polyLineClosure(polylineOptions,map)
-     
     })
-    
   }
     render(){
     // This variable holds the crime icon, sized for the map when rendered.
@@ -121,7 +110,21 @@ class Maps extends React.Component {
             className="google-map"
             google={this.props.google}
             zoom={11}
-            style={mapStyles}
+            disableDefaultUI= {true}
+            styles={[
+              {
+                "featureType": "road.arterial",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                  {
+                    "color": "#7cff78"
+                  },
+                  {
+                    "weight": 2
+                  }
+                ]
+              }
+            ]}
             initialCenter={{lat: 40.7128, lng: -74.0060}}
             onReady={this.setsRoute}
             >
@@ -133,7 +136,10 @@ class Maps extends React.Component {
               icon={this.markerIcon}
               />
           
+          
+          
           </Map>
+          <Slider className="slider" crimeNews={this.state.crimeNews} />
         </div>
       );
     };
