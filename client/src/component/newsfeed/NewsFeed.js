@@ -9,13 +9,17 @@ class NewsFeed extends React.Component{
     }} 
 handleCardClick = (e) => {
     e.preventDefault();
-    let cardDisplay = this._card_body.style.display;
+    let positioning = this._card_body.style.position;
+    
     this._card_body.focus();
-    if(cardDisplay !== "flex"){
-        this._card_body.style.display ="flex"
-    } else if (cardDisplay === "flex"){
-        this._card_body.style.display ="none"
-        } 
+    this._card_header.focus();
+    if(positioning !== "relative"){
+        this._card_body.style.position ="relative"
+        this._card_body.style.visibility ="visible"
+    } else if (positioning === "relative"){
+        this._card_body.style.position ="fixed"
+        this._card_body.style.visibility ="hidden"
+      } 
 }
 handleReadClick = (e) => {
     e.preventDefault();
@@ -25,15 +29,19 @@ render(){
     return (
         <div className='card-container'>
             <div className="card" >
-                <div className="card-header" onClick={this.handleCardClick}>
+                <div 
+                ref={(el) => {this._card_header = el}}
+                className="card-header" 
+                onClick={this.handleCardClick}>
                     {this.props.title}
                 </div>
                 <div 
-                id="relatedTarget" className="card-body"
+                id="relatedTarget" 
+                className="card-body"
                 ref={(el) => {this._card_body = el}} 
+                onClick={this.handleReadClick}
                 style={cardBodyStyles}>
                     {this.props.headline}
-                    <button onClick={this.handleReadClick}>Read</button>
                 </div>
             </div>
         </div>

@@ -1,21 +1,17 @@
-
 .mobile-nav-buttons{
     visibility:hidden;
     position:absolute;
 }
-
 .navbar-dark{
     width:100%;
     padding-right: 0;
     padding-top: 0;
     padding-bottom: 0;
 }
-
 .navbar-brand {
     font-family: 'Yanone Kaffeesatz', sans-serif;
     font-size:20px; 
 }
-
 .nav-link {
     font-family: 'Yanone Kaffeesatz', sans-serif;
     font-size:20px;
@@ -35,62 +31,54 @@
         width: 100%;
         z-index:1;
     }
-    
     .navbar-brand {
         font-family: 'Yanone Kaffeesatz', sans-serif;
         font-size:10px;
     }
-    
     .nav-link {
         font-family: 'Yanone Kaffeesatz', sans-serif;
         font-size:10px;
     }
-
-ul{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    margin:0;
-    padding: 0;
-    display:flex;
-    height:3.5rem;
+    ul{
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        margin:0;
+        padding: 0;
+        display:flex;
+        height:3.5rem;
+    }
+    ul a {
+        position:relative;
+        width:60px;
+        height:60px;
+        background:#f1f1f1;
+        display:block;
+        text-align:center;
+        margin:0px 6px;
+        border-radius:60%;
+        padding:6px;
+        box-sizing:border-box;
+        text-decoration:none;
+        box-shadow: 0, 15px, 20px rgba(0,0,0,0.9);
+        transition:.5s;
+        line-height:55px;
+        filter: drop-shadow(5px 5px 5px #000);
+    }
+    ul a:hover {
+        filter:none
+    }
+    .fas {
+        font-size:3em;
+        color:rgb(80, 140, 189);
+    }
+    .far {
+        font-size:3em;
+        line-height:45px;
+        color:rgb(80, 140, 189);
+    }
 }
-
-ul a 
-{
-    position:relative;
-    width:60px;
-    height:60px;
-    background:#f1f1f1;
-    display:block;
-    text-align:center;
-    margin:0px 6px;
-    border-radius:60%;
-    padding:6px;
-    box-sizing:border-box;
-    text-decoration:none;
-    box-shadow: 0, 15px, 20px rgba(0,0,0,0.9);
-    transition:.5s;
-    line-height:55px;
-    filter: drop-shadow(5px 5px 5px #000);
-  
-}
-ul a:hover {
-    filter:none
-  }
-
-.fas {
-    font-size:3em;
-    color:rgb(80, 140, 189);
-}
-.far {
-    font-size:3em;
-    line-height:45px;
-    color:rgb(80, 140, 189);
-}
-}
-
 
 @media (min-width: 377px) and (max-width: 412px) { 
     .navbar-dark{

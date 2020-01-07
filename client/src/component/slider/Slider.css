@@ -1,12 +1,18 @@
 .carousel-control-next{
     right:-5%;
+    position:absolute;
+    top:0%;
+   
 }
 .carousel-control-prev{
     left:-5%;
+    position:absolute;
+    top:0%;
 }
 
-@media only screen and (max-width: 600px) {
-    .carousel{
-        max-height: 100px;
+@media  (min-width: 543px)and (max-width: 1700px) {
+    .slider-container{
+        height:100px
+        
     }
 }

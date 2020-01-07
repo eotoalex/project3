@@ -2,14 +2,20 @@
     
     
 } */
+/* Wanted to make a hover effect for the newsfeed so that it look like its coming at the user. 
+like zindex into a transform of some sort. */
+/* .card-body:hover {
+    color:pink;
+} */
 .card-body{
-    display:none;
+    position:fixed;
+    visibility:hidden;
     padding:0px;
     margin:0px;
     border:0;
     height:100%;
     font-size:95%;
-    position:relative;
+    
     
 }
 .card {
