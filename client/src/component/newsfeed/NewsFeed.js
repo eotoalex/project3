@@ -10,7 +10,6 @@ class NewsFeed extends React.Component{
 handleCardClick = (e) => {
     e.preventDefault();
     let positioning = this._card_body.style.position;
-    
     this._card_body.focus();
     this._card_header.focus();
     if(positioning !== "relative"){

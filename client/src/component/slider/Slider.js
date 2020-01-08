@@ -13,8 +13,9 @@ function Slider(props){
                 // controls={false}
                 indicators={false}
                 // touch={true}
-                autoPlay={true}
-                stopOnHover={true}>
+                // autoPlay={true}
+                // stopOnHover does not work properly.
+                stoponHover={true}>
                     {props.crimeNews.map(news => (
                         <Carousel.Item>
                             <NewsFeed title={news.title} headline={news.headline} href={news.href}></NewsFeed>
