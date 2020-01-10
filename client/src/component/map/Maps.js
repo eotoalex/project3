@@ -16,12 +16,31 @@ class Maps extends React.Component {
     super(props)
     this.state = {
         map:[],
-        marker:[],
-        coords:[],   
-        crimeNews:[] || 'Loading...' 
-    }
-    this.onMouseover = this.onMouseover.bind(this)
+        marker:[], 
+        isInfoWindowOpen:false,
+        currentInfoWindow:[],
+        crimeNews:[] || 'Loading...',
+        openInfoWindow : (map,marker,googleObj) =>{
+          console.log("MAP ", map)
+          console.log("MARKER ", marker)
+          console.log("GOOGLE OBJ ", googleObj)
+          return 0;
+        },
+        onMouseOver:(map,marker) => {
+          let content = map.content;
+          let googleObj = this.props.google.maps;
+          let infoWindow = new googleObj.InfoWindow({
+            content:content
+          });
+          this.isInfoWindowOpen = true;
+          infoWindow.open(map,marker);
+          console.log(this.isInfoWindowOpen)
+          
+          },
+        
+    
   }
+}
  
   // User icon image, sized for the map.
   markerIcon = {
@@ -90,13 +109,6 @@ class Maps extends React.Component {
       this.polyLineClosure(polylineOptions,map)
     })
   }
-  // onMouseover = (props, marker, e) => {
-  //   // console.log("mouse over ", props, marker, e);
-  //   marker.addListener('click', function(){
-  //     console.log("MOUSE OVER WORKS",props)
-  //     console.log(e.target)
-  //   })
-// }
 onMouseover = (props, marker, e) => {
   // console.log("mouse over ", props, marker, e);
   marker.addListener('click', function(){
@@ -105,47 +117,28 @@ onMouseover = (props, marker, e) => {
   })
 }
     render(){
-      const googleObj = this.props.google.maps;
-      const mappers = this.state.map;
-      const marker = this.state.marker
-      // const mouseOver = this.onMouseOver
-      // const test = this.onMouseover()
+      const clickEvent = this.state.openInfoWindow;
+      const hover = this.state.onMouseOver;
+      const offIcon = this.state.onMouseOff
     // This variable holds the crime icon, sized for the map when rendered.
       const crimeIcon = {
       url:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXL8dMbULRMR3YVcdoZKDvHAKDEnyRIqnPx-llmYVULI5oTCTd&s",
       scaledSize: new this.props.google.maps.Size(40, 40)
       }
-
       const crimeLocales = this.props.coor.map(function(item){
-    //     let infoWindow = new googleObj.InfoWindow({
-    //       content:item
-    //     })
-    // infoWindow.open(mappers)
-    // console.log(item) 
-      function openInfoWindow (map,marker,googleObj) {
-      console.log("MAP ", map)
-      console.log("MARKER ", marker)
-      console.log("GOOGLE OBJ ", googleObj)
-      }
-      
-
     // This variable holds the locations of most current crime locations and renders them to the map as markers.
           return(
-          <Marker 
-          title={'CrimeLocale'}
-          position={item}
-          icon={crimeIcon}
-          content={"<h1>Bla Bla Bla</h1>"}
-          // onClick={() => {openInfoWindow(mappers,marker,googleObj)}}
-          //  onMouseover={mouseOver,test}
-          // onMouseover={()=>{console.log("mouse over")}}
-          >
-          
-          </Marker>
-          
-          
-
-         );
+            <Marker 
+            title={'CrimeLocale'}
+            position={item}
+            icon={crimeIcon}
+            content={"Bla Bla Bla"}
+            onMouseover={hover}
+            onMouseout= {offIcon}
+            onClick={clickEvent}
+            >
+            </Marker>
+          );
       });
       return(
         <div>   
