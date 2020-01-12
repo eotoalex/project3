@@ -10,8 +10,6 @@ const jwt = require('jsonwebtoken')
 process.env.SECRET_KEY = 'secret';
 const crimeLocationsController = require('./controllers/crimeLocationController');
 const newsFeedController = require('./controllers/newsFeedController');
-const geocodeController = require('./controllers/geocodeController');
-const polyline = require( 'google-polyline' )
 var Userspass = require('./routes/Users');
 
 // Defining middleware
@@ -37,6 +35,7 @@ app.get("/add/user", function(req,res){
 });
 
 app.use('/', Userspass)
+
 // This route posts the saved books to the database.
 app.post("/add/user", function(req, res) {
     const User = new Users({
@@ -47,13 +46,13 @@ app.post("/add/user", function(req, res) {
     });
     
     User.save(function(err,user){
-        if (err) {console.log(err)}
-        console.log(user.name , " was just added to the database")
-        
-        Users.find({}, function(err, data){
-            if(err){console.log(err)}
-            res.json(data)
-        });
+      if (err) {console.log(err)}
+      console.log(user.name , " was just added to the database")
+      
+      Users.find({}, function(err, data){
+          if(err){console.log(err)}
+          res.json(data)
+      });
     });
 });
 

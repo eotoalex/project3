@@ -5,7 +5,7 @@ const CrimeLocationsSchema = new Schema({
   id: mongoose.Schema.Types.ObjectId,
   latitude:String,
   longitude: String,
-//   date:String
+  date:String,
 });
 
 const CrimeLocations = mongoose.model("CrimeLocations",CrimeLocationsSchema);

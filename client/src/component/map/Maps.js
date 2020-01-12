@@ -9,38 +9,39 @@ const mapStyles = {
   height:"100vh",
   // pointerEvents:"none",
 };
-
  
 class Maps extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-        map:[],
-        marker:[], 
-        isInfoWindowOpen:false,
-        currentInfoWindow:[],
-        crimeNews:[] || 'Loading...',
-        openInfoWindow : (map,marker,googleObj) =>{
-          console.log("MAP ", map)
-          console.log("MARKER ", marker)
-          console.log("GOOGLE OBJ ", googleObj)
-          return 0;
-        },
-        onMouseOver:(map,marker) => {
-          let content = map.content;
-          let googleObj = this.props.google.maps;
-          let infoWindow = new googleObj.InfoWindow({
-            content:content
-          });
-          this.isInfoWindowOpen = true;
-          infoWindow.open(map,marker);
-          console.log(this.isInfoWindowOpen)
-          
-          },
-        
-    
+      map:[],
+      marker:[], 
+      isInfoWindowOpen:false,
+      currentInfoWindow:[],
+      crimeNews:[] || 'Loading...',
+      openInfoWindow : (map,marker,googleObj) =>{
+        console.log("MAP ", map)
+        console.log("MARKER ", marker)
+        console.log("GOOGLE OBJ ", googleObj)
+        return 0;
+      },
+      onMouseOver:(map,marker) => {
+        let content = map.content;
+        let googleObj = this.props.google.maps;
+        let infoWindow = new googleObj.InfoWindow({
+          content:content
+        });
+        this.state.currentInfoWindow.push(infoWindow)
+        console.log("MAP ", map)
+        console.log("MARKER ", marker)
+        console.log("GOOGLE OBJ ", googleObj)
+        this.isInfoWindowOpen = true;
+        infoWindow.open(map,marker);
+        console.log(this.isInfoWindowOpen)
+      },
+      offIcon:() => {console.log("===>",this.currentInfoWindow)}
+    }
   }
-}
  
   // User icon image, sized for the map.
   markerIcon = {
@@ -63,14 +64,13 @@ class Maps extends React.Component {
     // set the state to retain the instance of the map we have rendered.
     if(map !== undefined){
     this.setState({map:map})
-    console.log(map)
     }
     let mapObj = this.state.map;
     if(this.props.destination.length !== 0){
     this.calcRoutes(mapObj,usrLocation,lat,lng)
     console.log("We have an address", lat,lng)
-    } else {console.log("There is nothing in the props for destination!")}
-    console.log("map OUTSIDE STATE",map)
+    } 
+    
   }
   
    polyLineClosure = (polylineOptions,map) => {

@@ -2,10 +2,10 @@ import React from "react";
 import Maps from "../map/Maps";
 import API from "../../utils/API";
 import {Container} from 'reactstrap';
-import axios from "axios"
+// import axios from "axios"
 import '../map/Maps.css';
 import "./Navigation.css";
-import Slider from "../slider/Slider";
+// import Slider from "../slider/Slider";
 import Destination from "../destination/Destination";
 
 class Navigation extends React.Component{
@@ -42,8 +42,7 @@ class Navigation extends React.Component{
     grabCrimeData() {
         API.getLatLng()
         .then((res)  => {
-            this.setState({crimeLocations:res.data}, 
-            function(){console.log("crimelocations ",this.state.crimeLocations)})  
+            this.setState({crimeLocations:res.data})  
         })
         .catch((err) => {console.log(err)})
     }
@@ -54,8 +53,7 @@ class Navigation extends React.Component{
        
     }
     showPosition = (position) => {
-        this.setState({usrLocation:{lat:position.coords.latitude,lng:position.coords.longitude}}, 
-        function(){console.log("User Locale in state =>",this.state.usrLocation)})
+        this.setState({usrLocation:{lat:position.coords.latitude,lng:position.coords.longitude}})
         return {lat:position.coords.latitude,lng:position.coords.longitude}
     }
 
