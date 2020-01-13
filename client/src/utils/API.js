@@ -2,6 +2,10 @@
 import axios from 'axios';
 
 export default {
+    loadCrimeDataToDB:function(){
+        return axios.post("/api/crime");
+    },
+
     getLatLng: function(){
         return axios.get("/api/crime");
     },

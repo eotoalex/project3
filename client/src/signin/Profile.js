@@ -31,7 +31,7 @@ class Profile extends Component {
   render() {
     return (
       <div className="container">
-        <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+        <a href="*" onClick={this.logOut.bind(this)} className="nav-link">
             Logout
           </a>
         <div className="jumbotron mt-5">

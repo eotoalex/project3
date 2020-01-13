@@ -1,8 +1,11 @@
 const CrimeLocations = require ('../model/CrimeLocations');
+const axios = require('axios')
+// Need to devine mongoose some where.
 
 module.exports = {
     getCrimeData: function (req, res) {
-        CrimeLocations.find({}).then((result) => {
+        CrimeLocations.find({})
+        .then((result) => {
             res.json(result);
         });
     },
@@ -16,8 +19,8 @@ module.exports = {
         // })
         axios.get("https://data.cityofnewyork.us/resource/uip8-fykc.json")
         .then(function(response){
-        console.log(response)
-        for (let i = 0; i < 10; i++){
+        
+        for (let i = 0; i < 30; i++){
                 // let results = {};
                 let latitude = response.data[i].latitude;
                 let longitude = response.data[i].longitude;
@@ -38,9 +41,10 @@ module.exports = {
 
                 const CrimeLocation = new CrimeLocations({
                     id: new mongoose.Types.ObjectId(),
+                    date:date,
                     latitude: latitude,
                     longitude: longitude,
-                    date:date
+                    
                 })
 
                 CrimeLocation.save(function(err){console.log(err)})
@@ -53,8 +57,6 @@ module.exports = {
                 
             }
             
-        }).catch(function(err){
-            if (err) throw err;
         })
         
     }
