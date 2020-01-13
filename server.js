@@ -1,4 +1,3 @@
-require('dotenv').config("./.env")
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -7,10 +6,11 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const Users = require('./model/Users')
 const jwt = require('jsonwebtoken')
-process.env.SECRET_KEY = 'secret';
 const crimeLocationsController = require('./controllers/crimeLocationController');
 const newsFeedController = require('./controllers/newsFeedController');
 var Userspass = require('./controllers/userController');
+process.env.SECRET_KEY = 'secret';
+require('dotenv').config("./.env");
 
 // Defining middleware
 app.use(express.urlencoded({ extended: true }));
@@ -36,64 +36,13 @@ app.get("/add/user", function(req,res){
 
 app.use('/', Userspass)
 
-// This route posts the saved books to the database.
-app.post("/add/user", function(req, res) {
-    const User = new Users({
-        id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        email:req.body.email,
-        picture:req.body.picture
-    });
-    
-    User.save(function(err,user){
-      if (err) {console.log(err)}
-      console.log(user.name , " was just added to the database")
-      
-      Users.find({}, function(err, data){
-          if(err){console.log(err)}
-          res.json(data)
-      });
-    });
-});
-
-app.post('/register', (req, res) => {
-  console.log("connectin")
-  const today = new Date()
-  const userData = {
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    email: req.body.email,
-    password: req.body.password,
-    created: today
-  };
-  Users.findOne({
-    email: req.body.email
-  })
-  .then(user => {
-    if (!user) {
-      userData.password = req.body.password
-      Users.create(userData)
-      .then(user => {
-        res.json({ status: user.email + 'Registered!' + userData})
-      })
-      .catch(err => {
-        res.send('error: ' + err)
-      })
-    } else {
-        res.json({ error: 'User already exists' })
-      }
-  })
-  .catch(err => {
-    res.send('error: ' + err)
-  })
-});
-
-// This route queiries all books currently saved in the books database.
+// This route queiries all users currently in the database.
 app.get("/api", (req, res) => {
     Users.find({}).then((result) => {
         res.send(result);
     });  
 });
+
 
 app.post('/login', (req, res) => {
   res.send("UserAbbosjon")
@@ -101,12 +50,13 @@ app.post('/login', (req, res) => {
       email: req.body.email})
     })
 
-app.get("/api/crime",crimeLocationsController.getCrimeData)
+// Queries crime info from data set. 
+app.get("/api/crime",crimeLocationsController.getCrimeData);
+
+// Posts crime data to the database.
+app.post("/api/crime", crimeLocationsController.addCrimeDataToDB);
 
 
-app.post("/api/crime", crimeLocationsController.addCrimeDataToDB)
-
-// app.get("/api/AddressToLatLng", geocodeController.convertAddToLatLng)
 app.get("/api/AddressToLatLng", (req,res) => {
   const apiKey = "AIzaSyA-VspoF45DKRHLsuzBL0-hecHDNOUQdOY"
   
@@ -136,7 +86,8 @@ app.get('/profile', (req, res) => {
         res.send('error: ' + err)
       })
   })
-// This route deletes the saved books in the database.
+
+// This route deletes user from database (Requires debugging.) 
 app.delete("/delete/:id", (req, res) => {
     let userId = req.params.id;
     Users.findByIdAndDelete({_id:userId})
@@ -152,6 +103,7 @@ app.get("/apikey", (req,res) => {
     res.json(process.env.APIkey)
 });
 
+// News is scraped from the New York Times website.
 app.get("/scrapeNews",newsFeedController.getScrapedNews);
   
 // Send every other request to the react app.

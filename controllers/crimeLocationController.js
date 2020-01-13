@@ -8,12 +8,12 @@ module.exports = {
     },
 
     addCrimeDataToDB:(req, res) => {
-        const CrimeLocation = new CrimeLocations({
-            id: new mongoose.Types.ObjectId(),
-            latitude: req.body.latitude,
-            longitude: req.body.longitude,
-            date:req.body.date
-        })
+        // const CrimeLocation = new CrimeLocations({
+        //     id: new mongoose.Types.ObjectId(),
+        //     latitude: req.body.latitude,
+        //     longitude: req.body.longitude,
+        //     date:req.body.date
+        // })
         axios.get("https://data.cityofnewyork.us/resource/uip8-fykc.json")
         .then(function(response){
         console.log(response)
