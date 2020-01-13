@@ -21,20 +21,18 @@ ___
 ___
 
 # Map Usage
-> - To access the beta version of the app click on the [Trekky](https://evening-castle-24597.herokuapp.com/) link. Please allow time for Heroku to load, as it is hosting this beta application and needs to wake up.
+> - To access the beta version of the app click on the [Trekky](https://evening-castle-24597.herokuapp.com/) link. Please allow time for Heroku to load, as it is hosting this beta application and requires a few seconds if openned for the first time.
 >
-> - After registering and signing in, go to the map. 
+> - Enable location services on your browser, which will appear as a notification prompting you to accept or decline. Accept the location finder to have your location rendered to the map. There after, you may have to refresh the page if the crime data does not render properly.
 >
-> - Enable location tracking, which will appear as a notification prompting you to accept or decline. Accept the location finder to have your location rendered to the map. There after, you may have to refresh the page if the crime data did not render.
+> - After registering and signing in, go to the map to see crime data in your area. 
 >
-> - Afterward, you should see both your location and recent crime locations loaded to the map. If not make sure you've accepted location finder and/or refreshed the page.
->
-> - Now you can see historic crime data that has occurred around you within this year.
+> - Now you can see historic crime data that has occurred around you within this year. (10 markers should be rendering for now, as I test the database settings.)
 >
 > - Though, the tools around the map are none existent the map is interactive, and given the fact that is a Google Map API the user interface is no different from any google map you've used before. Additional documentation on google map interface can be found [here](https://support.google.com/maps/answer/144349?hl=en).
 
 # NewsFeed Functionality
-> - The newsfeed scrolls continuously unless you click on it, in which case it will stop scrolling to the next story.
+> - The newsfeed scrolls continuously unless you hover over it, in which case it will stop scrolling to the next story. You can now read the headline / summary without it scrolling away.
 >
 > - If you missed a story that scrolled by, you can click on the left arrow on the left side of the newsfeed container to go back one story. Continuous clicking will scroll backwards through the story headlines.
 >
@@ -42,13 +40,14 @@ ___
 
 # Crime Markers
 > - The markers with the red slash over a shadowed figure is an actual crime location as cited by New York State Open Data records.
-> - The pop up window works on mouseover and will indicate the information of the crime (currently debugging).
+> - The pop up window works on mouseover and will soon indicate the information of the crime (currently debugging).
 
 # Destination Bar
 > - When an address is put into the destination input box, a route will indicate a safe route for the user, around the crime markers (currently debugging).
 ___
 
 # Goals
+* Fix all bugs!
 * We will be inserting the crime data into a structured table that can be accessed in types as apposed to all crimes rendering to the map.
 For example;
 * The user can access which crime to generate on the map (murder, robbery, assault, etc.), in combination with other crimes and/or in isolation from other crimes.
