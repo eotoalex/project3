@@ -50,6 +50,7 @@ class Maps extends React.Component {
   }
 
   async componentDidMount () {
+    // axios.post()
     const crimeNews = await axios.get("/scrapeNews")
         this.setState({
             crimeNews : crimeNews.data
@@ -173,7 +174,8 @@ onMouseover = (props, marker, e) => {
               icon={this.markerIcon}
               onMouseover={this.onMouseover}
               />
-              <Slider className="slider" crimeNews={this.state.crimeNews} />
+              <Slider className="slider" 
+              crimeNews={this.state.crimeNews} />
           </Map>
         </div>
       );

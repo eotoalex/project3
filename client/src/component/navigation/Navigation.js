@@ -2,10 +2,8 @@ import React from "react";
 import Maps from "../map/Maps";
 import API from "../../utils/API";
 import {Container} from 'reactstrap';
-// import axios from "axios"
 import '../map/Maps.css';
 import "./Navigation.css";
-// import Slider from "../slider/Slider";
 import Destination from "../destination/Destination";
 
 class Navigation extends React.Component{
@@ -18,6 +16,7 @@ class Navigation extends React.Component{
             destination: "",
             destinationLatLng:[]
         }
+        this.loadCrimeDataInDB = this.loadCrimeDataInDB.bind(this)
         this.loadCrimeLocale = this.loadCrimeLocale.bind(this)
         this.grabCrimeData = this.grabCrimeData.bind(this)
         this.getUsrLocale = this.getUsrLocale.bind(this)
@@ -25,14 +24,22 @@ class Navigation extends React.Component{
     }
 
     async componentDidMount() {
+        await this.loadCrimeDataInDB()
         await this.getUsrLocale(this.loadCrimeLocale)
         await this.grabCrimeData()
         await this.loadCrimeLocale(this.state.crimeLocations)
-        // const crimeNews = await axios.get("/scrapeNews")
-        // this.setState({
-        //     crimeNews : crimeNews.data
-        // }); 
     }
+
+    loadCrimeDataInDB() {
+        API.loadCrimeDataToDB()
+        .then(() => {
+            console.log("Loaded to DB...")
+        })
+        .catch((err) => {console.log(err)})
+        // this error keeps getting hit, now why is that.
+    }
+    // .then(()=>{})}
+
     loadCrimeLocale(arr) {
         let locale = arr;
         return locale.map(function(item){
