@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken')
 process.env.SECRET_KEY = 'secret';
 const crimeLocationsController = require('./controllers/crimeLocationController');
 const newsFeedController = require('./controllers/newsFeedController');
-var Userspass = require('./routes/Users');
+var Userspass = require('./controllers/userController');
 
 // Defining middleware
 app.use(express.urlencoded({ extended: true }));
