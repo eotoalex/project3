@@ -133,6 +133,7 @@ onMouseover = (props, marker, e) => {
             title={'CrimeLocale'}
             position={item}
             icon={crimeIcon}
+            // A function or a variable can hold the API data type for crime to display here.
             content={"Bla Bla Bla"}
             onMouseover={hover}
             onMouseout= {offIcon}
