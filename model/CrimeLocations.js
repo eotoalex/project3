@@ -6,6 +6,10 @@ const CrimeLocationsSchema = new Schema({
   date:String,
   latitude:String,
   longitude: String,
+  age_group:String,
+  sex: String,
+  race: String,
+  offence: String
   
 });
 
