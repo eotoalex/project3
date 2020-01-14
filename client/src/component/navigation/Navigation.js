@@ -36,9 +36,7 @@ class Navigation extends React.Component{
             console.log("Loaded to DB...", res)
         })
         .catch((err) => {console.log(err)})
-        // this error keeps getting hit, now why is that.
     }
-    // .then(()=>{})}
 
     loadCrimeLocale(arr) {
         let locale = arr;
@@ -88,11 +86,7 @@ class Navigation extends React.Component{
     render() {
         return (
         <div className="container">
-            {/* <div className="overlay">
-                <iframe src="www.youtube.com" width="80%"></iframe>
-            </div> */}
             <Container className="container2"> 
-                {/* <Slider className="slider" crimeNews={this.state.crimeNews} /> */}
                 <Destination className="destination" handleInputChange={this.handleInputChange} handleFormSubmit={this.handleFormSubmit} />
                 <Maps 
                     className="mapper"
@@ -105,7 +99,6 @@ class Navigation extends React.Component{
                     criminalLocales={this.state.crimeLocations}
                     usrCurrentLocation={this.state.usrLocation}
                 > 
-                
                 </Maps> 
             </Container>          
         </div>
