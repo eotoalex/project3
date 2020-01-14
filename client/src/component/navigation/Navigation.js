@@ -32,8 +32,8 @@ class Navigation extends React.Component{
 
     loadCrimeDataInDB() {
         API.loadCrimeDataToDB()
-        .then(() => {
-            console.log("Loaded to DB...")
+        .then((res) => {
+            console.log("Loaded to DB...", res)
         })
         .catch((err) => {console.log(err)})
         // this error keeps getting hit, now why is that.

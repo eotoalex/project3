@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 export default {
-    loadCrimeDataToDB:function(){
+    loadCrimeDataToDB: function(){
         return axios.post("/api/crime");
     },
 
