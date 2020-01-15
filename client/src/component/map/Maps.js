@@ -19,6 +19,7 @@ class Maps extends React.Component {
       isInfoWindowOpen:false,
       currentInfoWindow:[],
       crimeNews:[] || 'Loading...',
+      crimeData: this.props.crimeData,
       openInfoWindow : (map,marker,googleObj) =>{
         console.log("MAP ", map)
         console.log("MARKER ", marker)
@@ -27,6 +28,8 @@ class Maps extends React.Component {
       },
       onMouseOver:(map,marker) => {
         let content = map.content;
+        let content2 = map.content2;
+        let content3=map.content3
         let googleObj = this.props.google.maps;
         let infoWindow = new googleObj.InfoWindow({
           content:content
@@ -50,8 +53,9 @@ class Maps extends React.Component {
   }
 
   async componentDidMount () {
-    // axios.post()
-    const crimeNews = await axios.get("/scrapeNews")
+    const crimeNews = await axios.get("/scrapeNews");
+    // await crimeDataSet = () => {console.log("hello")}
+     console.log("Crime Data => ", this.state.crimeData)
         this.setState({
             crimeNews : crimeNews.data
         });   
@@ -64,125 +68,138 @@ class Maps extends React.Component {
     
     // set the state to retain the instance of the map we have rendered.
     if(map !== undefined){
-    this.setState({map:map})
+      this.setState({map:map})
     }
     let mapObj = this.state.map;
     if(this.props.destination.length !== 0){
-    this.calcRoutes(mapObj,usrLocation,lat,lng)
-    console.log("We have an address", lat,lng)
-    } 
-    
+      this.calcRoutes(mapObj,usrLocation,lat,lng);
+      console.log("We have an address", lat,lng);
+    }  
   }
   
-   polyLineClosure = (polylineOptions,map) => {
+  polyLineClosure = (polylineOptions,map) => {
     let safePath;
     safePath = new this.props.google.maps.Polyline(polylineOptions[0]);
     safePath.setMap(map);
-   }
-
-    calcRoutes = (map,usrLocale,lat,lng) => {
-      let polylineOptions = [];
-      let directionsService = new this.props.google.maps.DirectionsService();
-      let start = usrLocale;
-      let end = new this.props.google.maps.LatLng(lat,lng);
-      let request = {
-        origin:start,
-        destination: end,
-        optimizeWaypoints:true,
-        travelMode: 'WALKING',
-        provideRouteAlternatives:true
-      }
-      directionsService.route(request, (res, status) => {
-        let points = []
-        if (status === 'OK'){
-          points = res.routes[0].overview_path;
-           polylineOptions.push( {
-            path: points,
-            geodesic: true,
-            strokeColor: '#FF0000',
-            strokeOpacity: 1.0,
-            strokeWeight: 2,
-            map:map
-          })
-      } else {
-        console.log("error ", status)
-      }
-      this.polyLineClosure(polylineOptions,map)
-    })
   }
-onMouseover = (props, marker, e) => {
+
+  calcRoutes = (map,usrLocale,lat,lng) => {
+    let polylineOptions = [];
+    let directionsService = new this.props.google.maps.DirectionsService();
+    let start = usrLocale;
+    let end = new this.props.google.maps.LatLng(lat,lng);
+    let request = {
+      origin:start,
+      destination: end,
+      optimizeWaypoints:true,
+      travelMode: 'WALKING',
+      provideRouteAlternatives:true
+    };
+    directionsService.route(request, (res, status) => {
+      let points = []
+      if (status === 'OK'){
+        points = res.routes[0].overview_path;
+        polylineOptions.push( {
+          path: points,
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2,
+          map:map
+        })
+    } else {
+        console.log("error ", status)
+    }
+    this.polyLineClosure(polylineOptions,map)
+    });
+  }
+
+  onMouseover = (props, marker, e) => {
   // console.log("mouse over ", props, marker, e);
   marker.addListener('click', function(){
     console.log("MOUSE OVER WORKS",props);
     console.log(e.target);
-  })
-}
-    render(){
-      const clickEvent = this.state.openInfoWindow;
-      const hover = this.state.onMouseOver;
-      const offIcon = this.state.onMouseOff
-    // This variable holds the crime icon, sized for the map when rendered.
-      const crimeIcon = {
-      url:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXL8dMbULRMR3YVcdoZKDvHAKDEnyRIqnPx-llmYVULI5oTCTd&s",
-      scaledSize: new this.props.google.maps.Size(40, 40)
-      }
-      const crimeLocales = this.props.coor.map(function(item){
-    // This variable holds the locations of most current crime locations and renders them to the map as markers.
-          return(
-            <Marker 
-            title={'CrimeLocale'}
-            position={item}
-            icon={crimeIcon}
-            // A function or a variable can hold the API data type for crime to display here.
-            content={"Bla Bla Bla"}
-            onMouseover={hover}
-            onMouseout= {offIcon}
-            onClick={clickEvent}
-            >
-            </Marker>
-          );
-      });
-      return(
-        <div>   
-          <Map
-            className="google-map"
-            google={this.props.google}
-            zoom={11}
-            disableDefaultUI= {true}
-            styles={[
-              {
-                "featureType": "road.arterial",
-                "elementType": "geometry.stroke",
-                "stylers": [
-                  {
-                    "color": "#7cff78"
-                  },
-                  {
-                    "weight": 2
-                  }
-                ]
-              }
-            ]}
-            initialCenter={{lat: 40.7128, lng: -74.0060}}
-            onReady={this.setsRoute}
-            >
-              {this.setsRoute()}
-              
-              {crimeLocales}
-              {this.setDestinationMarker}
-              <Marker
-              position={this.props.usrLocale}
-              icon={this.markerIcon}
-              onMouseover={this.onMouseover}
-              />
-              <Slider className="slider" 
-              crimeNews={this.state.crimeNews} />
-          </Map>
-        </div>
-      );
-    };
-  };
+  });
+  }
 
+  render(){
+    const clickEvent = this.state.openInfoWindow;
+    const hover = this.state.onMouseOver;
+    const offIcon = this.state.onMouseOff
+
+    // This variable holds the crime icon, sized for the map when rendered.
+    const crimeIcon = {
+    url:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXL8dMbULRMR3YVcdoZKDvHAKDEnyRIqnPx-llmYVULI5oTCTd&s",
+    scaledSize: new this.props.google.maps.Size(40, 40)
+    }
+    const crimeMarkers = this.props.coor.map(function(item){
+      return(
+        <Marker 
+        title={'CrimeLocale'}
+        position={{lat: item.lat, lng: item.lng}}
+        icon={crimeIcon}
+        content={
+          '<div id="content">'+
+            '<ul>'+
+              '<li>'+ "Offence: " + item.crime +'</li>'+
+              '<li>'+ "Date: " + item.date +'</li>'+
+              '<li>'+ "Sex: " + item.sex +'</li>'+
+              '<li>'+ "Race: " + item.race +'</li>'+
+            '</ul>'+
+          '</div>'
+        //   {Crime:item.crime,
+        //   test: item.date,
+        //   rejal:item.sex,
+        //  fadhf: item.race}
+        }
+       
+        onMouseover={hover}
+        onMouseout= {offIcon}
+        onClick={clickEvent}
+        >
+        </Marker>
+      );
+    });
+    return(
+      <div>   
+        <Map
+          className="google-map"
+          google={this.props.google}
+          zoom={11}
+          disableDefaultUI= {true}
+          styles={[
+            {
+              "featureType": "road.arterial",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#7cff78"
+                },
+                {
+                  "weight": 2
+                }
+              ]
+            }
+          ]}
+          initialCenter={{lat: 40.7128, lng: -74.0060}}
+          onReady={this.setsRoute}
+          >
+          {this.setsRoute()}
+          {crimeMarkers}
+          {this.setDestinationMarker}
+          <Marker
+            position={this.props.usrLocale}
+            icon={this.markerIcon}
+            onMouseover={this.onMouseover}
+          />
+          <Slider 
+            className="slider" 
+            crimeNews={this.state.crimeNews} />
+        </Map>
+      </div>
+    );
+  };
+};
 export default GoogleApiWrapper({
 apiKey:process.env.REACT_APP_APIKEY
 })(Maps);

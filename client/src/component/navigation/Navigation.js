@@ -16,7 +16,7 @@ class Navigation extends React.Component{
             destination: "",
             destinationLatLng:[]
         }
-        this.loadCrimeDataInDB = this.loadCrimeDataInDB.bind(this)
+        // this.loadCrimeDataInDB = this.loadCrimeDataInDB.bind(this)
         this.loadCrimeLocale = this.loadCrimeLocale.bind(this)
         this.grabCrimeData = this.grabCrimeData.bind(this)
         this.getUsrLocale = this.getUsrLocale.bind(this)
@@ -24,7 +24,7 @@ class Navigation extends React.Component{
     }
 
     async componentDidMount() {
-        await this.loadCrimeDataInDB()
+        // await this.loadCrimeDataInDB()
         await this.getUsrLocale(this.loadCrimeLocale)
         await this.grabCrimeData()
         await this.loadCrimeLocale(this.state.crimeLocations)
@@ -92,7 +92,23 @@ class Navigation extends React.Component{
                     className="mapper"
                     coor={
                     this.state.crimeLocations.map(function(item){
-                    return {lat:item.latitude, lng:item.longitude}})}
+                        console.log("crimeLocations in state => ", item)
+                    return {lat:item.latitude, 
+                            lng:item.longitude,
+                            crime: item.offence,
+                            date: item.date,
+                            sex: item.sex,
+                            race: item.race,
+                            arrestKey: item.arrest_key }})}
+                    // Can I return within coors in order to get the data through props.
+                    // crimeData={
+                    //     {Crime: item.offence,
+                    //      Date: item.date,
+                    //      Sex: item.sex,
+                    //      Race: item.race,
+                    //      ArrestKey: item.arrest_key 
+                    //     } 
+                    // }
                     usrLocale={this.state.usrLocation} 
                     google={this.props.google}
                     destination={this.state.destinationLatLng}

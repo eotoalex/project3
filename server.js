@@ -4,8 +4,8 @@ const path = require("path");
 const axios = require("axios");
 const app = express();
 const PORT = process.env.PORT || 3001;
-const Users = require('./model/Users')
-const jwt = require('jsonwebtoken')
+const Users = require('./model/Users');
+const jwt = require('jsonwebtoken');
 const crimeLocationsController = require('./controllers/crimeLocationController');
 const newsFeedController = require('./controllers/newsFeedController');
 var Userspass = require('./controllers/userController');
@@ -34,7 +34,7 @@ app.get("/add/user", function(req,res){
   });
 });
 
-app.use('/', Userspass)
+app.use('/', Userspass);
 
 // This route queiries all users currently in the database.
 app.get("/api", (req, res) => {
@@ -45,10 +45,10 @@ app.get("/api", (req, res) => {
 
 
 app.post('/login', (req, res) => {
-  res.send("UserAbbosjon")
+  res.send("UserAbbosjon");
     Users.findOne({
       email: req.body.email})
-    })
+    });
 
 // Queries crime info from data set. 
 app.get("/api/crime",crimeLocationsController.getCrimeData);
@@ -66,7 +66,7 @@ app.get("/api/AddressToLatLng", (req,res) => {
     }).catch(function(err){
         if (err) console.log(err);
     })
-})
+});
 
 app.get('/profile', (req, res) => {
     var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
@@ -82,10 +82,9 @@ app.get('/profile', (req, res) => {
         }
       })
       .catch(err => {
-        console.log("fdsdfs")
-        res.send('error: ' + err)
+        res.send('error: ' + err);
       })
-  })
+  });
 
 // This route deletes user from database (Requires debugging.) 
 app.delete("/delete/:id", (req, res) => {
@@ -93,14 +92,13 @@ app.delete("/delete/:id", (req, res) => {
     Users.findByIdAndDelete({_id:userId})
     .then((res) => {
         console.log(res)
-        .catch((err) => {console.log(err)})
-        
+        .catch((err) => {console.log(err)})   
     });
     res.end();
 });
 
 app.get("/apikey", (req,res) => {
-    res.json(process.env.APIkey)
+    res.json(process.env.APIkey);
 });
 
 // News is scraped from the New York Times website.
