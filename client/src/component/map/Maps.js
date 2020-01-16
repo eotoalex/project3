@@ -40,14 +40,13 @@ class Maps extends React.Component {
       onMouseOff:() => {
         let infoWindow = this.state.currentInfoWindow[0];
         this.isInfoWindowOpen = false;
-        if (!this.isInfoWindowOpen){
+        if (!this.isInfoWindowOpen && infoWindow){
           infoWindow.close()
         }
       }
     }
   }
  
-  // User icon image, sized for the map.
   markerIcon = {
     url:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFiVpCGq6a1uRuvpBvmybCdTrbu-LzbRQyLMF7JR_JUudoEb8FQ&s",
     scaledSize: new this.props.google.maps.Size(40, 40)
@@ -123,9 +122,7 @@ class Maps extends React.Component {
   }
 
   render(){
-    const clickEvent = this.state.openInfoWindow;
     const openInfoWindow = this.state.onMouseOver;
-    const hover = this.state.onMouseOver;
     const offIcon = this.state.onMouseOff
 
     // This variable holds the crime icon, sized for the map when rendered.
@@ -151,7 +148,7 @@ class Maps extends React.Component {
         }
         // onMouseover={hover}
         onMouseout= {offIcon}
-         onClick={openInfoWindow}
+        onClick={openInfoWindow}
         >
         </Marker>
       );
