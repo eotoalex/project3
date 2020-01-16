@@ -1,8 +1,8 @@
-import React from 'react';
-import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
-import Slider from "../slider/Slider";
-import axios from "axios"
 import './Maps.css';
+import React from 'react';
+import axios from "axios";
+import Slider from "../slider/Slider";
+import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
 
 const mapStyles = {
   width:"100vw",
@@ -28,21 +28,22 @@ class Maps extends React.Component {
       },
       onMouseOver:(map,marker) => {
         let content = map.content;
-        let content2 = map.content2;
-        let content3=map.content3
         let googleObj = this.props.google.maps;
         let infoWindow = new googleObj.InfoWindow({
           content:content
         });
-        this.state.currentInfoWindow.push(infoWindow)
-        console.log("MAP ", map)
-        console.log("MARKER ", marker)
-        console.log("GOOGLE OBJ ", googleObj)
+        this.state.currentInfoWindow =[];
+        this.state.currentInfoWindow.push(infoWindow);
         this.isInfoWindowOpen = true;
         infoWindow.open(map,marker);
-        console.log(this.isInfoWindowOpen)
       },
-      offIcon:() => {console.log("===>",this.currentInfoWindow)}
+      onMouseOff:() => {
+        let infoWindow = this.state.currentInfoWindow[0];
+        this.isInfoWindowOpen = false;
+        if (!this.isInfoWindowOpen){
+          infoWindow.close()
+        }
+      }
     }
   }
  
@@ -55,7 +56,6 @@ class Maps extends React.Component {
   async componentDidMount () {
     const crimeNews = await axios.get("/scrapeNews");
     // await crimeDataSet = () => {console.log("hello")}
-     console.log("Crime Data => ", this.state.crimeData)
         this.setState({
             crimeNews : crimeNews.data
         });   
@@ -124,6 +124,7 @@ class Maps extends React.Component {
 
   render(){
     const clickEvent = this.state.openInfoWindow;
+    const openInfoWindow = this.state.onMouseOver;
     const hover = this.state.onMouseOver;
     const offIcon = this.state.onMouseOff
 
@@ -140,22 +141,17 @@ class Maps extends React.Component {
         icon={crimeIcon}
         content={
           '<div id="content">'+
-            '<ul>'+
+            '<ul style="list-style-type:none;">'+
               '<li>'+ "Offence: " + item.crime +'</li>'+
               '<li>'+ "Date: " + item.date +'</li>'+
               '<li>'+ "Sex: " + item.sex +'</li>'+
               '<li>'+ "Race: " + item.race +'</li>'+
             '</ul>'+
           '</div>'
-        //   {Crime:item.crime,
-        //   test: item.date,
-        //   rejal:item.sex,
-        //  fadhf: item.race}
         }
-       
-        onMouseover={hover}
+        // onMouseover={hover}
         onMouseout= {offIcon}
-        onClick={clickEvent}
+         onClick={openInfoWindow}
         >
         </Marker>
       );
