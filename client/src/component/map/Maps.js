@@ -27,7 +27,12 @@ class Maps extends React.Component {
         return 0;
       },
       onMouseOver:(map,marker) => {
+        if(this.isInfoWindowOpen === true){
+        this.state.currentInfoWindow[0].close()
+        this.isInfoWindowOpen = false;
+      }else{
         this.state.currentInfoWindow =[];
+        
         let content = map.content;
         let googleObj = this.props.google.maps;
         let infoWindow = new googleObj.InfoWindow({
@@ -36,14 +41,16 @@ class Maps extends React.Component {
         this.state.currentInfoWindow.push(infoWindow);
         this.isInfoWindowOpen = true;
         infoWindow.open(map,marker);
+        }
       },
       onMouseOff:() => {
         let infoWindow = this.state.currentInfoWindow[0];
         this.isInfoWindowOpen = false;
         if (!this.isInfoWindowOpen && infoWindow){
           infoWindow.close()
+          
         }
-        infoWindow.close()
+        
       }
     }
   }
@@ -131,7 +138,15 @@ class Maps extends React.Component {
     url:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXL8dMbULRMR3YVcdoZKDvHAKDEnyRIqnPx-llmYVULI5oTCTd&s",
     scaledSize: new this.props.google.maps.Size(40, 40)
     }
+    
     const crimeMarkers = this.props.coor.map(function(item){
+      let crimeToRender = [];
+      // switch(item.crime){
+      //   case true:
+      //     console.log("Inside Switch ",item.crime)
+      //     break;
+
+      // }
       return(
         <Marker 
         title={'CrimeLocale'}
