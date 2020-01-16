@@ -17,7 +17,7 @@ class Maps extends React.Component {
       map:[],
       marker:[], 
       isInfoWindowOpen:false,
-      currentInfoWindow:[],
+      currentInfoWindow:[null],
       crimeNews:[] || 'Loading...',
       crimeData: this.props.crimeData,
       openInfoWindow : (map,marker,googleObj) =>{
@@ -27,12 +27,12 @@ class Maps extends React.Component {
         return 0;
       },
       onMouseOver:(map,marker) => {
+        this.state.currentInfoWindow =[];
         let content = map.content;
         let googleObj = this.props.google.maps;
         let infoWindow = new googleObj.InfoWindow({
           content:content
         });
-        this.state.currentInfoWindow =[];
         this.state.currentInfoWindow.push(infoWindow);
         this.isInfoWindowOpen = true;
         infoWindow.open(map,marker);
@@ -43,6 +43,7 @@ class Maps extends React.Component {
         if (!this.isInfoWindowOpen && infoWindow){
           infoWindow.close()
         }
+        infoWindow.close()
       }
     }
   }
