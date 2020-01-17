@@ -27,7 +27,7 @@ module.exports = {
                 let race = response.data[i].perp_race;
                 let offence = response.data[i].ofns_desc;
                 let arrestKey = response.data[i].arrest_key;
-                // let levelOfOffence = response.data[i].law_cat_cd;
+                let levelOfOffence = response.data[i].law_cat_cd;
                 // let lawCode = response.data[i].law_code;
 
                 // Here the data from the crime data set are seperated by type and put into the results object to be sent through to database.
@@ -39,7 +39,7 @@ module.exports = {
                 results.race = race;
                 results.offence = offence;
                 results.arrest_key = arrestKey;
-                // results.law_cat_cd = levelOfOffence;
+                results.law_cat_cd = levelOfOffence;
                 // resulsts.law_code = lawCode;
 
                 CrimeLocations.create(results).then(function(dbCrime){

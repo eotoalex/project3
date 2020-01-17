@@ -10,6 +10,22 @@
         position:static;
         top:0;
     }
+
+    #f-Button{
+      position:absolute;
+      right:1%;
+      top:13%;
+    }
+    #m-Button{
+      position:absolute;
+      right:1%;
+      top:20%;
+    }
+    #v-Button{
+      position:absolute;
+      right:1%;
+      top:30%;
+    }
   
   .overlay {
     position: absolute;
