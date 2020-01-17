@@ -1,7 +1,8 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import "./Navbar.css"
 import {Row,Container,Col } from 'reactstrap';
+import NewsReview from '../news_review/NewsReview.js'
 
 class Navbar extends React.Component{
     logOut(e) {
@@ -49,10 +50,11 @@ class Navbar extends React.Component{
         )
 
     return (
-      
+     
       <nav className="navbar navbar-dark bg-dark custom">
           <a className="navbar-brand" href="/">Trekky</a>
           <ul className="navbar-nav mr-auto">
+            
             <Container>
               <Row>
                 <Col>
@@ -70,9 +72,19 @@ class Navbar extends React.Component{
                     Profile
                   </Link>
                 </Col>
+                <Col> 
+                  <Link to="/news_review" className="nav-link" >
+                Comment
+              </Link>
+                </Col>
+                
+                
+
               </Row>
             </Container>
+
           </ul>
+         
           {localStorage.usertoken ? userLink : loginRegLink}
 
       <nav className="navbar navbar-dark bg-dark navbar-expand-sm">
@@ -95,6 +107,7 @@ class Navbar extends React.Component{
         </ul>
       </nav>
       </nav>
+      
     );
     }
 }
