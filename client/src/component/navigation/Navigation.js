@@ -32,6 +32,7 @@ class Navigation extends React.Component{
     }
 
     loadCrimeDataInDB() {
+        
         API.loadCrimeDataToDB()
         .then((res) => {
             console.log("Loaded to DB...", res)
