@@ -7,6 +7,7 @@ import Navigation from "./component/navigation/Navigation";
 import Signup from "./component/Signup";
 import Login from "./component/Login";
 import Profile from "./signin/Profile";
+import NewsReview from './component/news_review/NewsReview';
 // import {Row,Container,Col } from 'reactstrap';
 
 
@@ -23,6 +24,7 @@ class App extends React.Component{
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/news_review" component={NewsReview} />
             {/* <Route component={NoMatch} /> */}
            
           </Switch>
