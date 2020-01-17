@@ -25,14 +25,13 @@ class Navigation extends React.Component{
     }
 
     async componentDidMount() {
-         await this.loadCrimeDataInDB()
+        await this.loadCrimeDataInDB()
         await this.getUsrLocale(this.loadCrimeLocale)
         // await this.grabCrimeData()
         await this.loadCrimeLocale(this.state.crimeLocations)
     }
 
     loadCrimeDataInDB() {
-
         API.loadCrimeDataToDB()
         .then((res) => {
             console.log("Loaded to DB...", res)
