@@ -138,15 +138,17 @@ class Maps extends React.Component {
     url:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXL8dMbULRMR3YVcdoZKDvHAKDEnyRIqnPx-llmYVULI5oTCTd&s",
     scaledSize: new this.props.google.maps.Size(40, 40)
     }
-    
     const crimeMarkers = this.props.coor.map(function(item){
-      let crimeToRender = [];
-      // switch(item.crime){
-      //   case true:
-      //     console.log("Inside Switch ",item.crime)
-      //     break;
-
-      // }
+    const validateCrimeLevel = (crimeLevel) => {
+      switch(crimeLevel){
+        case "F":
+          return "Felony";
+          case "M":
+          return "Misdemeanor";
+          case "V":
+          return "Violation";
+      }
+    }
       return(
         <Marker 
         title={'CrimeLocale'}
@@ -155,10 +157,11 @@ class Maps extends React.Component {
         content={
           '<div id="content">'+
             '<ul style="list-style-type:none;">'+
-              '<li>'+ "Offence: " + item.crime +'</li>'+
+              '<li>'+ "Crime: " + item.crime +'</li>'+
               '<li>'+ "Date: " + item.date +'</li>'+
-              '<li>'+ "Sex: " + item.sex +'</li>'+
               '<li>'+ "Race: " + item.race +'</li>'+
+              '<li>'+ "Crime Level: " + validateCrimeLevel(item.levelOfOffense) +'</li>'+
+              '<li>'+ "Sex: " + item.sex +'</li>'+
             '</ul>'+
           '</div>'
         }
@@ -204,7 +207,10 @@ class Maps extends React.Component {
           <Slider 
             className="slider" 
             crimeNews={this.state.crimeNews} />
+            {/* <Button>MyButton</Button> */}
+            {/* <Button onClick={"this.handleBtnPress"}>Submit</Button> */}
         </Map>
+        
       </div>
     );
   };

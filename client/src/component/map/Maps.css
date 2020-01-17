@@ -4,8 +4,9 @@
   overflow:hidden;
   position:relative; 
   /* visibility:hidden;
-  display:none; */
+ 
   /* width:100%; */
+  /* display:none;  */
 }
 .slider{
   height:50%;
@@ -13,6 +14,11 @@
   position: relative;
   top:20%; 
   font:white;
+}
+
+#button{
+  position:absolute;
+  right:1%;
 }
 
 

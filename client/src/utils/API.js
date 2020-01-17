@@ -7,7 +7,9 @@ export default {
     },
 
     getLatLng: function(){
+
         return axios.get("/api/crime");
+        
     },
 
     convertAddToLatLng: function(address){

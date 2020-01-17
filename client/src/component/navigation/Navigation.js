@@ -21,12 +21,13 @@ class Navigation extends React.Component{
         this.grabCrimeData = this.grabCrimeData.bind(this)
         this.getUsrLocale = this.getUsrLocale.bind(this)
         this.showPosition = this.showPosition.bind(this)
+        this.handleBtnClick = this.handleBtnClick.bind(this)
     }
 
     async componentDidMount() {
         // await this.loadCrimeDataInDB()
         await this.getUsrLocale(this.loadCrimeLocale)
-        await this.grabCrimeData()
+        // await this.grabCrimeData()
         await this.loadCrimeLocale(this.state.crimeLocations)
     }
 
@@ -38,16 +39,47 @@ class Navigation extends React.Component{
         .catch((err) => {console.log(err)})
     }
 
+    async handleBtnClick(e){
+        let buttonId = e.target.id;
+        switch(buttonId){
+            case "f-Button":
+                await this.grabCrimeData("F");
+                break;
+            case 'm-Button':
+                await this.grabCrimeData(null,"M",null);
+                break;
+            case 'v-Button':
+                await this.grabCrimeData(null,null,"V");
+                break;
+        }
+    }
+
     loadCrimeLocale(arr) {
         let locale = arr;
         return locale.map(function(item){
-        return console.log(item)
+        return console.log("In function ",item)
         });   
     }
-    grabCrimeData() {
+    grabCrimeData(felony,misdemeanor,violation) {
         API.getLatLng()
         .then((res)  => {
-            this.setState({crimeLocations:res.data})  
+            let crimeLevelArr = [];
+            res.data.map((item) => {  
+                switch(item.law_cat_cd){
+                    case felony:
+                    console.log("FELONY => ", crimeLevelArr.push(item))
+                    break;
+                    case misdemeanor:
+                    console.log("MISDEMEANOR => ", crimeLevelArr.push(item))
+                    break;
+                    case violation:
+                    console.log("VIOLATION => ", crimeLevelArr.push(item))
+                    break;
+                }
+            }) 
+            this.setState({crimeLocations:crimeLevelArr})  
+            console.log(" STATE => ",this.state.crimeLocations)  
+            // this.setState({crimeLocations:res.data})  
         })
         .catch((err) => {console.log(err)})
     }
@@ -92,30 +124,26 @@ class Navigation extends React.Component{
                     className="mapper"
                     coor={
                     this.state.crimeLocations.map(function(item){
-                        console.log("crimeLocations in state => ", item)
                     return {lat:item.latitude, 
                             lng:item.longitude,
                             crime: item.offence,
                             date: item.date,
                             sex: item.sex,
                             race: item.race,
-                            arrestKey: item.arrest_key }})}
-                    // Can I return within coors in order to get the data through props.
-                    // crimeData={
-                    //     {Crime: item.offence,
-                    //      Date: item.date,
-                    //      Sex: item.sex,
-                    //      Race: item.race,
-                    //      ArrestKey: item.arrest_key 
-                    //     } 
-                    // }
+                            arrestKey: item.arrest_key, 
+                            levelOfOffense:item.law_cat_cd
+                        }})}
                     usrLocale={this.state.usrLocation} 
                     google={this.props.google}
                     destination={this.state.destinationLatLng}
                     criminalLocales={this.state.crimeLocations}
                     usrCurrentLocation={this.state.usrLocation}
                 > 
+                
                 </Maps> 
+                <button id="f-Button" onClick={this.handleBtnClick}>Felonys</button>
+                <button id="m-Button" onClick={this.handleBtnClick}>Misdemeanors</button>
+                <button id="v-Button" onClick={this.handleBtnClick}>Violations</button>
             </Container>          
         </div>
         );

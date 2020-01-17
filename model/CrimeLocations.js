@@ -11,7 +11,7 @@ const CrimeLocationsSchema = new Schema({
   race: String,
   offence: String,
   arrest_key: String,
-  // law_cat_cd:String,
+  law_cat_cd:String,
   // law_code:String
 
   
