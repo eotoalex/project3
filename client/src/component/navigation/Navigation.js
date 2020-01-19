@@ -2,9 +2,11 @@ import React from "react";
 import Maps from "../map/Maps";
 import API from "../../utils/API";
 import {Container} from 'reactstrap';
-// import '../map/Maps.css';
 import "./Navigation.css";
 import Destination from "../destination/Destination";
+import {
+    Link
+  } from "react-router-dom";
 
 class Navigation extends React.Component{
     constructor(props) {
@@ -14,14 +16,19 @@ class Navigation extends React.Component{
             usrLocation:[],
             crimeNews: [] || 'Loading...',
             destination: "",
-            destinationLatLng:[]
+            destinationLatLng:[],
+            trainInfo:[]
         }
        // this.loadCrimeDataInDB = this.loadCrimeDataInDB.bind(this)
+        // this.loadTrainDataToDB = this.loadTrainDataToDB.bind(this)
         this.loadCrimeLocale = this.loadCrimeLocale.bind(this)
         this.grabCrimeData = this.grabCrimeData.bind(this)
         this.getUsrLocale = this.getUsrLocale.bind(this)
         this.showPosition = this.showPosition.bind(this)
         this.handleBtnClick = this.handleBtnClick.bind(this)
+        this.handleCommentBtn = this.handleCommentBtn.bind(this)
+        this.handleTrainBtnClick = this.handleTrainBtnClick.bind(this)
+        
     }
 
     async componentDidMount() {
@@ -29,6 +36,16 @@ class Navigation extends React.Component{
         await this.getUsrLocale(this.loadCrimeLocale)
         // await this.grabCrimeData()
         await this.loadCrimeLocale(this.state.crimeLocations)
+        await this.loadTrainDataToDB()
+    }
+
+    loadTrainDataToDB() {
+        API.trainStationLstLng()
+        .then((res) => {
+            console.log("Train data loaded to DB...",res)
+            
+        })
+        .catch((err)=>{console.log(err)})
     }
 
     loadCrimeDataInDB() {
@@ -37,6 +54,16 @@ class Navigation extends React.Component{
             console.log("Loaded to DB...", res)
         })
         .catch((err) => {console.log(err)})
+    }
+
+    handleTrainBtnClick () {
+        console.log("Trains will render to page and connect to user location.")
+        // API.trainStationLstLng()
+        // .then((res) => {
+        //     console.log("RES in click event =>",res)
+        //     // this.setState({trainInfo:res}, () => {console.log('traininfo in state =>',this.state.trainInfo)})
+        // })
+        // .catch((err)=>{console.log(err)})
     }
 
     async handleBtnClick(e){
@@ -53,6 +80,14 @@ class Navigation extends React.Component{
                 break;
         }
     }
+
+    handleCommentBtn (e) {
+        // The article url passed to the value attribute will go into the <iframe>
+        console.log("Comment Btn works!", e.target.value)
+       
+    }
+
+
 
     loadCrimeLocale(arr) {
         let locale = arr;
@@ -144,6 +179,8 @@ class Navigation extends React.Component{
                 <button id="f-Button" onClick={this.handleBtnClick}>Felonys</button>
                 <button id="m-Button" onClick={this.handleBtnClick}>Misdemeanors</button>
                 <button id="v-Button" onClick={this.handleBtnClick}>Violations</button>
+                <button id="train-Button" onClick={this.handleTrainBtnClick}>Train</button>
+                <Link to="/news_review"><button id="article-comment" onClick={this.handleCommentBtn} value='Article URL'>Article Comment</button></Link>
             </Container>          
         </div>
         );

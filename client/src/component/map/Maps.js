@@ -3,12 +3,6 @@ import React from 'react';
 import axios from "axios";
 import Slider from "../slider/Slider";
 import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
-
-const mapStyles = {
-  width:"100vw",
-  height:"100vh",
-  // pointerEvents:"none",
-};
  
 class Maps extends React.Component {
   constructor(props) {
