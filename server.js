@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const axios = require("axios");
 const app = express();
+const cheerio = require("cheerio");
 const PORT = process.env.PORT || 3001;
 const Users = require('./model/Users');
 const jwt = require('jsonwebtoken');
@@ -11,6 +12,7 @@ const newsFeedController = require('./controllers/newsFeedController');
 var Userspass = require('./controllers/userController');
 process.env.SECRET_KEY = 'secret';
 require('dotenv').config("./.env");
+const SubwayStations = require ('./model/SubwayStations');
 
 // Defining middleware
 app.use(express.urlencoded({ extended: true }));
@@ -103,6 +105,84 @@ app.get("/apikey", (req,res) => {
 
 // News is scraped from the New York Times website.
 app.get("/scrapeNews",newsFeedController.getScrapedNews);
+
+
+
+// This end point will facilitate the scraping of the headline and the image for the comment page, in relation to articles that are commented on.
+app.get("/article_specs",(req,res) => {
+  axios.get("https://www.nydailynews.com/new-york/nyc-crime/ny-video-attack-harriman-20200118-so3skb4z5nfq5ogrulrp754hfy-story.html")
+  .then(function(response){
+    var $ = cheerio.load(response.data);
+  
+  let results = [];
+
+  $(".crd--cnt").each(function(i, element){
+      var title = $(element).find("h1").text();
+
+
+      // var img = $(element).find('figure').find('img').find('src');
+      var img = $(element).find(".r-mb").find("img").attr("alt");
+      // var text = 
+      if(title !== "" ){
+          results.push({
+              title:title,
+              image:img,
+              
+          })
+      }
+  })
+  let resultsList = [];
+  resultsList.push(results[0]);
+  res.json(resultsList);
+  
+  })
+
+
+  // console.log(req)
+  // axios.get("https://www.nydailynews.com/new-york/nyc-crime/ny-video-attack-harriman-20200118-so3skb4z5nfq5ogrulrp754hfy-story.html")
+  // .then(function(response){
+  // const cheerio = require("cheerio");
+  // var $ = cheerio.load(response.data);
+  // var result = [];
+
+  // $(".artcl--m").each(function(i, element){
+  //   var title = $(element).find("h1").text();
+  //   result.push({
+  //     title:title
+  //   })
+  // })
+
+  // res.json(result)
+
+  // });
+})
+
+app.get('/train_latlng', (req,res) => {
+  axios.get('https://data.cityofnewyork.us/resource/kk4q-3rt2.json')
+  .then(function(response){
+    // console.log(response.data)
+    response.data.map( (item)=> {
+      let results = {};
+      let station = item.name;
+      let latitude = item.the_geom.coordinates[1];
+      let longitude = item.the_geom.coordinates[0];
+      let line = item.line;
+      let info = item.notes;
+
+      results.station = station;
+      results.latitude = latitude;
+      results.longitude = longitude;
+      results.line = line;
+      results.info = info;
+
+
+      SubwayStations.create(results)
+      .then((res) => {console.log("Loaded Subway info to DB...", res)})
+      .catch((err) => {console.log(err)})
+    })
+  })
+
+})
   
 // Send every other request to the react app.
 app.get("*", (req, res) => {

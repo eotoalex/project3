@@ -19,12 +19,23 @@
     #m-Button{
       position:absolute;
       right:1%;
-      top:20%;
+      top:23%;
     }
     #v-Button{
       position:absolute;
       right:1%;
-      top:30%;
+      top:33%;
+    }
+
+   #article-comment{
+    position:absolute;
+      right:1%;
+      top:43%;
+    }
+    #train-Button{
+      position:absolute;
+      right:1%;
+      top:53%;
     }
   
   .overlay {
