@@ -22,6 +22,10 @@ export default {
     },
 
     trainStationLstLng: function (){
-        return axios.get('/train_latlng')
+        return axios.get('/train_latlng');
+    },
+
+    getTrainDataDB: function() {
+        return axios.get('/train_data_db');
     }
 };
