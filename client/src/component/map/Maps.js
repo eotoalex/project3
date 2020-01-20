@@ -3,6 +3,7 @@ import React from 'react';
 import axios from "axios";
 import Slider from "../slider/Slider";
 import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
+import trainIcon from "../../icons/icons8-train-50.png"
  
 class Maps extends React.Component {
   constructor(props) {
@@ -10,10 +11,17 @@ class Maps extends React.Component {
     this.state = {
       map:[],
       marker:[], 
+      trainMarkers:[],
       isInfoWindowOpen:false,
       currentInfoWindow:[null],
       crimeNews:[] || 'Loading...',
       crimeData: this.props.crimeData,
+      trainData: this.props.trainStationData,
+      trainIcon: {
+        url:trainIcon,
+        scaledSize: new this.props.google.maps.Size(30, 30), 
+      },
+      clickedTrainBtn: false,
       openInfoWindow : (map,marker,googleObj) =>{
         console.log("MAP ", map)
         console.log("MARKER ", marker)
@@ -47,6 +55,8 @@ class Maps extends React.Component {
         
       }
     }
+    this.handleTrainBtnClick = this.handleTrainBtnClick.bind(this)
+    this.handleTrainsNearby = this.handleTrainsNearby.bind(this)
   }
  
   markerIcon = {
@@ -56,7 +66,6 @@ class Maps extends React.Component {
 
   async componentDidMount () {
     const crimeNews = await axios.get("/scrapeNews");
-    // await crimeDataSet = () => {console.log("hello")}
         this.setState({
             crimeNews : crimeNews.data
         });   
@@ -77,6 +86,82 @@ class Maps extends React.Component {
       console.log("We have an address", lat,lng);
     }  
   }
+
+  distance(lat1, lon1, lat2, lon2) {
+    var p = 0.017453292519943295;    // Math.PI / 180
+    var c = Math.cos;
+    var a = 0.5 - c((lat2 - lat1) * p)/2 + 
+            c(lat1 * p) * c(lat2 * p) * 
+            (1 - c((lon2 - lon1) * p))/2;
+  
+    return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+  }
+
+ handleTrainsNearby(e) {
+  //  console.log(this.distance())
+  //  Get the users location and the nearest trains location and output the result.
+
+  console.log("user location => ", this.props.usrCurrentLocation )
+  console.log("train location location => ",e )
+
+ } 
+
+ trainInfoWindow (map, trainMarker){
+   console.log("Info window is active!");
+  //  let infoWindow = new googleObj.InfoWindow({
+  //   content:content
+  // });
+  // this.state.currentInfoWindow.push(infoWindow);
+  // this.isInfoWindowOpen = true;
+  // infoWindow.open(map,trainMarker);
+  // }
+   
+ }
+
+ handleTrainBtnClick () {
+  // console.log("Map => ", this.state.map);
+  let stationLocations = this.props.trainStationData;
+  let map = this.state.map;
+  let markersArr = [];
+  let infoWindow = this.trainInfoWindow;
+  
+if (this.state.clickedTrainBtn === false){
+  this.state.clickedTrainBtn = true
+  stationLocations.map((stationCoords) => {
+    let latitude = parseFloat(stationCoords.latitude);
+    let longitude = parseFloat(stationCoords.longitude);
+    let position = {lat:latitude,lng:longitude};
+    let lines = stationCoords.line;
+    let info = stationCoords.info;
+    let name = stationCoords.station;
+    
+    let marker = new this.props.google.maps.Marker({
+      position:position,
+      title:name,
+      content:info,
+      lines:lines,
+      icon:this.state.trainIcon,
+      onClick:{infoWindow},
+    });
+    markersArr.push(marker)
+    marker.setMap(map)
+  })
+  this.setState({trainMarkers:markersArr})
+  
+
+ } else if (this.state.clickedTrainBtn === true) {
+   
+   this.state.clickedTrainBtn = false;
+  for(let i = 0; i<this.state.trainMarkers.length; i++){
+    this.state.trainMarkers[i].setMap(null);
+  }
+   
+    
+    
+   
+ }
+
+}
   
   polyLineClosure = (polylineOptions,map) => {
     let safePath;
@@ -198,12 +283,21 @@ class Maps extends React.Component {
             icon={this.markerIcon}
             onMouseover={this.onMouseover}
           />
+          <button
+            id="train-Button" 
+            onClick={this.handleTrainBtnClick}
+            >TrainBtn
+          </button>
+          <button id="trains-nearby"
+            onClick={this.handleTrainsNearby}>
+            Trains Near by
+          </button>
           <Slider 
             className="slider" 
             crimeNews={this.state.crimeNews} />
-            {/* <Button>MyButton</Button> */}
-            {/* <Button onClick={"this.handleBtnPress"}>Submit</Button> */}
+             
         </Map>
+       
         
       </div>
     );

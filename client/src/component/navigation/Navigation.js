@@ -4,9 +4,8 @@ import API from "../../utils/API";
 import {Container} from 'reactstrap';
 import "./Navigation.css";
 import Destination from "../destination/Destination";
-import {
-    Link
-  } from "react-router-dom";
+import {Link} from "react-router-dom";
+import Button from '../button/Button';
 
 class Navigation extends React.Component{
     constructor(props) {
@@ -19,15 +18,16 @@ class Navigation extends React.Component{
             destinationLatLng:[],
             trainInfo:[]
         }
-       // this.loadCrimeDataInDB = this.loadCrimeDataInDB.bind(this)
+        // this.loadCrimeDataInDB = this.loadCrimeDataInDB.bind(this)
         // this.loadTrainDataToDB = this.loadTrainDataToDB.bind(this)
         this.loadCrimeLocale = this.loadCrimeLocale.bind(this)
         this.grabCrimeData = this.grabCrimeData.bind(this)
+        this.grabTrainDataDB = this.grabTrainDataDB.bind(this)
         this.getUsrLocale = this.getUsrLocale.bind(this)
         this.showPosition = this.showPosition.bind(this)
         this.handleBtnClick = this.handleBtnClick.bind(this)
         this.handleCommentBtn = this.handleCommentBtn.bind(this)
-        this.handleTrainBtnClick = this.handleTrainBtnClick.bind(this)
+        // this.handleTrainBtnClick = this.handleTrainBtnClick.bind(this)
         
     }
 
@@ -36,7 +36,8 @@ class Navigation extends React.Component{
         await this.getUsrLocale(this.loadCrimeLocale)
         // await this.grabCrimeData()
         await this.loadCrimeLocale(this.state.crimeLocations)
-        await this.loadTrainDataToDB()
+        // await this.loadTrainDataToDB()
+        await this.grabTrainDataDB()
     }
 
     loadTrainDataToDB() {
@@ -56,15 +57,35 @@ class Navigation extends React.Component{
         .catch((err) => {console.log(err)})
     }
 
-    handleTrainBtnClick () {
-        console.log("Trains will render to page and connect to user location.")
-        // API.trainStationLstLng()
-        // .then((res) => {
-        //     console.log("RES in click event =>",res)
-        //     // this.setState({trainInfo:res}, () => {console.log('traininfo in state =>',this.state.trainInfo)})
-        // })
-        // .catch((err)=>{console.log(err)})
+    grabTrainDataDB() {
+        API.getTrainDataDB()
+        .then((res) => {
+            this.setState({trainInfo:res.data})
+        })
+        .catch((err) => {console.log(err)})
     }
+
+    proximityLatLng() {
+        // This will determine which latlng is close to the main latlng
+        // The 3 closests latlng will be pushed to the closestLocations array 
+        // Then only those markers will be pushed to be rendered.
+
+    
+    }
+
+    // handleTrainBtnClick () {
+    //     console.log("Train Button => ", this.props.trainStationData);
+    //     // return(
+    //     //     <Marker
+    //     //     title={'Train Station'}
+    //     //     position={{lat: "40.741039999802105", lng: "-73.99787100060406"}}
+    //     //     icon={'train Icon'}
+    //     //     content={"Info"}
+    //     //     map={}
+    //     //     ></Marker>
+    //     // )
+
+    // }
 
     async handleBtnClick(e){
         let buttonId = e.target.id;
@@ -173,13 +194,14 @@ class Navigation extends React.Component{
                     destination={this.state.destinationLatLng}
                     criminalLocales={this.state.crimeLocations}
                     usrCurrentLocation={this.state.usrLocation}
+                    trainStationData={this.state.trainInfo}
                 > 
                 
                 </Maps> 
                 <button id="f-Button" onClick={this.handleBtnClick}>Felonys</button>
                 <button id="m-Button" onClick={this.handleBtnClick}>Misdemeanors</button>
                 <button id="v-Button" onClick={this.handleBtnClick}>Violations</button>
-                <button id="train-Button" onClick={this.handleTrainBtnClick}>Train</button>
+                {/* <Button onClick={this.handleTrainBtnClick}>Train</Button> */}
                 <Link to="/news_review"><button id="article-comment" onClick={this.handleCommentBtn} value='Article URL'>Article Comment</button></Link>
             </Container>          
         </div>

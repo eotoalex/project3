@@ -157,6 +157,14 @@ app.get("/article_specs",(req,res) => {
   // });
 })
 
+app.get('/train_data_db', (req,res) => {
+  SubwayStations.find({})
+  .then((result) => {
+    console.log("Train data in DB => ",result.length);
+    res.json(result);
+  });
+})
+
 app.get('/train_latlng', (req,res) => {
   axios.get('https://data.cityofnewyork.us/resource/kk4q-3rt2.json')
   .then(function(response){

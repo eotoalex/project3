@@ -16,6 +16,18 @@
   font:white;
 }
 
+#train-Button{
+  position:absolute;
+  right:1%;
+  top:53%;
+}
+
+#trains-nearby{
+  position:absolute;
+  right:1%;
+  top:63%;
+}
+
 #button{
   position:absolute;
   right:1%;
