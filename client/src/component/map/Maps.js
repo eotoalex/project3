@@ -29,6 +29,8 @@ class Maps extends React.Component {
         return 0;
       },
       onMouseOver:(map,marker) => {
+        console.log("MAP ", map)
+        console.log("MARKER ", marker)
         if(this.isInfoWindowOpen === true){
         this.state.currentInfoWindow[0].close()
         this.isInfoWindowOpen = false;
@@ -123,7 +125,7 @@ class Maps extends React.Component {
   let stationLocations = this.props.trainStationData;
   let map = this.state.map;
   let markersArr = [];
-  let infoWindow = this.trainInfoWindow;
+  let infoWindow = this.state.onMouseOver;
   
 if (this.state.clickedTrainBtn === false){
   this.state.clickedTrainBtn = true
@@ -132,19 +134,32 @@ if (this.state.clickedTrainBtn === false){
     let longitude = parseFloat(stationCoords.longitude);
     let position = {lat:latitude,lng:longitude};
     let lines = stationCoords.line;
-    let info = stationCoords.info;
+    // let info = stationCoords.info;
+    let test = "<h1>Hello</h1>"
     let name = stationCoords.station;
     
     let marker = new this.props.google.maps.Marker({
       position:position,
       title:name,
-      content:info,
+      content:test,
+        // '<div id="content">'+
+        //   '<ul style="list-style-type:none;">'+
+        //     '<li>'+ "Trains: " + info +'</li>'+
+        //     '<li>'+ "Station: " + name +'</li>'+
+        //     '<li>'+ "Position " + position +'</li>'+
+        //   '</ul>'+
+        // '</div>',
       lines:lines,
       icon:this.state.trainIcon,
-      onClick:{infoWindow},
+      // onClick:infoWindow(map),
     });
     markersArr.push(marker)
     marker.setMap(map)
+    marker.addListener('click', function() {
+      // map.setZoom(8);
+      // map.setCenter(marker.getPosition());
+      infoWindow(map,marker)
+    });
   })
   this.setState({trainMarkers:markersArr})
   
