@@ -37,10 +37,13 @@ class NewsReview extends React.Component{
             <div>
                <div>
                 <p>{this.state.articleHeadline}</p>
-               
-                <img className="article_img" src={this.state.articleImage}/>
+               {/* Input address here. */}
+                {/* <img className="article_img" src={this.state.articleImage}/> */}
                 </div>
-              
+              {/* Input incident, if you are in immediate danger please stop and call 911. */}
+              {/* Tag people in incident. */}
+              {/* Photo or video upload option. */}
+              {/* URL link to video or photo or */}
 
 
                 <p>url</p>
