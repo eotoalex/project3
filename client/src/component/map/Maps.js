@@ -37,7 +37,7 @@ class Maps extends React.Component {
       }else{
         this.state.currentInfoWindow =[];
         
-        let content = map.content;
+        let content = marker.content;
         let googleObj = this.props.google.maps;
         let infoWindow = new googleObj.InfoWindow({
           content:content
@@ -88,23 +88,67 @@ class Maps extends React.Component {
       console.log("We have an address", lat,lng);
     }  
   }
-
-  distance(lat1, lon1, lat2, lon2) {
-    var p = 0.017453292519943295;    // Math.PI / 180
-    var c = Math.cos;
-    var a = 0.5 - c((lat2 - lat1) * p)/2 + 
-            c(lat1 * p) * c(lat2 * p) * 
-            (1 - c((lon2 - lon1) * p))/2;
-  
-    return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+  deg2rad(deg) {
+    return deg * Math.PI / 180
   }
 
- handleTrainsNearby(e) {
+  distance(lat1, lon1, lat2, lon2) {
+    var R = 3958.8; // Radius of the earth in miles
+    var dLat = this.deg2rad(lat2 - lat1); // deg2rad below
+    var dLon = this.deg2rad(lon2 - lon1);
+    var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in miles
+    return Math.round(100 * d)/100;
+  }
+  
+ 
+  // 2 * R; R = 6371 km R= 3958.8
+ quickSort(){}
+
+ handleTrainsNearby() {
+// this.distance (requires latlng1 to be user and latlng2 to be trainstation pushing three closest to an array.)
+// the three latlng in the array are put into the calcRoutes with a for loop that displays all three polylines.
+// An info box should appear to show the distance, recent incidents nearest the routes and the train.
+
   //  console.log(this.distance())
   //  Get the users location and the nearest trains location and output the result.
+  // Distance will calculate the nearest train station.
+  // Disance can also calculate the nearest precinct.
+  // Distance can also get the nearest hospital.(Address will be in this.)
+  // calcRoutes function will be used where parameters are map, userlocation and lat lng of trainStation, 
 
-  console.log("user location => ", this.props.usrCurrentLocation )
-  console.log("train location location => ",e )
+  let usrLocation = this.props.usrCurrentLocation;
+  let trainLocations = this.props.trainStationData;
+  let userLat = usrLocation.lat;
+  let userLng = usrLocation.lng;
+  let distancesCollected = [];
+
+ trainLocations.map((station) => {
+  let trainSLat = parseFloat(station.latitude);
+  let trainSLng = parseFloat(station.longitude);
+  let id = station._id;
+  
+   distancesCollected.push({id:id,distance:this.distance(userLat,userLng,trainSLat,trainSLng)});
+  // distancesCollected.push(this.distance(userLat,userLng,trainSLat,trainSLng));
+     
+ })
+  
+  // console.log(trainLocations)
+  
+  console.log("DistancesCollected ARR ",distancesCollected)
+
+
+// When I get the distances in the distancesCollected array, I have to do a quick sort to get it ready for the calcRoutes function.
+// After this we can render the polylines, with the info box indicating how far is the nearest train, 
+// then render the crimedata points by doing it all over again but this time with the crimedata to see which are closest to the latlngs of the polyline.
+// It would be most effective to find the two closest crime locations to the polylines, with an info bar also indicating the amount of Violations, Felonys and Misdemeanors have occured enroute.
+// The work on comment feature that renders a marker with an infoWindow to the map as well.
+  
 
  } 
 
@@ -134,21 +178,22 @@ if (this.state.clickedTrainBtn === false){
     let longitude = parseFloat(stationCoords.longitude);
     let position = {lat:latitude,lng:longitude};
     let lines = stationCoords.line;
-    // let info = stationCoords.info;
-    let test = "<h1>Hello</h1>"
+    let info = stationCoords.info;
+   
     let name = stationCoords.station;
     
     let marker = new this.props.google.maps.Marker({
       position:position,
       title:name,
-      content:test,
-        // '<div id="content">'+
-        //   '<ul style="list-style-type:none;">'+
-        //     '<li>'+ "Trains: " + info +'</li>'+
-        //     '<li>'+ "Station: " + name +'</li>'+
-        //     '<li>'+ "Position " + position +'</li>'+
-        //   '</ul>'+
-        // '</div>',
+      content:
+        '<div id="content">'+
+          '<ul style="list-style-type:none;">'+
+            '<li>'+ "Trains: " + info +'</li>'+
+            '<li>'+ "Station: " + name +'</li>'+
+            '<li>'+ "Position " + position.lat +' '+ position.lng +'</li>'+
+            '<li>'+ "Arrives " + "Coming Soon..."+'</li>'+
+          '</ul>'+
+        '</div>',
       lines:lines,
       icon:this.state.trainIcon,
       // onClick:infoWindow(map),
@@ -260,7 +305,7 @@ if (this.state.clickedTrainBtn === false){
           '</div>'
         }
         // onMouseover={hover}
-        onMouseout= {offIcon}
+        // onMouseout= {offIcon}
         onClick={openInfoWindow}
         >
         </Marker>

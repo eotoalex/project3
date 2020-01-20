@@ -1,6 +1,6 @@
 # Trekky
 
-Trekky is a crime tracking app that identifies recent crime data and tracks patterns to better inform those that travel around the city.
+Trekky is a crime location app that identifies historic crime data and tracks patterns of incidents, to better inform those that travel around the city. Quarterly arrest records from the NYPD Arrests Data API, are rendered to the Google Maps API, as well as the users location, with additional information on the arrest when the marker is clicked.Users are routed to the nearest subway or any given location they put into the destination bar, with rendered crime that occurred near or around the polyline that forms leading to the destination marker on the map. Trekky is designed to inform user travel and safe routing around the city, with an eventual lead into practical data visualization for law enforcement agencies’ National Crime Information Center database.
 ___
 
 ## Technologies 
