@@ -28,6 +28,12 @@
   top:63%;
 }
 
+#crime-nearby {
+  position:absolute;
+  right:1%;
+  top:73%
+}
+
 #button{
   position:absolute;
   right:1%;
