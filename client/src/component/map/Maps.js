@@ -108,9 +108,96 @@ class Maps extends React.Component {
   
  
   // 2 * R; R = 6371 km R= 3958.8
- quickSort(){}
+   
+   quickSort = nums => {
+     
+    const sortedArray = [...nums]
+    
+    if (sortedArray.length <= 1) {
+      return sortedArray;
+    }
+    
+    const pivot = sortedArray[sortedArray.length-1];
+    const left = [];
+    const right = [];
+    
+    for (let i = 0; i < sortedArray.length-1; i++) {
+      if (sortedArray[i] < pivot) {
+        left.push(sortedArray[i]);
+      }
+      else {
+        right.push(sortedArray[i]);
+      }
+    }
+    //  console.log("QuickSort ",[...this.quickSort(left), pivot, ...this.quickSort(right)])
+    // console.log('sortedArray', sortedArray)
+    return [...this.quickSort(left), pivot, ...this.quickSort(right)];
+  };
+  
 
  handleTrainsNearby() {
+  let usrLocation = this.props.usrCurrentLocation;
+  let trainLocations = this.props.trainStationData;
+  let userLat = usrLocation.lat;
+  let userLng = usrLocation.lng;
+  let distancesCollected = [];
+  let distancesLatLng = [];
+  let idArr = [];
+
+ trainLocations.map((station) => {
+  let trainSLat = parseFloat(station.latitude);
+  let trainSLng = parseFloat(station.longitude);
+  let id = station._id;
+  let track = station.station;
+  let line = station.line;
+  let info = station.info;
+  let lat = station.latitude;
+  let lng = station.longitude;
+  
+  distancesCollected.push({
+    id:id,
+    // track:track,
+    // line:line,
+    // info:info,
+    // lat:lat,
+    // lng:lng,
+    distance:this.distance(userLat,userLng,trainSLat,trainSLng)
+  
+  });
+  console.log(distancesLatLng.push(this.distance(userLat,userLng,trainSLat,trainSLng)))
+  console.log(distancesCollected)
+
+  
+
+ })
+
+//   console.log( this.quickSort(distancesCollected))
+// console.log(this.quickSort(distancesCollected)) // object
+
+
+// distancesCollected.map((item) => {
+  
+// if(item.distance === distancesLatLng[0]){
+//   let result = {}
+//  result.id = item.id;
+//  result.station = item.track;
+//  result.line = item.line;
+//  result.info = item.info;
+//  result.lat = item.lat;
+//  result.lng = item.lng;
+//  result.distance = item.distance;
+//   idArr.push(result)
+// } 
+// }) 
+// console.log("IDArray =>  ",idArr)
+
+
+
+
+// console.log(this.quickSort(distancesLatLng))
+
+
+
 // this.distance (requires latlng1 to be user and latlng2 to be trainstation pushing three closest to an array.)
 // the three latlng in the array are put into the calcRoutes with a for loop that displays all three polylines.
 // An info box should appear to show the distance, recent incidents nearest the routes and the train.
@@ -122,25 +209,13 @@ class Maps extends React.Component {
   // Distance can also get the nearest hospital.(Address will be in this.)
   // calcRoutes function will be used where parameters are map, userlocation and lat lng of trainStation, 
 
-  let usrLocation = this.props.usrCurrentLocation;
-  let trainLocations = this.props.trainStationData;
-  let userLat = usrLocation.lat;
-  let userLng = usrLocation.lng;
-  let distancesCollected = [];
 
- trainLocations.map((station) => {
-  let trainSLat = parseFloat(station.latitude);
-  let trainSLng = parseFloat(station.longitude);
-  let id = station._id;
-  
-   distancesCollected.push({id:id,distance:this.distance(userLat,userLng,trainSLat,trainSLng)});
-  // distancesCollected.push(this.distance(userLat,userLng,trainSLat,trainSLng));
      
- })
+//  })
   
   // console.log(trainLocations)
   
-  console.log("DistancesCollected ARR ",distancesCollected)
+  // console.log("DistancesCollected ARR ",distancesCollected)
 
 
 // When I get the distances in the distancesCollected array, I have to do a quick sort to get it ready for the calcRoutes function.
