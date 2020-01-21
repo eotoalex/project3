@@ -2,6 +2,10 @@
 import axios from 'axios';
 
 export default {
+    resetAllInDB: function(){
+        return axios.delete("/dropDB")
+    },
+
     loadCrimeDataToDB: function(){
         return axios.post("/api/crime");
     },

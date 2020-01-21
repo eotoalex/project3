@@ -32,6 +32,7 @@ class Navigation extends React.Component{
     }
 
     async componentDidMount() {
+        await this.resetDB()
         await this.loadCrimeDataInDB()
         await this.loadTrainDataToDB()
         await this.getUsrLocale(this.loadCrimeLocale)
@@ -39,6 +40,10 @@ class Navigation extends React.Component{
         await this.loadCrimeLocale(this.state.crimeLocations)
         
         await this.grabTrainDataDB()
+    }
+
+    resetDB(){
+        API.resetAllInDB()
     }
 
     loadTrainDataToDB() {

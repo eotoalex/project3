@@ -191,6 +191,12 @@ app.get('/train_latlng', (req,res) => {
   })
 
 })
+
+app.delete("/dropDB",()=>{
+  db.collections['crimelocations','subwaystations'].drop( function(err) {
+    console.log('collection dropped');
+});
+})
   
 // Send every other request to the react app.
 app.get("*", (req, res) => {
