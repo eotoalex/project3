@@ -38,7 +38,6 @@ class Navigation extends React.Component{
         await this.getUsrLocale(this.loadCrimeLocale)
         // await this.grabCrimeData()
         await this.loadCrimeLocale(this.state.crimeLocations)
-        
         await this.grabTrainDataDB()
     }
 
@@ -47,7 +46,7 @@ class Navigation extends React.Component{
     }
 
     loadTrainDataToDB() {
-        API.trainStationLstLng()
+        API.trainStationLatLng()
         .then((res) => {
             console.log("Train data loaded to DB...",res)
             
@@ -153,6 +152,7 @@ class Navigation extends React.Component{
     }
     showPosition = (position) => {
         this.setState({usrLocation:{lat:position.coords.latitude,lng:position.coords.longitude}})
+        console.log("In navigation => ", this.state.usrLocation)
         return {lat:position.coords.latitude,lng:position.coords.longitude}
     }
 

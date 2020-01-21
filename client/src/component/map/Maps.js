@@ -10,6 +10,7 @@ class Maps extends React.Component {
     super(props)
     this.state = {
       map:[],
+      userGeoLocation:this.props.usrCurrentLocation,
       marker:[], 
       trainMarkers:[],
       isInfoWindowOpen:false,
@@ -67,11 +68,29 @@ class Maps extends React.Component {
   }
 
   async componentDidMount () {
+    // await this.loadUsrLocation(); 
+    // await this.setState({userGeoLocation:this.getUsrLocale()})
     const crimeNews = await axios.get("/scrapeNews");
         this.setState({
             crimeNews : crimeNews.data
         });   
   }
+
+  loadUsrLocation (){
+    this.setState({userGeoLocation:this.props.usrCurrentLocation})
+    console.log(this.state.userGeoLocation)
+    return this.state.userGeoLocation
+  }
+
+  getUsrLocale = () => {
+    return( navigator.geolocation.getCurrentPosition(this.showPosition)
+            // callback(this.state.crimeLocations)
+            ) 
+  }
+showPosition = (position) => {
+    this.setState({usrLocation:{lat:position.coords.latitude,lng:position.coords.longitude}})
+    return {lat:position.coords.latitude,lng:position.coords.longitude}
+}
 
   setsRoute = (mapProps, map) => {
     let lat = this.props.destination.latitude;
@@ -135,6 +154,7 @@ class Maps extends React.Component {
   }
 
  handleTrainsNearby() {
+  //  console.log(this.props.trainStationData)
   let usrLocation = this.props.usrCurrentLocation;
   let trainLocations = this.props.trainStationData;
   let userLat = usrLocation.lat;
@@ -144,6 +164,7 @@ class Maps extends React.Component {
   let idArr = [];
   let map = this.state.map;
   let infoWindow = this.state.onMouseOver;
+  console.log("user location " ,usrLocation)
 
  trainLocations.map((station) => {
   let trainSLat = parseFloat(station.latitude);
@@ -170,7 +191,7 @@ class Maps extends React.Component {
   
  })
  
-//  console.log(distancesCollected)
+ console.log(distancesCollected)
 //  console.log(this.quickSort(distancesLatLng))
 
 distancesCollected.map((item) => {
@@ -209,7 +230,7 @@ let marker = new this.props.google.maps.Marker({
         '<li>'+ "Station: " + station +'</li>'+
         '<li>'+ "Distance: " + distance+ " miles away" +'</li>'+
         '<li>'+ "Arrives: " + "Coming Soon..."+'</li>'+
-        '<button>'+ "Check Area: " + "Coming Soon..."+'</button>'+
+        '<button>'+ "View Crime Nearby: " + "Coming Soon..."+'</button>'+
 
       '</ul>'+
     '</div>',
@@ -225,6 +246,7 @@ marker.addListener('click', function() {
   infoWindow(map,marker)
 });
 
+// Add another parameter which is the color of the polyline. Green for this one.
 this.calcRoutes (map,usrLocation,swStationsLat,swStationsLng)
 
 })
@@ -293,7 +315,6 @@ if (this.state.clickedTrainBtn === false){
     let position = {lat:latitude,lng:longitude};
     let lines = stationCoords.line;
     let info = stationCoords.info;
-   
     let name = stationCoords.station;
     
     let marker = new this.props.google.maps.Marker({
@@ -446,7 +467,7 @@ if (this.state.clickedTrainBtn === false){
               ]
             }
           ]}
-          initialCenter={this.props.usrCurrentLocation}
+          initialCenter={this.state.userGeoLocation ||{lat:40.8551424,lng:-73.92460799999999}}
           onReady={this.setsRoute}
           >
           {this.setsRoute()}
