@@ -18,8 +18,8 @@ class Navigation extends React.Component{
             destinationLatLng:[],
             trainInfo:[]
         }
-        // this.loadCrimeDataInDB = this.loadCrimeDataInDB.bind(this)
-        // this.loadTrainDataToDB = this.loadTrainDataToDB.bind(this)
+        this.loadCrimeDataInDB = this.loadCrimeDataInDB.bind(this)
+        this.loadTrainDataToDB = this.loadTrainDataToDB.bind(this)
         this.loadCrimeLocale = this.loadCrimeLocale.bind(this)
         this.grabCrimeData = this.grabCrimeData.bind(this)
         this.grabTrainDataDB = this.grabTrainDataDB.bind(this)
@@ -32,8 +32,8 @@ class Navigation extends React.Component{
     }
 
     async componentDidMount() {
-        // await this.loadCrimeDataInDB()
-        // await this.loadTrainDataToDB()
+        await this.loadCrimeDataInDB()
+        await this.loadTrainDataToDB()
         await this.getUsrLocale(this.loadCrimeLocale)
         // await this.grabCrimeData()
         await this.loadCrimeLocale(this.state.crimeLocations)
