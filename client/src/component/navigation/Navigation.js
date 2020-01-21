@@ -33,10 +33,11 @@ class Navigation extends React.Component{
 
     async componentDidMount() {
         // await this.loadCrimeDataInDB()
+        // await this.loadTrainDataToDB()
         await this.getUsrLocale(this.loadCrimeLocale)
         // await this.grabCrimeData()
         await this.loadCrimeLocale(this.state.crimeLocations)
-        // await this.loadTrainDataToDB()
+        
         await this.grabTrainDataDB()
     }
 

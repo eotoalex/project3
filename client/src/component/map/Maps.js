@@ -106,8 +106,6 @@ class Maps extends React.Component {
     return Math.round(100 * d)/100;
   }
   
- 
-  // 2 * R; R = 6371 km R= 3958.8
    
    quickSort = nums => {
      
@@ -129,11 +127,12 @@ class Maps extends React.Component {
         right.push(sortedArray[i]);
       }
     }
-    //  console.log("QuickSort ",[...this.quickSort(left), pivot, ...this.quickSort(right)])
-    // console.log('sortedArray', sortedArray)
     return [...this.quickSort(left), pivot, ...this.quickSort(right)];
   };
   
+  handleCrimesNearby () {
+    console.log("Crime button works!")
+  }
 
  handleTrainsNearby() {
   let usrLocation = this.props.usrCurrentLocation;
@@ -143,6 +142,8 @@ class Maps extends React.Component {
   let distancesCollected = [];
   let distancesLatLng = [];
   let idArr = [];
+  let map = this.state.map;
+  let infoWindow = this.state.onMouseOver;
 
  trainLocations.map((station) => {
   let trainSLat = parseFloat(station.latitude);
@@ -156,45 +157,83 @@ class Maps extends React.Component {
   
   distancesCollected.push({
     id:id,
-    // track:track,
-    // line:line,
-    // info:info,
-    // lat:lat,
-    // lng:lng,
+    track:track,
+    line:line,
+    info:info,
+    lat:lat,
+    lng:lng,
     distance:this.distance(userLat,userLng,trainSLat,trainSLng)
-  
   });
-  console.log(distancesLatLng.push(this.distance(userLat,userLng,trainSLat,trainSLng)))
-  console.log(distancesCollected)
+
+  distancesLatLng.push(this.distance(userLat,userLng,trainSLat,trainSLng))
 
   
-
  })
+ 
+//  console.log(distancesCollected)
+//  console.log(this.quickSort(distancesLatLng))
 
-//   console.log( this.quickSort(distancesCollected))
-// console.log(this.quickSort(distancesCollected)) // object
+distancesCollected.map((item) => {
 
+  for(let i = 0; i < 3; i++){ 
+    
+    if(item.distance === this.quickSort(distancesLatLng)[i]){
+    let result = {}
+    result.id = item.id;
+    result.station = item.track;
+    result.line = item.line;
+    result.info = item.info;
+    result.lat = item.lat;
+    result.lng = item.lng;
+    result.distance = item.distance;
+    idArr.push(result)
+    } 
+  }
+}) 
+console.log("IDArray =>  ",idArr)
 
-// distancesCollected.map((item) => {
+idArr.map((nearestStation) => {
+  let swStationsLat = parseFloat(nearestStation.lat);
+  let swStationsLng = parseFloat(nearestStation.lng);
+  let position = {lat:swStationsLat,lng:swStationsLng};
+  let station = nearestStation.station;
+  let lines =  nearestStation.line;
+  let distance = nearestStation.distance;
+
+let marker = new this.props.google.maps.Marker({
+  position:position,
+  content:
+    '<div id="content">'+
+      '<ul style="list-style-type:none;">'+
+      '<li>'+ "Trains: " + lines +'</li>'+
+        '<li>'+ "Station: " + station +'</li>'+
+        '<li>'+ "Distance: " + distance+ " miles away" +'</li>'+
+        '<li>'+ "Arrives: " + "Coming Soon..."+'</li>'+
+        '<button>'+ "Check Area: " + "Coming Soon..."+'</button>'+
+
+      '</ul>'+
+    '</div>',
   
-// if(item.distance === distancesLatLng[0]){
-//   let result = {}
-//  result.id = item.id;
-//  result.station = item.track;
-//  result.line = item.line;
-//  result.info = item.info;
-//  result.lat = item.lat;
-//  result.lng = item.lng;
-//  result.distance = item.distance;
-//   idArr.push(result)
-// } 
-// }) 
-// console.log("IDArray =>  ",idArr)
+  icon:this.state.trainIcon,
+  // onClick:infoWindow(map),
+});
+
+marker.setMap(map)
+marker.addListener('click', function() {
+  // map.setZoom(8);
+  // map.setCenter(marker.getPosition());
+  infoWindow(map,marker)
+});
+
+this.calcRoutes (map,usrLocation,swStationsLat,swStationsLng)
+
+})
 
 
 
 
-// console.log(this.quickSort(distancesLatLng))
+
+
 
 
 
@@ -391,7 +430,7 @@ if (this.state.clickedTrainBtn === false){
         <Map
           className="google-map"
           google={this.props.google}
-          zoom={11}
+          zoom={15}
           disableDefaultUI= {true}
           styles={[
             {
@@ -407,7 +446,7 @@ if (this.state.clickedTrainBtn === false){
               ]
             }
           ]}
-          initialCenter={{lat: 40.7128, lng: -74.0060}}
+          initialCenter={this.props.usrCurrentLocation}
           onReady={this.setsRoute}
           >
           {this.setsRoute()}
@@ -425,7 +464,11 @@ if (this.state.clickedTrainBtn === false){
           </button>
           <button id="trains-nearby"
             onClick={this.handleTrainsNearby}>
-            Trains Near by
+            Trains Near Me
+          </button>
+          <button id="crime-nearby"
+            onClick={this.handleCrimesNearby}>
+            Arrests Near Me
           </button>
           <Slider 
             className="slider" 

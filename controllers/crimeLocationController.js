@@ -17,7 +17,7 @@ module.exports = {
         axios.get("https://data.cityofnewyork.us/resource/uip8-fykc.json")
         .then(function(response){
         
-            for (let i = 0; i < 100; i++){
+            for (let i = 0; i < 100000; i++){
                 let results = {};
                 let latitude = response.data[i].latitude;
                 let longitude = response.data[i].longitude;
@@ -43,7 +43,7 @@ module.exports = {
                 // resulsts.law_code = lawCode;
 
                 CrimeLocations.create(results).then(function(dbCrime){
-                    console.log(dbCrime);
+                    // console.log(dbCrime);
                 }).catch(function(err){
                     console.log(err);
                 }) 
