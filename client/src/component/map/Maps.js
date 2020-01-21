@@ -374,13 +374,13 @@ if (this.state.clickedTrainBtn === false){
     });
   }
 
-  onMouseover = (props, marker, e) => {
-  // console.log("mouse over ", props, marker, e);
-  marker.addListener('click', function(){
-    console.log("MOUSE OVER WORKS",props);
-    console.log(e.target);
-  });
-  }
+  // onMouseover = (props, marker, e) => {
+  // // console.log("mouse over ", props, marker, e);
+  // marker.addListener('click', function(){
+  //   console.log("MOUSE OVER WORKS",props);
+  //   console.log(e.target);
+  // });
+  // }
 
   render(){
     const openInfoWindow = this.state.onMouseOver;
@@ -455,7 +455,7 @@ if (this.state.clickedTrainBtn === false){
           <Marker
             position={this.props.usrLocale}
             icon={this.markerIcon}
-            onMouseover={this.onMouseover}
+            onClick={this.openInfoWindow}
           />
           <button
             id="train-Button" 
