@@ -663,9 +663,11 @@ else if (this.state.crimeNearBy === true) {
               ]
             }
           ]}
-          filler={console.log("userGeo ",this.state.userGeoLocation)}
-          // initialCenter={this.state.userGeoLocation || {lat: 40.8551424, lng: -73.92460799999999}}
-          initialCenter={console.log("Loading") || this.props.usrLocale ||this.state.userGeoLocation || {lat: 40.8551424, lng: -73.92460799999999}}
+          // filler={console.log("userGeo ",this.state.userGeoLocation)}
+          // It is very strange that userGeoLocation does not render the map when it works perfectly as it should.
+           initialCenter={{lat: 40.8551424, lng: -73.92460799999999} || this.state.userGeoLocation }
+          //  initialCenter={this.state.userGeoLocation}
+          // initialCenter={console.log("Loading") || this.props.usrLocale ||this.state.userGeoLocation || {lat: 40.8551424, lng: -73.92460799999999}}
           onReady={this.setsRoute}
           >
           {this.setsRoute()}
