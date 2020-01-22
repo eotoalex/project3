@@ -27,6 +27,7 @@ class Navigation extends React.Component{
         this.showPosition = this.showPosition.bind(this)
         this.handleBtnClick = this.handleBtnClick.bind(this)
         this.handleCommentBtn = this.handleCommentBtn.bind(this)
+      
         // this.handleTrainBtnClick = this.handleTrainBtnClick.bind(this)
         
     }
@@ -206,6 +207,7 @@ class Navigation extends React.Component{
                 </Maps> 
                 <button id="f-Button" onClick={this.handleBtnClick}>Felonys</button>
                 <button id="m-Button" onClick={this.handleBtnClick}>Misdemeanors</button>
+
                 <button id="v-Button" onClick={this.handleBtnClick}>Violations</button>
                 {/* <Button onClick={this.handleTrainBtnClick}>Train</Button> */}
                 <Link to="/news_review"><button id="article-comment" onClick={this.handleCommentBtn} value='Article URL'>Article Comment</button></Link>
