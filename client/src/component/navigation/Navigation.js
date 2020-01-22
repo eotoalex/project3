@@ -205,12 +205,13 @@ class Navigation extends React.Component{
                 > 
                 
                 </Maps> 
-                <button id="f-Button" onClick={this.handleBtnClick}>Felonys</button>
-                <button id="m-Button" onClick={this.handleBtnClick}>Misdemeanors</button>
-
-                <button id="v-Button" onClick={this.handleBtnClick}>Violations</button>
+                <div className="button-container">
+                <button className="button" id="f-Button" onClick={this.handleBtnClick}>Felonys</button>
+                <button className="button"id="m-Button" onClick={this.handleBtnClick}>Misdemeanors</button>
+                <button className="button"id="v-Button" onClick={this.handleBtnClick}>Violations</button>
+                </div>
                 {/* <Button onClick={this.handleTrainBtnClick}>Train</Button> */}
-                <Link to="/news_review"><button id="article-comment" onClick={this.handleCommentBtn} value='Article URL'>Article Comment</button></Link>
+                {/* <Link to="/news_review"><button className="button" id="article-comment" onClick={this.handleCommentBtn} value='Article URL'>Article Comment</button></Link> */}
             </Container>          
         </div>
         );

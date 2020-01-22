@@ -8,6 +8,10 @@
   /* width:100%; */
   /* display:none;  */
 }
+
+/* #button-container{
+ background-color:gray;
+} */
 .slider{
   height:50%;
   width:100%;
@@ -39,4 +43,27 @@
   right:1%;
 }
 
+
+#content {
+  width:460px;
+  height:80px;
+}
+
+/* #content {
+  position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    border: 15px solid orange
+} */
+/* 
+#ul {
+ 
+  top: 0; right: 0; bottom: 0; left: 0;
+  border: 15px solid orange
+} */
+ 
+/* #veiw_crime_btn{
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  border: 15px solid orange
+} */
 
