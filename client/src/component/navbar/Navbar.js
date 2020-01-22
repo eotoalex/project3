@@ -21,11 +21,11 @@ class Navbar extends React.Component{
               Login
             </Link>
             </Col>
-            <Col>
+            {/* <Col>
               <Link to="/signup" className="nav-link">
                 Register
               </Link>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </ul>
@@ -67,11 +67,11 @@ class Navbar extends React.Component{
                       Map
                   </Link>
                 </Col>
-                <Col> 
+                {/* <Col> 
                   <Link to="/" className="nav-link">
                     Profile
                   </Link>
-                </Col>
+                </Col> */}
                 <Col> 
                   <Link to="/news_review" className="nav-link" >
                 Comment

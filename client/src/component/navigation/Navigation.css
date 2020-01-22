@@ -11,6 +11,15 @@
         top:0;
     }
 
+    .button {
+      /* display:none; */
+     background-color:rgb(39, 29, 129) !important;
+     color:white;
+    }
+    .button-container {
+      background-color: grey;
+    }
+
     #f-Button{
       position:absolute;
       right:1%;
