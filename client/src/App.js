@@ -26,6 +26,7 @@ class App extends React.Component{
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/news_review" component={NewsReview} />
+            
             {/* <Route component={NoMatch} /> */}
            
           </Switch>
