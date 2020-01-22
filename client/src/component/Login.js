@@ -1,6 +1,8 @@
  
-import React, { Component } from 'react'
-import { login } from './UserFunctions'
+import React, { Component } from 'react';
+import { login } from './UserFunctions';
+import { Redirect,Link } from 'react-router-dom';
+
 
 class Login extends Component {
   constructor() {
@@ -8,7 +10,8 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      errors: {}
+      errors: {},
+      redirect:true
     }
 
     this.onChange = this.onChange.bind(this)
@@ -32,6 +35,14 @@ class Login extends Component {
       }
     })
   }
+
+  setRedirect = () => {
+    return( 
+      <div>
+    <Redirect to='/signup' />
+    </div>)
+  }
+ 
 
   render() {
     return (
@@ -69,13 +80,17 @@ class Login extends Component {
                 Sign in
               </button>
             </form>
+            <Link to="/signup">
             <button
                 type="submit"
                 className="btn btn-secondary btn-lg btn-block"
                 style={{"margin":"auto","display":"block","marginTop":"10px"}}
+                onClick={this.setRedirect}
               >
                 Register
               </button>
+              </Link>
+              {/* <Link to="/news_review"><button className="button" id="article-comment" onClick={this.handleCommentBtn} value='Article URL'>Article Comment</button></Link> */}
           </div>
         </div>
       </div>
