@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Navbar from "./component/navbar/Navbar"
-import Home from "./component/home/Home"
+import Navbar from "./component/navbar/Navbar";
+// import Maps from "./component/map/Maps";
+import Home from "./component/home/Home";
 import Navigation from "./component/navigation/Navigation";
 import Signup from "./component/Signup";
 import Login from "./component/Login";
@@ -20,6 +21,7 @@ class App extends React.Component{
           <Navbar/>
           <Switch>
             <Route exact path="/" component={Home} />
+            {/* <Route exact path="/map" component={Maps} /> */}
             <Route exact path="/navigation" component={Navigation} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />

@@ -27,6 +27,7 @@ class Navigation extends React.Component{
         this.showPosition = this.showPosition.bind(this)
         this.handleBtnClick = this.handleBtnClick.bind(this)
         this.handleCommentBtn = this.handleCommentBtn.bind(this)
+      
         // this.handleTrainBtnClick = this.handleTrainBtnClick.bind(this)
         
     }
@@ -38,7 +39,6 @@ class Navigation extends React.Component{
         await this.getUsrLocale(this.loadCrimeLocale)
         // await this.grabCrimeData()
         await this.loadCrimeLocale(this.state.crimeLocations)
-        
         await this.grabTrainDataDB()
     }
 
@@ -47,7 +47,7 @@ class Navigation extends React.Component{
     }
 
     loadTrainDataToDB() {
-        API.trainStationLstLng()
+        API.trainStationLatLng()
         .then((res) => {
             console.log("Train data loaded to DB...",res)
             
@@ -153,6 +153,7 @@ class Navigation extends React.Component{
     }
     showPosition = (position) => {
         this.setState({usrLocation:{lat:position.coords.latitude,lng:position.coords.longitude}})
+        console.log("In navigation => ", this.state.usrLocation)
         return {lat:position.coords.latitude,lng:position.coords.longitude}
     }
 
@@ -206,6 +207,7 @@ class Navigation extends React.Component{
                 </Maps> 
                 <button id="f-Button" onClick={this.handleBtnClick}>Felonys</button>
                 <button id="m-Button" onClick={this.handleBtnClick}>Misdemeanors</button>
+
                 <button id="v-Button" onClick={this.handleBtnClick}>Violations</button>
                 {/* <Button onClick={this.handleTrainBtnClick}>Train</Button> */}
                 <Link to="/news_review"><button id="article-comment" onClick={this.handleCommentBtn} value='Article URL'>Article Comment</button></Link>

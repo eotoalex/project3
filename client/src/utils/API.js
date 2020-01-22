@@ -25,7 +25,7 @@ export default {
         return axios.get("/article_specs",url);
     },
 
-    trainStationLstLng: function (){
+    trainStationLatLng: function (){
         return axios.get('/train_latlng');
     },
 
