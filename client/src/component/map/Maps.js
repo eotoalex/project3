@@ -228,8 +228,8 @@ class Maps extends React.Component {
   
  })
  
- console.log(distancesCollected)
-//  console.log(this.quickSort(distancesLatLng))
+ console.log("distances to be mapped => ",distancesCollected)
+ console.log("array of distances tobe compared => " ,this.quickSort(distancesLatLng))
 
 distancesCollected.map((item) => {
 
@@ -282,7 +282,7 @@ marker.addListener('click', function() {
   // map.setCenter(marker.getPosition());
   infoWindow(map,marker)
 });
-
+console.log("usrLocation ",usrLocation)
 // Add another parameter which is the color of the polyline. Green for this one.
 this.calcRoutes (map,usrLocation,swStationsLat,swStationsLng,"#006eff")
 
@@ -408,18 +408,13 @@ if (this.state.clickedTrainBtn === false){
  }
 
 }
-  
-  polyLineClosure = (polylineOptions,map) => {
-      let poly;
-        if(!this.state.trainPolyOpen){
-        poly = new this.props.google.maps.Polyline(polylineOptions[0]);
-        poly.setMap(map);
-        this.state.currentPolyline.push(polylineOptions[0])
-        this.state.mainPolyPath.push(poly)
-        } 
-  }
 
   calcRoutes = (map,usrLocale,lat,lng,color) => {
+    console.log('map =>',map )
+    console.log('usrLocale  =>',usrLocale )
+    console.log('lat =>', lat )
+    console.log('lng =>', lng)
+    console.log('color =>', color )
     let polylineOptions = [];
     let directionsService = new this.props.google.maps.DirectionsService();
     let start = usrLocale;
@@ -450,7 +445,19 @@ if (this.state.clickedTrainBtn === false){
     });
   }
 
-  
+  polyLineClosure = (polylineOptions,map) => {
+    let poly;
+   console.log('polylineOptions ', polylineOptions)
+
+      if(!this.state.trainPolyOpen){
+      poly = new this.props.google.maps.Polyline(polylineOptions[0]);
+      poly.setMap(map);
+      this.state.currentPolyline.push(polylineOptions[0])
+      this.state.mainPolyPath.push(poly)
+        
+
+      } 
+}
 
  handleCrimesNearby () {
 
@@ -573,6 +580,7 @@ if (this.state.clickedTrainBtn === false){
 this.calcRoutes (map,usrLocated,crimeLat,crimeLng)
 this.state.crimeNearBy = true
 
+
 })
 
 } 
@@ -665,7 +673,7 @@ else if (this.state.crimeNearBy === true) {
           ]}
           // filler={console.log("userGeo ",this.state.userGeoLocation)}
           // It is very strange that userGeoLocation does not render the map when it works perfectly as it should.
-           initialCenter={{lat: 40.8551424, lng: -73.92460799999999} || this.state.userGeoLocation }
+           initialCenter={{lat: 40.8551424, lng: -73.92460799999999}}
           //  initialCenter={this.state.userGeoLocation}
           // initialCenter={console.log("Loading") || this.props.usrLocale ||this.state.userGeoLocation || {lat: 40.8551424, lng: -73.92460799999999}}
           onReady={this.setsRoute}
@@ -674,7 +682,8 @@ else if (this.state.crimeNearBy === true) {
           {crimeMarkers}
           {this.setDestinationMarker}
           <Marker
-            position={this.props.usrLocale}
+            // position={this.props.usrLocale}
+            position={{lat: 40.8551424, lng: -73.92460799999999}}
             icon={this.markerIcon}
             onClick={this.openInfoWindow}
           />

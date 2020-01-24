@@ -6,11 +6,13 @@ import "./Navigation.css";
 import Destination from "../destination/Destination";
 import {Link} from "react-router-dom";
 import Button from '../button/Button';
+import Comment from '../comment/Comment';
 
 class Navigation extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
+            commentMarkers:[],
             crimeLocations:[],
             usrLocation:[],
             crimeNews: [] || 'Loading...',
@@ -18,18 +20,15 @@ class Navigation extends React.Component{
             destinationLatLng:[],
             trainInfo:[]
         }
-        this.loadCrimeDataInDB = this.loadCrimeDataInDB.bind(this)
-        this.loadTrainDataToDB = this.loadTrainDataToDB.bind(this)
-        this.loadCrimeLocale = this.loadCrimeLocale.bind(this)
-        this.grabCrimeData = this.grabCrimeData.bind(this)
-        this.grabTrainDataDB = this.grabTrainDataDB.bind(this)
-        this.getUsrLocale = this.getUsrLocale.bind(this)
-        this.showPosition = this.showPosition.bind(this)
-        this.handleBtnClick = this.handleBtnClick.bind(this)
-        this.handleCommentBtn = this.handleCommentBtn.bind(this)
-      
-        // this.handleTrainBtnClick = this.handleTrainBtnClick.bind(this)
-        
+    this.loadCrimeDataInDB = this.loadCrimeDataInDB.bind(this)
+    this.loadTrainDataToDB = this.loadTrainDataToDB.bind(this)
+    this.loadCrimeLocale = this.loadCrimeLocale.bind(this)
+    this.grabCrimeData = this.grabCrimeData.bind(this)
+    this.grabTrainDataDB = this.grabTrainDataDB.bind(this)
+    this.getUsrLocale = this.getUsrLocale.bind(this)
+    this.showPosition = this.showPosition.bind(this)
+    this.handleBtnClick = this.handleBtnClick.bind(this)
+    this.handleCommentBtn = this.handleCommentBtn.bind(this)
     }
 
     async componentDidMount() {
@@ -50,7 +49,6 @@ class Navigation extends React.Component{
         API.trainStationLatLng()
         .then((res) => {
             console.log("Train data loaded to DB...",res)
-            
         })
         .catch((err)=>{console.log(err)})
     }
@@ -71,6 +69,7 @@ class Navigation extends React.Component{
         .catch((err) => {console.log(err)})
     }
 
+    // Polyline crime rendering.
     proximityLatLng() {
         // This will determine which latlng is close to the main latlng
         // The 3 closests latlng will be pushed to the closestLocations array 
@@ -78,20 +77,6 @@ class Navigation extends React.Component{
 
     
     }
-
-    // handleTrainBtnClick () {
-    //     console.log("Train Button => ", this.props.trainStationData);
-    //     // return(
-    //     //     <Marker
-    //     //     title={'Train Station'}
-    //     //     position={{lat: "40.741039999802105", lng: "-73.99787100060406"}}
-    //     //     icon={'train Icon'}
-    //     //     content={"Info"}
-    //     //     map={}
-    //     //     ></Marker>
-    //     // )
-
-    // }
 
     async handleBtnClick(e){
         let buttonId = e.target.id;
@@ -110,11 +95,8 @@ class Navigation extends React.Component{
 
     handleCommentBtn (e) {
         // The article url passed to the value attribute will go into the <iframe>
-        console.log("Comment Btn works!", e.target.value)
-       
+        console.log("Comment Btn works!", e.target.value) 
     }
-
-
 
     loadCrimeLocale(arr) {
         let locale = arr;
@@ -122,6 +104,7 @@ class Navigation extends React.Component{
         return console.log("In function ",item)
         });   
     }
+
     grabCrimeData(felony,misdemeanor,violation) {
         API.getLatLng()
         .then((res)  => {
@@ -138,19 +121,19 @@ class Navigation extends React.Component{
                     console.log("VIOLATION => ", crimeLevelArr.push(item))
                     break;
                 }
-            }) 
-            this.setState({crimeLocations:crimeLevelArr})  
-            console.log(" STATE => ",this.state.crimeLocations)  
+            });
+            this.setState({crimeLocations:crimeLevelArr});  
+            console.log(" STATE => ",this.state.crimeLocations);  
             // this.setState({crimeLocations:res.data})  
         })
         .catch((err) => {console.log(err)})
     }
 
     getUsrLocale = (callback) => {
-        return( navigator.geolocation.getCurrentPosition(this.showPosition),
-                callback(this.state.crimeLocations))
-       
+        return ( navigator.geolocation.getCurrentPosition(this.showPosition),
+        callback(this.state.crimeLocations))  
     }
+    
     showPosition = (position) => {
         this.setState({usrLocation:{lat:position.coords.latitude,lng:position.coords.longitude}})
         console.log("In navigation => ", this.state.usrLocation)
