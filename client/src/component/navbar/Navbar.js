@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import "./Navbar.css"
 import {Row,Container,Col } from 'reactstrap';
 import NewsReview from '../news_review/NewsReview.js'
+import Navigation from '../navigation/Navigation';
 
 class Navbar extends React.Component{
     logOut(e) {
@@ -11,8 +12,13 @@ class Navbar extends React.Component{
         this.props.history.push(`/`)
     }
 
+    handComment = () => {
+      console.log("comment click works")
+    }
+
     render (){
       const loginRegLink = (
+        
         <ul className="navbar-nav ml-auto">
         <Container>
           <Row>
@@ -50,11 +56,9 @@ class Navbar extends React.Component{
         )
 
     return (
-     
       <nav className="navbar navbar-dark bg-dark custom">
           <a className="navbar-brand" href="/">Trekky</a>
           <ul className="navbar-nav mr-auto">
-            
             <Container>
               <Row>
                 <Col>
@@ -68,21 +72,27 @@ class Navbar extends React.Component{
                   </Link>
                 </Col>
                 <Col> 
-                  <Link to="/" className="nav-link">
+                  <Link to="/profile" className="nav-link">
                     Profile
                   </Link>
                 </Col>
                 <Col> 
-                  <Link to="/news_review" className="nav-link" >
-                Comment
-              </Link>
+                  <Link to="*" className="nav-link" >
+                    Reporting
+                  </Link>
                 </Col>
-                
-                
-
+                <Col> 
+                  <Link to="*" className="nav-link" >
+                    Routes
+                  </Link>
+                </Col>
+                <Col> 
+                  <Link to="/navigation" className="nav-link" onClick={this.handComment}>
+                    Comment
+                   </Link>
+                </Col>
               </Row>
             </Container>
-
           </ul>
          
           {localStorage.usertoken ? userLink : loginRegLink}

@@ -7,6 +7,8 @@ import Destination from "../destination/Destination";
 import {Link} from "react-router-dom";
 import Button from '../button/Button';
 import Comment from '../comment/Comment';
+import "../navbar/Navbar.js"
+import "../../App"
 
 class Navigation extends React.Component{
     constructor(props) {
@@ -180,7 +182,7 @@ class Navigation extends React.Component{
                             levelOfOffense:item.law_cat_cd
                         }})}
                     usrLocale={this.state.usrLocation} 
-                    google={this.props.google}
+                    google={console.log("test")}
                     destination={this.state.destinationLatLng}
                     criminalLocales={this.state.crimeLocations}
                     usrCurrentLocation={this.state.usrLocation}

@@ -56,14 +56,10 @@ class Maps extends React.Component {
         this.isInfoWindowOpen = false;
       }else{
         this.state.currentInfoWindow =[];
-        
         let content = marker.content;
         let googleObj = this.props.google.maps;
         let infoWindow = new googleObj.InfoWindow({
           content:content,
-          
-          
-
         });
         this.state.currentInfoWindow.push(infoWindow);
         this.isInfoWindowOpen = true;
@@ -75,7 +71,6 @@ class Maps extends React.Component {
         this.isInfoWindowOpen = false;
         if (!this.isInfoWindowOpen && infoWindow){
           infoWindow.close()
-          
         }
         
       }
@@ -112,21 +107,16 @@ class Maps extends React.Component {
   }
 
   loadUsrLocation = (callback) => {
-    
-      return( navigator.geolocation.getCurrentPosition(this.showPosition),
-              callback(this.crimeDataCollection))
+    return( navigator.geolocation.getCurrentPosition(this.showPosition),
+    callback(this.crimeDataCollection))
      
   }
+
   showPosition = (position) => {
       this.setState({userGeoLocation:{lat:position.coords.latitude,lng:position.coords.longitude}})
       console.log("In maps => ", this.state.userGeoLocation)
       return {lat:position.coords.latitude,lng:position.coords.longitude}
   }
-     
-  
-  
-    
-    
 
   setsRoute = (mapProps, map) => {
     let lat = this.props.destination.latitude;
@@ -163,7 +153,6 @@ class Maps extends React.Component {
   
    
    quickSort = nums => {
-     
     const sortedArray = [...nums]
     
     if (sortedArray.length <= 1) {
@@ -188,104 +177,96 @@ class Maps extends React.Component {
   
 
  handleTrainsNearby() {
-  //  console.log(this.props.trainStationData)
   if(this.state.trainNearBy === false){
     
-  let usrLocation = this.props.usrCurrentLocation;
-  let trainLocations = this.props.trainStationData;
-  let userLat = usrLocation.lat;
-  let userLng = usrLocation.lng;
-  let distancesCollected = [];
-  let distancesLatLng = [];
-  let idArr = [];
-  let map = this.state.map;
-  let infoWindow = this.state.onMouseOver;
-  console.log("user location " ,usrLocation)
-  let markersNearMe = [];
+    let usrLocation = this.props.usrCurrentLocation;
+    let trainLocations = this.props.trainStationData;
+    let userLat = usrLocation.lat;
+    let userLng = usrLocation.lng;
+    let distancesCollected = [];
+    let distancesLatLng = [];
+    let idArr = [];
+    let map = this.state.map;
+    let infoWindow = this.state.onMouseOver;
+    console.log("user location " ,usrLocation)
+    let markersNearMe = [];
 
- trainLocations.map((station) => {
-  let trainSLat = parseFloat(station.latitude);
-  let trainSLng = parseFloat(station.longitude);
-  let id = station._id;
-  let track = station.station;
-  let line = station.line;
-  let info = station.info;
-  let lat = station.latitude;
-  let lng = station.longitude;
-  
-  distancesCollected.push({
-    id:id,
-    track:track,
-    line:line,
-    info:info,
-    lat:lat,
-    lng:lng,
-    distance:this.distance(userLat,userLng,trainSLat,trainSLng)
-  });
-
-  distancesLatLng.push(this.distance(userLat,userLng,trainSLat,trainSLng))
-
-  
- })
- 
- console.log("distances to be mapped => ",distancesCollected)
- console.log("array of distances tobe compared => " ,this.quickSort(distancesLatLng))
-
-distancesCollected.map((item) => {
-
-  for(let i = 0; i < 3; i++){ 
+  trainLocations.map((station) => {
+    let trainSLat = parseFloat(station.latitude);
+    let trainSLng = parseFloat(station.longitude);
+    let id = station._id;
+    let track = station.station;
+    let line = station.line;
+    let info = station.info;
+    let lat = station.latitude;
+    let lng = station.longitude;
     
-    if(item.distance === this.quickSort(distancesLatLng)[i]){
-    let result = {}
-    result.id = item.id;
-    result.station = item.track;
-    result.line = item.line;
-    result.info = item.info;
-    result.lat = item.lat;
-    result.lng = item.lng;
-    result.distance = item.distance;
-    idArr.push(result)
-    } 
-  }
-}) 
-console.log("IDArray =>  ",idArr)
-
-idArr.map((nearestStation) => {
-  let swStationsLat = parseFloat(nearestStation.lat);
-  let swStationsLng = parseFloat(nearestStation.lng);
-  let position = {lat:swStationsLat,lng:swStationsLng};
-  let station = nearestStation.station;
-  let lines =  nearestStation.line;
-  let distance = nearestStation.distance;
-
-let marker = new this.props.google.maps.Marker({
-  position:position,
-  content:
-    '<div id="content">'+
-      '<ul style="list-style-type:none;">'+
-      '<li>'+ "Trains: " + lines +'</li>'+
-        '<li>'+ "Station: " + station +'</li>'+
-        '<li>'+ "Distance: " + distance+ " miles away" +'</li>'+
-        '<li>'+ "Arrives: " + "Coming Soon..."+'</li>'+
-        '<button id= "veiw_crime_btn">'+ "View Crime Nearby: " + "Coming Soon..."+'</button>'+
-
-      '</ul>'+
-    '</div>',
+    distancesCollected.push({
+      id:id,
+      track:track,
+      line:line,
+      info:info,
+      lat:lat,
+      lng:lng,
+      distance:this.distance(userLat,userLng,trainSLat,trainSLng)
+    });
+    distancesLatLng.push(this.distance(userLat,userLng,trainSLat,trainSLng))
+  })
   
-  icon:this.state.trainIcon,
-  // onClick:infoWindow(map),
-});
-this.state.trainsNearByMarkers.push(marker)
-marker.setMap(map)
-marker.addListener('click', function() {
-  // map.setZoom(8);
-  // map.setCenter(marker.getPosition());
-  infoWindow(map,marker)
-});
-console.log("usrLocation ",usrLocation)
-// Add another parameter which is the color of the polyline. Green for this one.
-this.calcRoutes (map,usrLocation,swStationsLat,swStationsLng,"#006eff")
+  console.log("distances to be mapped => ",distancesCollected)
+  console.log("array of distances tobe compared => " ,this.quickSort(distancesLatLng))
 
+  distancesCollected.map((item) => {
+
+    for(let i = 0; i < 3; i++){ 
+      if(item.distance === this.quickSort(distancesLatLng)[i]){
+        let result = {}
+        result.id = item.id;
+        result.station = item.track;
+        result.line = item.line;
+        result.info = item.info;
+        result.lat = item.lat;
+        result.lng = item.lng;
+        result.distance = item.distance;
+        idArr.push(result)
+      } 
+    }
+  }) 
+  console.log("IDArray =>  ",idArr)
+
+  idArr.map((nearestStation) => {
+    let swStationsLat = parseFloat(nearestStation.lat);
+    let swStationsLng = parseFloat(nearestStation.lng);
+    let position = {lat:swStationsLat,lng:swStationsLng};
+    let station = nearestStation.station;
+    let lines =  nearestStation.line;
+    let distance = nearestStation.distance;
+
+  let marker = new this.props.google.maps.Marker({
+    position:position,
+    content:
+      '<div id="content">'+
+        '<ul style="list-style-type:none;">'+
+          '<li>'+ "Trains: " + lines +'</li>'+
+          '<li>'+ "Station: " + station +'</li>'+
+          '<li>'+ "Distance: " + distance+ " miles away" +'</li>'+
+          '<li>'+ "Arrives: " + "Coming Soon..."+'</li>'+
+          '<button id= "veiw_crime_btn">'+ "View Crime Nearby: " + "Coming Soon..."+'</button>'+
+        '</ul>'+
+      '</div>',
+    icon:this.state.trainIcon,
+    // onClick:infoWindow(map),
+  });
+  this.state.trainsNearByMarkers.push(marker)
+  marker.setMap(map)
+  marker.addListener('click', function() {
+    // map.setZoom(8);
+    // map.setCenter(marker.getPosition());
+    infoWindow(map,marker)
+  });
+  console.log("usrLocation ",usrLocation)
+  // Add another parameter which is the color of the polyline. Green for this one.
+  this.calcRoutes (map,usrLocation,swStationsLat,swStationsLng,"#006eff")
 })
 
 this.setState({trainNearBy:true})
@@ -351,62 +332,53 @@ this.setState({trainNearBy:true})
  }
 
  handleTrainBtnClick () {
-  // console.log("Map => ", this.state.map);
   let stationLocations = this.props.trainStationData;
   let map = this.state.map;
   let markersArr = [];
   let infoWindow = this.state.onMouseOver;
-  
-if (this.state.clickedTrainBtn === false){
-  this.state.clickedTrainBtn = true
-  stationLocations.map((stationCoords) => {
-    let latitude = parseFloat(stationCoords.latitude);
-    let longitude = parseFloat(stationCoords.longitude);
-    let position = {lat:latitude,lng:longitude};
-    let lines = stationCoords.line;
-    let info = stationCoords.info;
-    let name = stationCoords.station;
     
-    let marker = new this.props.google.maps.Marker({
-      position:position,
-      title:name,
-      content:
-        '<div id="content">'+
-          '<ul style="list-style-type:none;">'+
-            '<li>'+ "Trains: " + info +'</li>'+
-            '<li>'+ "Station: " + name +'</li>'+
-            '<li>'+ "Position " + position.lat +' '+ position.lng +'</li>'+
-            '<li>'+ "Arrives " + "Coming Soon..."+'</li>'+
-          '</ul>'+
-        '</div>',
-      lines:lines,
-      icon:this.state.trainIcon,
-      // onClick:infoWindow(map),
-    });
-    markersArr.push(marker)
-    marker.setMap(map)
-    marker.addListener('click', function() {
-      // map.setZoom(8);
-      // map.setCenter(marker.getPosition());
-      infoWindow(map,marker)
-    });
-  })
-  this.setState({trainMarkers:markersArr})
+  if (this.state.clickedTrainBtn === false){
+    this.state.clickedTrainBtn = true
+    stationLocations.map((stationCoords) => {
+      let latitude = parseFloat(stationCoords.latitude);
+      let longitude = parseFloat(stationCoords.longitude);
+      let position = {lat:latitude,lng:longitude};
+      let lines = stationCoords.line;
+      let info = stationCoords.info;
+      let name = stationCoords.station;
+      let marker = new this.props.google.maps.Marker({
+        position:position,
+        title:name,
+        content:
+          '<div id="content">'+
+            '<ul style="list-style-type:none;">'+
+              '<li>'+ "Trains: " + info +'</li>'+
+              '<li>'+ "Station: " + name +'</li>'+
+              '<li>'+ "Position " + position.lat +' '+ position.lng +'</li>'+
+              '<li>'+ "Arrives " + "Coming Soon..."+'</li>'+
+            '</ul>'+
+          '</div>',
+        lines:lines,
+        icon:this.state.trainIcon,
+        // onClick:infoWindow(map),
+      });
+      markersArr.push(marker)
+      marker.setMap(map)
+      marker.addListener('click', function() {
+        // map.setZoom(8);
+        // map.setCenter(marker.getPosition());
+        infoWindow(map,marker)
+      });
+    })
+    this.setState({trainMarkers:markersArr})
   
 
- } else if (this.state.clickedTrainBtn === true) {
-   
-   this.state.clickedTrainBtn = false;
-  for(let i = 0; i<this.state.trainMarkers.length; i++){
-    this.state.trainMarkers[i].setMap(null);
-    
+  } else if (this.state.clickedTrainBtn === true) {
+      this.state.clickedTrainBtn = false;
+    for(let i = 0; i<this.state.trainMarkers.length; i++){
+      this.state.trainMarkers[i].setMap(null);
+    } 
   }
-   
-    
-    
-   
- }
-
 }
 
   calcRoutes = (map,usrLocale,lat,lng,color) => {
@@ -447,142 +419,138 @@ if (this.state.clickedTrainBtn === false){
 
   polyLineClosure = (polylineOptions,map) => {
     let poly;
-   console.log('polylineOptions ', polylineOptions)
-
-      if(!this.state.trainPolyOpen){
+    console.log('polylineOptions ', polylineOptions)
+    if(!this.state.trainPolyOpen){
       poly = new this.props.google.maps.Polyline(polylineOptions[0]);
       poly.setMap(map);
       this.state.currentPolyline.push(polylineOptions[0])
       this.state.mainPolyPath.push(poly)
-        
-
-      } 
-}
+    } 
+  }
 
  handleCrimesNearby () {
 
   if(!this.state.crimeNearBy){
-  let crimeData = this.state.crimePulled;
-  let usrLocated = this.props.usrCurrentLocation;
-  let userLat = usrLocated.lat;
-  let userLng = usrLocated.lng;
-  let crimeInMiles = [];
-  let crimeDistanceCalc = [];
-  let sortedCrimeLocations = [];
-  let crimesNearMe =[];
-  let map = this.state.map;
-  let infoWindow = this.state.onMouseOver;
+    let crimeData = this.state.crimePulled;
+    let usrLocated = this.props.usrCurrentLocation;
+    let userLat = usrLocated.lat;
+    let userLng = usrLocated.lng;
+    let crimeInMiles = [];
+    let crimeDistanceCalc = [];
+    let sortedCrimeLocations = [];
+    let crimesNearMe =[];
+    let map = this.state.map;
+    let infoWindow = this.state.onMouseOver;
 
 
-  crimeData.map((crime) => {
-  let id = crime._id;
-  let crimeLat = parseFloat(crime.latitude);
-  let crimeLng = parseFloat(crime.longitude);
- 
-  crimeDistanceCalc.push({
-   id : crime._id,
-   crime: crime.offence,
-   lat : crime.latitude,
-   lng : crime.longitude,
-   age : crime.age_group,
-   sex : crime.sex,
-   race : crime.race,
-   levelOfOffence : crime.law_cat_cd,
-   distance: this.distance(userLat,userLng,crimeLat,crimeLng),
-   })
-
-   crimeInMiles.push(this.distance(userLat,userLng,crimeLat,crimeLng))
-
+    crimeData.map((crime) => {
+    let id = crime._id;
+    let crimeLat = parseFloat(crime.latitude);
+    let crimeLng = parseFloat(crime.longitude);
   
+    crimeDistanceCalc.push({
+    id : crime._id,
+    crime: crime.offence,
+    lat : crime.latitude,
+    lng : crime.longitude,
+    age : crime.age_group,
+    sex : crime.sex,
+    race : crime.race,
+    levelOfOffence : crime.law_cat_cd,
+    distance: this.distance(userLat,userLng,crimeLat,crimeLng),
+    })
+
+    crimeInMiles.push(this.distance(userLat,userLng,crimeLat,crimeLng))
+
+    
+
+    })
+    // console.log("crime distance array => ",  crimeDistanceCalc)
+    // console.log("Crime in Miles ", crimeInMiles)
+    sortedCrimeLocations.push(this.quickSort(crimeInMiles))
+
+  // console.log("sortedCrimeLocations ", sortedCrimeLocations)
+  // console.log("crimeDistanceCalc", crimeDistanceCalc)
+  // console.log("CrimeData ", crimeData)
+
+    crimeDistanceCalc.map((item) => {
+      
+    for(let i = 0; i < 6; i++){
+    
+      // crimesNearMe.push(sortedCrimeLocations[0][i]);
+
+      if(item.distance === sortedCrimeLocations[0][i]){
+        let result = {}
+        result.id = item.id;
+        result.crime = item.crime;
+        result.age = item.age;
+        result.sex = item.sex;
+        result.race = item.race;
+        result.levelOfOffence = item.levelOfOffence;
+        result.lat = item.lat;
+        result.lng = item.lng;
+        result.distance = item.distance;
+        crimesNearMe.push(result);
+        } 
+    }
+  })
+
+
+      crimesNearMe.map((nearestCrime) => {
+        
+      let crimeLat = parseFloat(nearestCrime.lat);
+      let crimeLng = parseFloat(nearestCrime.lng);
+      let position = {lat:crimeLat, lng:crimeLng};
+      let crime = nearestCrime.crime;
+      let age = nearestCrime.age;
+      let sex = nearestCrime.sex;
+      let race =  nearestCrime.race;
+      let levelOfOffence = nearestCrime.levelOfOffence;
+      let distance = nearestCrime.distance;
+      const validateCrimeLevel = (crimeLevel) => {
+        switch(crimeLevel){
+          case "F":
+            return "Felony";
+            case "M":
+            return "Misdemeanor";
+            case "V":
+            return "Violation";
+        }
+      }
+    
+    let marker = new this.props.google.maps.Marker({
+      position:position,
+      content:
+        '<div id="content">'+
+          '<ul id="ul" style="list-style-type:none;">'+
+          '<li>'+ "Crime " + crime +'</li>'+
+          // '<li>'+ "Age Range: " + age +'</li>'+
+          //   '<li>'+ "Sex: " + sex +'</li>'+
+            '<li>'+ "Race: " + race +'</li>'+
+            '<li>'+ "Level Of Offence: " + validateCrimeLevel(levelOfOffence)+'</li>'+
+            '<li>'+ "Distance: " + distance + ' miles'+'</li>'+
+            '<button>'+ "Do you have additional info on this crime?"+'</button>'+
+    
+          '</ul>'+
+        '</div>',
+      
+      icon:this.state.crimeIcon,
+      // onClick:infoWindow(map),
+    });
+    this.state.crimeNearByMarkers.push(marker)
+    marker.setMap(map)
+    marker.addListener('click', function() {
+    // map.setZoom(8);
+    // map.setCenter(marker.getPosition());
+    infoWindow(map,marker)
+  });
+
+  // Add another parameter which is the color of the polyline. Green for this one.
+  this.calcRoutes (map,usrLocated,crimeLat,crimeLng)
+  this.state.crimeNearBy = true
+
 
   })
-  // console.log("crime distance array => ",  crimeDistanceCalc)
-  // console.log("Crime in Miles ", crimeInMiles)
-  sortedCrimeLocations.push(this.quickSort(crimeInMiles))
-
-// console.log("sortedCrimeLocations ", sortedCrimeLocations)
-// console.log("crimeDistanceCalc", crimeDistanceCalc)
-// console.log("CrimeData ", crimeData)
-
-  crimeDistanceCalc.map((item) => {
-    
-  for(let i = 0; i < 6; i++){
-   
-    // crimesNearMe.push(sortedCrimeLocations[0][i]);
-
-    if(item.distance === sortedCrimeLocations[0][i]){
-      let result = {}
-      result.id = item.id;
-      result.crime = item.crime;
-      result.age = item.age;
-      result.sex = item.sex;
-      result.race = item.race;
-      result.levelOfOffence = item.levelOfOffence;
-      result.lat = item.lat;
-      result.lng = item.lng;
-      result.distance = item.distance;
-      crimesNearMe.push(result);
-      } 
-  }
-})
-
-
-    crimesNearMe.map((nearestCrime) => {
-      
-    let crimeLat = parseFloat(nearestCrime.lat);
-    let crimeLng = parseFloat(nearestCrime.lng);
-    let position = {lat:crimeLat, lng:crimeLng};
-    let crime = nearestCrime.crime;
-    let age = nearestCrime.age;
-    let sex = nearestCrime.sex;
-    let race =  nearestCrime.race;
-    let levelOfOffence = nearestCrime.levelOfOffence;
-    let distance = nearestCrime.distance;
-    const validateCrimeLevel = (crimeLevel) => {
-      switch(crimeLevel){
-        case "F":
-          return "Felony";
-          case "M":
-          return "Misdemeanor";
-          case "V":
-          return "Violation";
-      }
-    }
-  
-  let marker = new this.props.google.maps.Marker({
-    position:position,
-    content:
-      '<div id="content">'+
-        '<ul id="ul" style="list-style-type:none;">'+
-        '<li>'+ "Crime " + crime +'</li>'+
-        // '<li>'+ "Age Range: " + age +'</li>'+
-        //   '<li>'+ "Sex: " + sex +'</li>'+
-          '<li>'+ "Race: " + race +'</li>'+
-          '<li>'+ "Level Of Offence: " + validateCrimeLevel(levelOfOffence)+'</li>'+
-          '<li>'+ "Distance: " + distance + ' miles'+'</li>'+
-          '<button>'+ "Do you have additional info on this crime?"+'</button>'+
-  
-        '</ul>'+
-      '</div>',
-    
-    icon:this.state.crimeIcon,
-    // onClick:infoWindow(map),
-  });
-  this.state.crimeNearByMarkers.push(marker)
-  marker.setMap(map)
-  marker.addListener('click', function() {
-  // map.setZoom(8);
-  // map.setCenter(marker.getPosition());
-  infoWindow(map,marker)
-});
-
-// Add another parameter which is the color of the polyline. Green for this one.
-this.calcRoutes (map,usrLocated,crimeLat,crimeLng)
-this.state.crimeNearBy = true
-
-
-})
-
 } 
 
 else if (this.state.crimeNearBy === true) {
@@ -684,6 +652,7 @@ else if (this.state.crimeNearBy === true) {
           <Marker
             // position={this.props.usrLocale}
             position={{lat: 40.8551424, lng: -73.92460799999999}}
+            // position={this.props.userGeoLocation}
             icon={this.markerIcon}
             onClick={this.openInfoWindow}
           />
