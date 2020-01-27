@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Home.css';
 import {Carousel} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 class Home extends Component{
     render(){
@@ -9,7 +10,7 @@ class Home extends Component{
             <div className="jumbotron">
                 <h1>Trekky</h1>
                 <h2>Dont just find your way. Know your way.</h2>
-                <button className="btn btn-success">Sign up for free!</button>
+               <Link to="/signup"> <button className="btn btn-success">Sign up for free!</button></Link>
             </div>
             <div className="description">
                 <Carousel className="crs">
