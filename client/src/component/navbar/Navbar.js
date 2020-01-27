@@ -6,6 +6,13 @@ import NewsReview from '../news_review/NewsReview.js'
 import Navigation from '../navigation/Navigation';
 
 class Navbar extends React.Component{
+  constructor (props) {
+    super(props)
+    this.state={
+      onClickRes:[]
+    }
+  }
+
     logOut(e) {
         e.preventDefault()
         localStorage.removeItem('usertoken')
@@ -14,6 +21,7 @@ class Navbar extends React.Component{
 
     handComment = () => {
       console.log("comment click works")
+      
     }
 
     render (){
@@ -87,7 +95,7 @@ class Navbar extends React.Component{
                   </Link>
                 </Col>
                 <Col> 
-                  <Link to="/navigation" className="nav-link" onClick={this.handComment}>
+                  <Link to="/comment" className="nav-link" onClick={this.handComment}>
                     Comment
                    </Link>
                 </Col>

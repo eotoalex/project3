@@ -6,12 +6,13 @@ import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
 import trainIcon from "../../icons/icons8-train-50.png";
 import crimeIcon from "../../icons/crimeImg.png"
 import API from "../../utils/API";
+import {Modal,Button} from "react-bootstrap";
  
 class Maps extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      modalShow:false,
       mainPolyPath:[],
       crimePathPoly:[],
       currentPolyline:[],
@@ -682,7 +683,6 @@ else if (this.state.crimeNearBy === true) {
             crimeNews={this.state.crimeNews} />
              
         </Map>
-       
         
       </div>
     );

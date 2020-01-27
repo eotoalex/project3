@@ -182,13 +182,12 @@ class Navigation extends React.Component{
                             levelOfOffense:item.law_cat_cd
                         }})}
                     usrLocale={this.state.usrLocation} 
-                    google={console.log("test")}
+                    // google={console.log("test", this.props)}
                     destination={this.state.destinationLatLng}
                     criminalLocales={this.state.crimeLocations}
                     usrCurrentLocation={this.state.usrLocation}
                     trainStationData={this.state.trainInfo}
                 > 
-                
                 </Maps> 
                 <div className="button-container">
                 <button className="button" id="f-Button" onClick={this.handleBtnClick}>Felonys</button>
