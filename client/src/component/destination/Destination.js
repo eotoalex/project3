@@ -16,6 +16,7 @@ class Destination extends React.Component{
         
     // }
 
+
     render(){
        
         return(
@@ -43,7 +44,7 @@ class Destination extends React.Component{
                             ref={(el) => {this._input = el}}
                         ></input>
                     </div><br></br>
-                    <button onClick={this.props.handleFormSubmit}  className="btn btn-primary mt-8">
+                    <button onClick={this.handleFormSubmit}  className="btn btn-primary mt-8">
                         Go!
                     </button>
                 </div>

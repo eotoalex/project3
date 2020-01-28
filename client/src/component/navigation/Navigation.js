@@ -183,10 +183,11 @@ class Navigation extends React.Component{
                         }})}
                     usrLocale={this.state.usrLocation} 
                     // google={console.log("test", this.props)}
-                    destination={this.state.destinationLatLng}
+                    destination={this.props.destination || null}
                     criminalLocales={this.state.crimeLocations}
                     usrCurrentLocation={this.state.usrLocation}
                     trainStationData={this.state.trainInfo}
+                    dragMarker={this.props.dragMarker}
                 > 
                 </Maps> 
                 <div className="button-container">

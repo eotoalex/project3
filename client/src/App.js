@@ -8,6 +8,7 @@ import Login from "./component/Login";
 import Profile from "./signin/Profile";
 import NewsReview from './component/news_review/NewsReview';
 import Comment from './component/comment/Comment';
+import Routes from './component/routes/Routes';
 import './App.css';
 
 
@@ -25,6 +26,8 @@ class App extends React.Component{
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/news_review" component={NewsReview} />
             <Route exact path='/comment' component={Comment}/>
+            <Route exact path='/routes' component={Routes}/>
+
           </Switch>
         </div>
       </Router>

@@ -90,7 +90,7 @@ class Navbar extends React.Component{
                   </Link>
                 </Col>
                 <Col> 
-                  <Link to="*" className="nav-link" >
+                  <Link to="/routes" className="nav-link" >
                     Routes
                   </Link>
                 </Col>
