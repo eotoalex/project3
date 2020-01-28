@@ -134,6 +134,7 @@ class Maps extends React.Component {
       console.log("We have an address", lat,lng);
     }  
   }
+  
   deg2rad(deg) {
     return deg * Math.PI / 180
   }
@@ -580,6 +581,10 @@ else if (this.state.crimeNearBy === true) {
     const lat = this.state.userGeoLocation.lat;
     const lng = this.state.userGeoLocation.lng;
 
+    if(this.props.destination){
+      console.log("Destination is seen = > ", this.props.destination)
+    } else {console.log("Unavailable Destination!!")}
+
     // This variable holds the crime icon, sized for the map when rendered.
     const crimeIcon = {
     url:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXL8dMbULRMR3YVcdoZKDvHAKDEnyRIqnPx-llmYVULI5oTCTd&s",
@@ -650,6 +655,7 @@ else if (this.state.crimeNearBy === true) {
           {this.setsRoute()}
           {crimeMarkers}
           {this.setDestinationMarker}
+          {this.props.dragMarker}
           <Marker
             // position={this.props.usrLocale}
             position={{lat: 40.8551424, lng: -73.92460799999999}}
