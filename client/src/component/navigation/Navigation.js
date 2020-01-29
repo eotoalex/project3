@@ -183,7 +183,7 @@ class Navigation extends React.Component{
                         }})}
                     usrLocale={this.state.usrLocation} 
                     // google={console.log("test", this.props)}
-                    destination={this.props.destination || null}
+                    destination={this.props.destination || " "}
                     criminalLocales={this.state.crimeLocations}
                     usrCurrentLocation={this.state.usrLocation}
                     trainStationData={this.state.trainInfo}
