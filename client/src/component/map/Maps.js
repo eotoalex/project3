@@ -4,7 +4,8 @@ import axios from "axios";
 import Slider from "../slider/Slider";
 import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
 import trainIcon from "../../icons/icons8-train-50.png";
-import crimeIcon from "../../icons/crimeImg.png"
+import crimeIcon from "../../icons/crimeImg.png";
+import destinationIcon from "../../icons/flag-checkered-solid.svg";
 import API from "../../utils/API";
 import {Modal,Button} from "react-bootstrap";
  
@@ -41,6 +42,10 @@ class Maps extends React.Component {
       crimeIcon:{
         url:crimeIcon,
         scaledSize: new this.props.google.maps.Size(30, 30),
+      },
+      destinationIcon:{
+        url:destinationIcon,
+        scaledSize: new this.props.google.maps.Size(40,40),
       },
       clickedTrainBtn: false,
       openInfoWindow : (map,marker,googleObj) =>{
@@ -131,6 +136,7 @@ class Maps extends React.Component {
     let mapObj = this.state.map;
     if(this.props.destination.length !== 0){
       this.calcRoutes(mapObj,usrLocation,lat,lng,"blue");
+      // This address needs to have marker on these coordinates.
       console.log("We have an address", lat,lng);
     }  
   }
@@ -393,6 +399,12 @@ this.setState({trainNearBy:true})
     let directionsService = new this.props.google.maps.DirectionsService();
     let start = usrLocale;
     let end = new this.props.google.maps.LatLng(lat,lng);
+    let desIcon = this.state.destinationIcon;
+    let marker = new this.props.google.maps.Marker({
+      position:end,
+      title:"Destination",
+      icon:desIcon,
+    })
     let request = {
       origin:start,
       destination: end,
@@ -415,8 +427,11 @@ this.setState({trainNearBy:true})
     } else {
         console.log("error ", status)
     }
+
     //Set the end marker coordinates as the 3rd parameter for the polylineClosure functio.n
     this.polyLineClosure(polylineOptions,map)
+   map.addListener((e) => {console.log("Listener works, ",e.target)})
+    marker.setMap(map)
     });
   }
 
@@ -549,6 +564,7 @@ this.setState({trainNearBy:true})
   });
 
   // Add another parameter which is the color of the polyline. Green for this one.
+  
   this.calcRoutes (map,usrLocated,crimeLat,crimeLng)
   this.state.crimeNearBy = true
 
@@ -655,7 +671,7 @@ else if (this.state.crimeNearBy === true) {
           >
           {this.setsRoute()}
           {crimeMarkers}
-          {this.setDestinationMarker}
+          {/* {this.setDestinationMarker} */}
           {this.props.dragMarker}
           <Marker
             // position={this.props.usrLocale}
