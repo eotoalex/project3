@@ -415,7 +415,7 @@ this.setState({trainNearBy:true})
     } else {
         console.log("error ", status)
     }
-    //Set the end marker coordinates as the 3rd parameter for the polylineClosure function.
+    //Set the end marker coordinates as the 3rd parameter for the polylineClosure functio.n
     this.polyLineClosure(polylineOptions,map)
     });
   }
