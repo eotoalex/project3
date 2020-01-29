@@ -18,13 +18,14 @@ class Comment extends React.Component{
 
     handleModalClose = () => {
         console.log("Close Modal")
-        this.setState({modalShow:false})
+        // this.setState({modalShow:false})
+        this.state.modalShow = false;
       }
 
     render(){
         return(
             <div>
-                <Navigation>
+                <Navigation >
                 </Navigation>
                 <Modal show={this.state.modalShow} onHide={this.handleModalClose}>
                     <Modal.Header closeButton>
