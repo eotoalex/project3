@@ -40,10 +40,22 @@ ___
 
 # Crime Markers
 > - The markers with the red slash over a shadowed figure is an actual crime location as cited by New York State Open Data records.
-> - The pop up window works on mouseover and will soon indicate the information of the crime (currently debugging).
+> - The pop up window for each marker works after clicking on a crime location. These informatin windows will give additional information of the crime committed in that area.
+> - The information include, sex, race, crime committed, leve of offence and date of arrest.
 
-# Destination Bar
-> - When an address is put into the destination input box, a route will indicate a safe route for the user, around the crime markers (currently debugging).
+# Routes
+> - When clicked, an address can be typed into the destination input box. 
+> - Thereafter, a route will indicate a safe route for the user, in the form of a blue polyline.
+> - Coming Soon (User gets to choose their route based on the crime report of a given route and crime locations render upon user request and so does a crime report for a given location or route within a 3 mile radius.)
+
+# Comment
+> - Currently in development. The comment feature will allow users to ping locations and comment on a given area.
+
+# Article Review
+> - Currently in development. This will allow the user to review and comment on articles that are written on a given area.
+> - Users will also be able to ping the precise location of the articles coverage.
+
+
 ___
 
 # Goals
