@@ -43,7 +43,7 @@ ___
 > - The pop up window for each marker works after clicking on a crime location. These informatin windows will give additional information of the crime committed in that area.
 > - The information include, sex, race, crime committed, leve of offence and date of arrest.
 
-# Routes
+# Route
 > - When clicked, an address can be typed into the destination input box. 
 > - Thereafter, a route will indicate a safe route for the user, in the form of a blue polyline.
 > - Coming Soon (User gets to choose their route based on the crime report of a given route and crime locations render upon user request and so does a crime report for a given location or route within a 3 mile radius.)

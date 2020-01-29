@@ -2,7 +2,7 @@ import React from "react";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import "./Navbar.css"
 import {Row,Container,Col } from 'reactstrap';
-import NewsReview from '../news_review/NewsReview.js'
+import NewsReview from '../newsreview/NewsReview.js'
 import Navigation from '../navigation/Navigation';
 
 class Navbar extends React.Component{
@@ -85,8 +85,8 @@ class Navbar extends React.Component{
                   </Link>
                 </Col>
                 <Col> 
-                  <Link to="*" className="nav-link" >
-                    Reporting
+                  <Link to="/newsreview" className="nav-link" >
+                    Reviews
                   </Link>
                 </Col>
                 <Col> 
