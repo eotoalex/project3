@@ -37,7 +37,7 @@ class Maps extends React.Component {
       trainData: this.props.trainStationData,
       trainIcon: {
         url:trainIcon,
-        scaledSize: new this.props.google.maps.Size(30, 30), 
+        scaledSize: new this.props.google.maps.Size(40, 40), 
       },
       crimeIcon:{
         url:crimeIcon,
@@ -135,7 +135,7 @@ class Maps extends React.Component {
     }
     let mapObj = this.state.map;
     if(this.props.destination.length !== 0){
-      this.calcRoutes(mapObj,usrLocation,lat,lng,"blue");
+      this.calcRoutes(mapObj,usrLocation,lat,lng,"blue","route");
       // This address needs to have marker on these coordinates.
       console.log("We have an address", lat,lng);
     }  
@@ -293,51 +293,22 @@ this.setState({trainNearBy:true})
    this.state.trainNearBy =false;
   }
 
-
-
-
-
-
-// this.distance (requires latlng1 to be user and latlng2 to be trainstation pushing three closest to an array.)
-// the three latlng in the array are put into the calcRoutes with a for loop that displays all three polylines.
-// An info box should appear to show the distance, recent incidents nearest the routes and the train.
-
-  //  console.log(this.distance())
-  //  Get the users location and the nearest trains location and output the result.
-  // Distance will calculate the nearest train station.
-  // Disance can also calculate the nearest precinct.
-  // Distance can also get the nearest hospital.(Address will be in this.)
-  // calcRoutes function will be used where parameters are map, userlocation and lat lng of trainStation, 
-
-
-     
-//  })
-  
-  // console.log(trainLocations)
-  
-  // console.log("DistancesCollected ARR ",distancesCollected)
-
-
-// When I get the distances in the distancesCollected array, I have to do a quick sort to get it ready for the calcRoutes function.
-// After this we can render the polylines, with the info box indicating how far is the nearest train, 
-// then render the crimedata points by doing it all over again but this time with the crimedata to see which are closest to the latlngs of the polyline.
-// It would be most effective to find the two closest crime locations to the polylines, with an info bar also indicating the amount of Violations, Felonys and Misdemeanors have occured enroute.
-// The work on comment feature that renders a marker with an infoWindow to the map as well.
-  
-
  } 
 
- trainInfoWindow (map, trainMarker){
-   console.log("Info window is active!");
-  //  let infoWindow = new googleObj.InfoWindow({
-  //   content:content
-  // });
-  // this.state.currentInfoWindow.push(infoWindow);
-  // this.isInfoWindowOpen = true;
-  // infoWindow.open(map,trainMarker);
-  // }
-   
+ markersAlongPolyPath = () => {
+   console.log("Markers Along Poly hitting")
+   console.log("Now collect all the poly coordinates and see if you can render alternate routes if you can.")
+
+  // Begin looking to render alternate paths.
+  // Re-zooming the map as well.
+  // Developing a crime report modal of sorts. (Have it lift up from the bottom of the map, looks cooler that way.)
+  // Getting two more api marker datasets rendering. (School Violence and Stabbings)
+  // Might want straight polylines rendering to each point along path with a distance indicate in info currentInfoWindow
+  // Crime report should have Number of over all crimes of either sort, Each individual crime listed, distance, time and day committed,
+
  }
+
+
 
  handleTrainBtnClick () {
   let stationLocations = this.props.trainStationData;
@@ -389,12 +360,7 @@ this.setState({trainNearBy:true})
   }
 }
 
-  calcRoutes = (map,usrLocale,lat,lng,color) => {
-    console.log('map =>',map )
-    console.log('usrLocale  =>',usrLocale )
-    console.log('lat =>', lat )
-    console.log('lng =>', lng)
-    console.log('color =>', color )
+  calcRoutes = (map,usrLocale,lat,lng,color,type) => {
     let polylineOptions = [];
     let directionsService = new this.props.google.maps.DirectionsService();
     let start = usrLocale;
@@ -428,10 +394,11 @@ this.setState({trainNearBy:true})
         console.log("error ", status)
     }
 
-    //Set the end marker coordinates as the 3rd parameter for the polylineClosure functio.n
-    this.polyLineClosure(polylineOptions,map)
-   map.addListener((e) => {console.log("Listener works, ",e.target)})
-    marker.setMap(map)
+   this.polyLineClosure(polylineOptions,map)
+    if(type === "route"){
+      marker.setMap(map)
+      this.markersAlongPolyPath();
+    }
     });
   }
 
