@@ -296,8 +296,16 @@ this.setState({trainNearBy:true})
  } 
 
  markersAlongPolyPath = () => {
-   console.log("Markers Along Poly hitting")
-   console.log("Now collect all the poly coordinates and see if you can render alternate routes if you can.")
+   console.log("Current Polyline in state, ",this.state.currentPolyline[0].path.length)
+  //  console.log("user Geo in state, ", this.state.userGeoLocation)
+  let polyPath =this.state.currentPolyline[0].path;
+
+  // These are all the latitudes and longitudes of the polyline.
+  polyPath.map((item) => {
+    console.log(item.lat(), " ", item.lng())
+  })
+  // This function handles crimes near by, but what does it return and how can I use this with the polyline lat and lngs.
+  // this.handleCrimesNearby
 
   // Begin looking to render alternate paths.
   // Re-zooming the map as well.
