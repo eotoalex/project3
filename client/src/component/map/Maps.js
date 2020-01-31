@@ -296,16 +296,27 @@ this.setState({trainNearBy:true})
  } 
 
  markersAlongPolyPath = () => {
-   console.log("Current Polyline in state, ",this.state.currentPolyline[0].path.length)
-  //  console.log("user Geo in state, ", this.state.userGeoLocation)
-  let polyPath =this.state.currentPolyline[0].path;
+   let polyArray = []
+   let polyPath = this.state.currentPolyline[0];
+  //  console.log("Current Polyline in state, ",this.state.currentPolyline[0])
+   if (polyPath !== undefined){
+     //  console.log("user Geo in state, ", this.state.userGeoLocation)
+  let polyPathRoute = this.state.currentPolyline[0].path;
 
-  // These are all the latitudes and longitudes of the polyline.
-  polyPath.map((item) => {
-    console.log(item.lat(), " ", item.lng())
+  // // These are all the latitudes and longitudes of the polyline.
+  polyPathRoute.map((item) => {
+    // console.log(item.lat(), " ", item.lng())
+    polyArray.push({lat:item.lat(),lng:item.lng()})
   })
+   }
+ 
   // This function handles crimes near by, but what does it return and how can I use this with the polyline lat and lngs.
-  // this.handleCrimesNearby
+  // I can literally use this function but I would need to refine it to allow for any other function to use it, but as it stands it can only be used for crime near the user.
+  // This should take a parameter, an array of locations from the poly.
+  // For each lat and lng from the polyline there should be two to three crime markers rendered.
+  // If there are no crimes in less than five miles then it does not render.
+  // If a crime location is on the exact path then it will be recognized in the crime report.
+  // this.handleCrimeOnPoly(polyArray)
 
   // Begin looking to render alternate paths.
   // Re-zooming the map as well.
@@ -314,6 +325,11 @@ this.setState({trainNearBy:true})
   // Might want straight polylines rendering to each point along path with a distance indicate in info currentInfoWindow
   // Crime report should have Number of over all crimes of either sort, Each individual crime listed, distance, time and day committed,
 
+  // Distnace on line 462 needs to translate to polyLat, polyLng
+  // then the distance needs to be checked from 0-2 miles from poly.
+  // If so then markers are pushed to state and rendered at the end of poly array map.
+  // If crime is more than this then the markers will not render.
+  // Need to put more crime data in the database.
  }
 
 
@@ -421,8 +437,153 @@ this.setState({trainNearBy:true})
     } 
   }
 
- handleCrimesNearby () {
+handleCrimeOnPoly (polyArr) {
+   console.log("Poly array...  " , polyArr)
+    if(!this.state.crimeNearBy){
+      polyArr.map((poly) => {
 
+      let crimeData = this.state.crimePulled;
+      let polyLat = poly.lat;
+      let polyLng = poly.lng;
+      let crimeInMiles = [];
+      let crimeDistanceCalc = [];
+      let sortedCrimeLocations = [];
+      let crimesNearMe =[];
+      let map = this.state.map;
+      let infoWindow = this.state.onMouseOver;
+  
+  
+      crimeData.map((crime) => {
+      let id = crime._id;
+      let crimeLat = parseFloat(crime.latitude);
+      let crimeLng = parseFloat(crime.longitude);
+    
+      crimeDistanceCalc.push({
+      id : crime._id,
+      crime: crime.offence,
+      lat : crime.latitude,
+      lng : crime.longitude,
+      age : crime.age_group,
+      sex : crime.sex,
+      race : crime.race,
+      levelOfOffence : crime.law_cat_cd,
+      distance: this.distance(polyLat,polyLng,crimeLat,crimeLng),
+      })
+  
+      crimeInMiles.push(this.distance(polyLat,polyLng,crimeLat,crimeLng))
+  
+      })
+      sortedCrimeLocations.push(this.quickSort(crimeInMiles))
+      console.log("crimeDistanceCalc ",crimeDistanceCalc)
+      crimeDistanceCalc.map((item) => {
+        
+      // for(let i = 0; i < 6; i++){
+      
+        // crimesNearMe.push(sortedCrimeLocations[0][i]);
+  
+        if(item.distance < 1){
+          let result = {}
+          result.id = item.id;
+          result.crime = item.crime;
+          result.age = item.age;
+          result.sex = item.sex;
+          result.race = item.race;
+          result.levelOfOffence = item.levelOfOffence;
+          result.lat = item.lat;
+          result.lng = item.lng;
+          result.distance = item.distance;
+          crimesNearMe.push(result);
+          } 
+      // }
+    })
+    // console.log("crimeDistanceCalc ", crimeDistanceCalc);
+    // console.log("sortedCrimeLocations ", sortedCrimeLocations)
+    // console.log("crimeInMiles ", crimeInMiles)
+    
+  
+  
+        crimesNearMe.map((nearestCrime) => {
+          // console.log("crimesNearMe ", crimesNearMe)
+        let crimeLat = parseFloat(nearestCrime.lat);
+        let crimeLng = parseFloat(nearestCrime.lng);
+        let position = {lat:crimeLat, lng:crimeLng};
+        let crime = nearestCrime.crime;
+        // let age = nearestCrime.age;
+        // let sex = nearestCrime.sex;
+        let race =  nearestCrime.race;
+        let levelOfOffence = nearestCrime.levelOfOffence;
+        let distance = nearestCrime.distance;
+        const validateCrimeLevel = (crimeLevel) => {
+          switch(crimeLevel){
+            case "F":
+              return "Felony";
+              case "M":
+              return "Misdemeanor";
+              case "V":
+              return "Violation";
+          }
+        }
+      
+      let marker = new this.props.google.maps.Marker({
+        position:position,
+        content:
+          '<div id="content">'+
+            '<ul id="ul" style="list-style-type:none;">'+
+            '<li>'+ "Crime " + crime +'</li>'+
+            // '<li>'+ "Age Range: " + age +'</li>'+
+            //   '<li>'+ "Sex: " + sex +'</li>'+
+              '<li>'+ "Race: " + race +'</li>'+
+              '<li>'+ "Level Of Offence: " + validateCrimeLevel(levelOfOffence)+'</li>'+
+              '<li>'+ "Distance: " + distance + ' miles'+'</li>'+
+              '<button>'+ "Do you have additional info on this crime?"+'</button>'+
+      
+            '</ul>'+
+          '</div>',
+        
+        icon:this.state.crimeIcon,
+        // onClick:infoWindow(map),
+      });
+      this.state.crimeNearByMarkers.push(marker)
+      marker.setMap(map)
+      marker.addListener('click', function() {
+      // map.setZoom(8);
+      // map.setCenter(marker.getPosition());
+      infoWindow(map,marker)
+    });
+  
+    // Add another parameter which is the color of the polyline. Green for this one.
+    
+    // this.calcRoutes (map,usrLocated,crimeLat,crimeLng)
+    this.state.crimeNearBy = true
+  
+  
+    })
+   })
+  } 
+  
+  else if (this.state.crimeNearBy === true) {
+  
+    let currentPoly = this.state.mainPolyPath;
+    for(let i = 0; i<this.state.crimeNearByMarkers.length; i++){
+      this.state.crimeNearByMarkers[i].setMap(null);
+    }
+   //  console.log("current poly ",this.state.currentPolyline)
+   for(let i = 0; i < currentPoly.length; i++ ){
+   this.state.mainPolyPath[i].setMap(null);
+   }
+   this.state.mainPolyPath = [];
+    this.state.crimeNearByMarkers = [];
+    this.state.crimeNearBy =false;
+   }
+  
+  
+  
+  
+  }
+
+
+ handleCrimesNearby () {
+   
   if(!this.state.crimeNearBy){
     let crimeData = this.state.crimePulled;
     let usrLocated = this.props.usrCurrentLocation;
@@ -455,16 +616,8 @@ this.setState({trainNearBy:true})
 
     crimeInMiles.push(this.distance(userLat,userLng,crimeLat,crimeLng))
 
-    
-
     })
-    // console.log("crime distance array => ",  crimeDistanceCalc)
-    // console.log("Crime in Miles ", crimeInMiles)
     sortedCrimeLocations.push(this.quickSort(crimeInMiles))
-
-  // console.log("sortedCrimeLocations ", sortedCrimeLocations)
-  // console.log("crimeDistanceCalc", crimeDistanceCalc)
-  // console.log("CrimeData ", crimeData)
 
     crimeDistanceCalc.map((item) => {
       
