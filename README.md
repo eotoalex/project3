@@ -30,6 +30,12 @@ ___
 > - Now you can see historic crime data that has occurred around you within this year. (10 markers should be rendering for now, as I test the database settings.)
 >
 > - Though, the tools around the map are none existent the map is interactive, and given the fact that is a Google Map API the user interface is no different from any google map you've used before. Additional documentation on google map interface can be found [here](https://support.google.com/maps/answer/144349?hl=en).
+>
+>The buttons on the right test functionality for identifying Felonys, Misdemeanors, Violations throughout the city that are currently stored in the database (1000 crime records).
+>The train button has stored information on every train location in the city. 
+>The train near me identifies train near your current location. Upon clicking the train icon on the map, an infowindow will identify how far each train is, which trains pass there, the name of the station, etc.
+>
+>The crime near me button identifies the nearest crimes to your current location. Upon clicking on the crime icon, you will get a host of information in the infowindow: the distance, the crime committed, etc. 
 
 # NewsFeed Functionality
 > - The newsfeed scrolls continuously unless you hover over it, in which case it will stop scrolling to the next story. You can now read the headline / summary without it scrolling away.
