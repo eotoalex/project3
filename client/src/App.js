@@ -17,7 +17,7 @@ class App extends React.Component{
     return (
       <Router>
         <div className="App">
-          <Navbar test={console.log("Navbar Props => ",this.props)}/>
+          <Navbar />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/navigation" component={Navigation} />

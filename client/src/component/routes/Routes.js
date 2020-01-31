@@ -8,11 +8,19 @@ class Routes extends React.Component{
         super(props)
         this.state = {
             comment:[],
-            modalShow:true,
-            modalShowTwo:false,
+            modalShow:[],
+            // modalShowTwo:false,
             destination:[],
             destinationLatLng:[]
         }
+        this.displayModalOnLoad = this.displayModalOnLoad.bind(this)
+    }
+    componentDidMount() {
+        this.displayModalOnLoad()
+    }
+
+    displayModalOnLoad = () => {
+        this.setState({modalShow:true})
     }
 
     handleCommentSubmit = (e) => {
@@ -35,11 +43,8 @@ class Routes extends React.Component{
         .then((res) => { 
             let latitude = res.data.results[0].geometry.location.lat;
             let longitude = res.data.results[0].geometry.location.lng;
-            this.setState({destinationLatLng:{latitude,longitude}},
-            () => {console.log("Destination in STate!",this.state.destinationLatLng)}
-            )
+            this.setState({destinationLatLng:{latitude,longitude}})
         })
-        console.log("target ", event.target)
         this.state.modalShow = false;
         // this.setState({modalShow:false})
     }
@@ -50,7 +55,7 @@ class Routes extends React.Component{
         this.setState({
             [name]: value
         });
-        console.log("Destination in state => ", this.state.destination)
+        
     }
 
     render(){
