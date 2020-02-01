@@ -349,6 +349,9 @@ class Maps extends React.Component {
     let polyLat = polyLatLng.lat;
     let polyLng = polyLatLng.lng;
     let CrimeDistanceArr = [];
+    let crimeObjDistances = [];
+    let sortedDistances = [];
+    let closestCrimes =[];
     // let polyLatLng = {lat:poly.lat,lng:poly.lng}
     // let crimeInMiles = [];
     // let crimeDistanceCalc = [];
@@ -383,6 +386,34 @@ class Maps extends React.Component {
 
     console.log(CrimeDistanceArr[0])
     console.log(CrimeDistanceArr)
+    CrimeDistanceArr.map((crimeObj)=> {
+      // The distance will be sorted, but how do I keep the object???
+      // Reference sort function.
+      crimeObjDistances.push(crimeObj.distance)
+
+
+    })
+
+    sortedDistances.push(this.quickSort(crimeObjDistances))
+
+    console.log("sortedDistances => ", sortedDistances)
+
+    CrimeDistanceArr.map((crimeObj) => {
+
+      if(crimeObj.distance === sortedDistances[0][0]){
+        
+        closestCrimes.push(crimeObj)
+
+      }
+    })
+    console.log("closestCrimes => ", closestCrimes)
+
+    
+
+    
+
+    
+
 
   
   //     crimeInMiles.push(this.distance(polyLat,polyLng,crimeLat,crimeLng))
@@ -489,11 +520,6 @@ class Maps extends React.Component {
   //   this.state.mainPolyPath = [];
   //   this.state.crimeNearByMarkers = [];
   //   this.state.crimeNearBy =false;
-   
-  
-  
-  
-  
   }
 
   handleTrainBtnClick () {
