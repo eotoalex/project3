@@ -29,11 +29,11 @@ ___
 >
 > - Now you can see historic crime data that has occurred around you within this year. (10 markers should be rendering for now, as I test the database settings.)
 >
-> - Though, the tools around the map are none existent the map is interactive, and given the fact that is a Google Map API the user interface is no different from any google map you've used before. Additional documentation on google map interface can be found [here](https://support.google.com/maps/answer/144349?hl=en).
+> - Though, the tools around the map are not visible the map is interactive, and given the fact that it is a Google Map API the user interface is no different from any google map you've used before. Additional documentation on the google map interface can be found [here](https://support.google.com/maps/answer/144349?hl=en).
 >
 >The buttons on the right test functionality for identifying Felonys, Misdemeanors, Violations throughout the city that are currently stored in the database (1000 crime records).
 >The train button has stored information on every train location in the city. 
->The train near me identifies train near your current location. Upon clicking the train icon on the map, an infowindow will identify how far each train is, which trains pass there, the name of the station, etc.
+>The train near me identifies trains near your current location. Upon clicking the train icon on the map, an infowindow will identify how far each train is, which trains pass there, the name of the station, etc.
 >
 >The crime near me button identifies the nearest crimes to your current location. Upon clicking on the crime icon, you will get a host of information in the infowindow: the distance, the crime committed, etc. 
 
@@ -66,10 +66,8 @@ ___
 
 # Goals
 * Fix all bugs!
-* We will be inserting the crime data into a structured table that can be accessed in types as apposed to all crimes rendering to the map.
-For example;
-* The user can access which crime to generate on the map (murder, robbery, assault, etc.), in combination with other crimes and/or in isolation from other crimes.
-* A description of the suspect will appear above the marker as an infowindow, along with time, date of crime and a description of the crime when the crime marker is clicked.
+* Have crime markers visualize along the path leading to the users destination. A crime report will be put into the mix as well to give the users an understanding of the path they will be taking.
+* Users will be given alternate routes pending the results of the crime report generated from the user destination input.
 * The user can track trends of each crime in a given area of the city by clicking on a given area or indicating on the destination input area and pressing enter.
 * The user can get access to schools graduation rates, hospitals ratings, tax rates, or average rent within a given area, but more importantly year over year crime for a given borough/area of the city.
 * The user can have their data visualized on a graph.
