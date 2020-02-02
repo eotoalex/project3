@@ -12,25 +12,27 @@ ___
 - [Comment](#Comment)
 - [Article Review](#Article-Review)
 - [Goals Looking Forward...](#Goals-Looking-Forward)
-- [Technologies](#Technologies)
+- [Technologies Used](#Technologies-Used)
 - [Our Philosophy](#Our-Philosophy)
 - [Where does our data come from?](#Where-does-our-data-come-from?)
 - [Beta Release Notes](#Beta-Release-Notes)
 
 
 # Beta Release Notes
-* New Features
+**New Features**
 > The Routes link now renders a user route to their destination with an added marker (checkered flag).
 
-* Fixed Bugs
+**Fixed Bugs**
 > The Routes link in the navigation bar would identify a routed path but no marker.
 
-* Current Issues
+**Current Issues**
 > The GPS does not render the users exact location on the map when the map link is clicked, unless a latitude and longitude in manually put into the map position attribute within its component Map [example]().
 
 # Quick Start up Guide
 > To get started click [here](https://evening-castle-24597.herokuapp.com/) to visit our site.
 > If it's taking extra long to load, please be patient as Heroku wakes up.
+>
+> Here is a quick [demo]() to get your feet wet.
 
 # Where does our data come from?
 > Our data is collected from NYC OpenData, primarily NYPD Arrest Data (Year to Date). There are about 600,000+ incidents, but for the sake of testing functionality and routing, only 1000 incidents are being used and rendered to the map.
@@ -81,7 +83,7 @@ ___
 
 ___
 
-## Technologies 
+## Technologies Used
 * Javascript
 * NodeJS
 * CSS
