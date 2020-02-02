@@ -11,7 +11,7 @@ ___
 - [Route](#Route)
 - [Comment](#Comment)
 - [Article Review](#Article-Review)
-- [Goals Looking Forward...](#Goals-Looking-Forward...)
+- [Goals Looking Forward...](#Goals-Looking-Forward)
 - [Technologies](#Technologies)
 - [Our Philosophy](#Our-Philosophy)
 - [Where does our data come from?](#Where-does-our-data-come-from?)
