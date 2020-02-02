@@ -406,6 +406,9 @@ class Maps extends React.Component {
 
       }
     })
+    // The closest crime will render if the marker is created, but there needs to be a way to limit the amount of operations because it is not logical to have almost 300,000 operations occur to get all the nearest markers rendering.
+    // Unless there was a way to determine which lat lng coordinates were in manhattan and isolate only those lat lng coords.
+    // And to have those lat lngs that are just super far away to be excluded from the following searches. (Could limit searches by half.)
     console.log("closestCrimes => ", closestCrimes)
 
     

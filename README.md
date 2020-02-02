@@ -1,23 +1,40 @@
 # Trekky
 
-Trekky is a crime location app that identifies historic crime data and tracks patterns of incidents, to better inform those that travel around the city. Quarterly arrest records from the NYPD Arrests Data API, are rendered to the Google Maps API, as well as the users location, with additional information on the arrest when the marker is clicked.Users are routed to the nearest subway or any given location they put into the destination bar, with rendered crime that occurred near or around the polyline that forms leading to the destination marker on the map. Trekky is designed to inform user travel and safe routing around the city, with an eventual lead into practical data visualization for law enforcement agencies’ National Crime Information Center database.
+Trekky is a crime app that identifies historic crime data in relation to the users location.  
 ___
 
-## Technologies 
-* Javascript
-* NodeJS
-* CSS
-* Bootstrap
-* React
-* React-Router-Dom
-* ExpressJS
-* MongoDB
-* Mongoose
-* Axios
-* Cheerio
-* JSON Web Tokens
-* Google Maps API
-* New York Crime API
+# Contents
+- [Quick Start up Guide](#Quick-Start-up-Guide)
+- [Map Usage](#Map-Usage)
+- [News Feed](#NewsFeed-Functionality)
+- [Crime Markers](#Crime-Markers)
+- [Route](#Route)
+- [Comment](#Comment)
+- [Article Review](#Article-Review)
+- [Goals Looking Forward...](#Goals-Looking-Forward...)
+- [Technologies](#Technologies)
+- [Our Philosophy](#Our-Philosophy)
+- [Where does our data come from?](#Where-does-our-data-come-from?)
+- [Beta Release Notes](#Beta-Release-Notes)
+
+
+# Beta Release Notes
+* New Features
+> The Routes link now renders a user route to their destination with an added marker (checkered flag).
+
+* Fixed Bugs
+> The Routes link in the navigation bar would identify a routed path but no marker.
+
+* Current Issues
+> The GPS does not render the users exact location on the map when the map link is clicked, unless a latitude and longitude in manually put into the map position attribute within its component Map [example]().
+
+# Quick Start up Guide
+> To get started click [here](https://evening-castle-24597.herokuapp.com/) to visit our site.
+> If it's taking extra long to load, please be patient as Heroku wakes up.
+
+# Where does our data come from?
+> Our data is collected from NYC OpenData, primarily NYPD Arrest Data (Year to Date). There are about 600,000+ incidents, but for the sake of testing functionality and routing, only 1000 incidents are being used and rendered to the map.
+
 ___
 
 # Map Usage
@@ -58,16 +75,30 @@ ___
 > - Currently in development. The comment feature will allow users to ping locations and comment on a given area.
 
 # Article Review
-> - Currently in development. This will allow the user to review and comment on articles that are written on a given area.
-> - Users will also be able to ping the precise location of the articles coverage.
+> - Currently in development. This will allow the user to review and comment on articles appear in the NewsFeed.
+> - Users will also be able to ping the precise location of the articles coverage and contribute to forum on a given article or issue developed into a new forum by the commentators.
 
 
 ___
 
-# Goals
-* Fix all bugs!
-* Have crime markers visualize along the path leading to the users destination. A crime report will be put into the mix as well to give the users an understanding of the path they will be taking.
-* Users will be given alternate routes pending the results of the crime report generated from the user destination input.
-* The user can track trends of each crime in a given area of the city by clicking on a given area or indicating on the destination input area and pressing enter.
-* The user can get access to schools graduation rates, hospitals ratings, tax rates, or average rent within a given area, but more importantly year over year crime for a given borough/area of the city.
-* The user can have their data visualized on a graph.
+## Technologies 
+* Javascript
+* NodeJS
+* CSS
+* Bootstrap
+* React
+* React-Router-Dom
+* ExpressJS
+* MongoDB
+* Mongoose
+* Axios
+* Cheerio
+* JSON Web Tokens
+* Google Maps API
+* New York Crime API
+
+# Goals Looking Forward...
+> Crime markers visualized along the path leading to the users destination, with a crime report appearing at the bottom of the map. 
+> Alternate routes recommended to the user, as a result of the crime report's calculation of crimes in proximity to the routes generated. 
+> Adding more API's that indicate community information like: school violence, school graduation rates, stabbings, murders, real estate prices, school graduation rates, and hospital ratings would be an ideal set of information to have rendered on a chart and the map as well. It would be ideal to have these rendered on a graph all at once to measure trends if any exist.
+> Eventually becoming a visualization tool for law enforcement agencies and citizens alike, utilizing NCIC at full exposure to law enforcement and low for citizens. The goal is to bridge the gap between law enforcement and the citizens they protect by allowing a free flow of information and dialogue along community issues.
