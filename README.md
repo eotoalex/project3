@@ -99,7 +99,7 @@ ___
 >
 > - **Violation button** Renders all violation level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
 >
-> To reference Resources Near Me buttons please click [here](##Resources-Near-Me)
+> To reference Resources Near Me buttons please click [here](#Resources-Near-Me)
 >
 > - These markers are actual crime locations as cited by New York State OpenData [NYPD Arrest Data](https://data.cityofnewyork.us/Public-Safety/NYPD-Arrest-Data-Year-to-Date-/uip8-fykc).
 >
