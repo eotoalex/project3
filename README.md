@@ -83,6 +83,7 @@ ___
 > - You can double click the headline and an additional box area with a brief summary of the news story will drop down from the headline box. You can click on this summary area to get the full article.
 
 # Crime Markers
+
 > - **Felony button** Renders all felony level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
 >
 > - **Misdemeanor button** Renders all misdemeanor level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
