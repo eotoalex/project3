@@ -16,9 +16,8 @@ ___
 - [Route](#Route)
 - [Comment](#Comment)
 - [Article Review](#Article-Review)
-- [Goals Looking Forward...](#Goals-Looking-Forward)
 - [Technologies Used](#Technologies-Used)
-- [Suggestions?](#Suggestions?)
+- [Goals Looking Forward...](#Goals-Looking-Forward)
 
 
 # Quick Start up Guide
