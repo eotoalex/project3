@@ -140,8 +140,11 @@ ___
 
 # Goals Looking Forward...
 > Crime markers visualized along the path leading to the users destination, with a crime report appearing at the bottom of the map. 
-> Alternate routes recommended to the user, as a result of the crime report's calculation of crimes in proximity to the routes generated. 
+>
+> Alternate routes recommended to the user, as a result of the crime report's calculation of crimes in proximity to the routes generated.
+> 
 > Adding more API's that indicate community information like: school violence, school graduation rates, stabbings, murders, real estate prices, school graduation rates, and hospital ratings would be an ideal set of information to have rendered on a chart and the map as well. It would be ideal to have these rendered on a graph all at once to measure trends if any exist.
+>
 > Eventually becoming a visualization tool for law enforcement agencies and citizens alike, utilizing NCIC at full exposure to law enforcement and low for citizens. The goal is to bridge the gap between law enforcement and the citizens they protect by allowing a free flow of information and dialogue that covers community issues.
 
 
