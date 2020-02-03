@@ -74,6 +74,7 @@ ___
 >
 > ## Resources Near Me Buttons
 > To reference to Type of Crime Buttons please click [here](#Type-of-Crime-Buttons).
+>
 > - **Train button**  renders all trains in the New York City area as a train icon in each respective location where they are located. When clicked, each icon will display an information window about the trains that pass there, the station name, the address of the station, and (Coming Soon...) the next train to arrive at that station.
 >
 > - **Train near me button** renders all trains near your current location as a train icon, accompanied by a blue line connecting the user location icon to the train icon on the map. When any of these icons are clicked, an infowindow will appear above the icon stating: which trains pass there, the name of the station, an infowindow identifying how far each train is from your location, and (Coming Soon...) when the next train will be arriving at that station.
@@ -97,6 +98,7 @@ ___
 > - **Misdemeanor button** Renders all misdemeanor level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
 >
 > - **Violation button** Renders all violation level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
+>
 > To reference the Resources Near Me Buttons please click [here](#Resources-Near-Me-Buttons)
 ___
 >
