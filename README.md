@@ -57,6 +57,7 @@ ___
 > Trekky was truly a marvel to think up, but it needs you to breathe, and it needs you to see. As I build out different aspects of this app, I hope you will all join me in testing various functionality. This beta version is far from finished, but we will get there.
 
 ___
+Back to [Table of Contents](#Contents)
 
 # Where does our data come from?
 > Our data is collected from NYC OpenData, primarily NYPD Arrest Data (Year to Date). There are about 600,000+ incidents, but for the sake of testing and building new functionality and routing, only 1000 incidents are being used and rendered to this beta version of Trekky.
@@ -88,6 +89,8 @@ ___
 > - **Train near me button** renders all trains near your current location as a train icon, accompanied by a blue line connecting the user location icon to the train icon on the map. When any of these icons are clicked, an infowindow will appear above the icon stating: which trains pass there, the name of the station, an infowindow identifying how far each train is from your location, and (Coming Soon...) when the next train will be arriving at that station.
 >
 > - **Crime near me button** renders all crimes near your current location as a crime icon with a red slash over a shadowed figure, accompanied by a red line connecting the user location icon with the crime icon on the map. Upon clicking on the crime icon, you will get a host of information in an infowindow above the icon stating: the crime committed, the distance the user current is from the crime, the level of offense the crime falls under, whether the assailant is male of female. 
+
+Back to [Table of Contents](#Contents)
 
 # NewsFeed Functionality
 
@@ -155,5 +158,8 @@ ___
 > Adding more API's that indicate community information like: school violence, school graduation rates, stabbings, murders, real estate prices, school graduation rates, and hospital ratings would be an ideal set of information to have rendered on a chart and the map as well. It would be ideal to have these rendered on a graph all at once to measure trends if any exist.
 >
 > Eventually becoming a visualization tool for law enforcement agencies and citizens alike, utilizing NCIC at full exposure to law enforcement and low for citizens. The goal is to bridge the gap between law enforcement and the citizens they protect by allowing a free flow of information and dialogue that covers community issues.
+___
+
+Back to [Table of Contents](#Contents)
 
 
