@@ -57,6 +57,8 @@ ___
 >
 > Trekky was truly a marvel to think up, but it needs you to breathe, and it needs you to see. As I build out different aspects of this app, I hope you will all join me in testing various functionality. This beta version is far from finished, but we will get there.
 
+___
+
 # Where does our data come from?
 > Our data is collected from NYC OpenData, primarily NYPD Arrest Data (Year to Date). There are about 600,000+ incidents, but for the sake of testing and building new functionality and routing, only 1000 incidents are being used and rendered to this beta version of Trekky.
 
@@ -112,9 +114,9 @@ ___
 >
 > - These markers are actual crime locations as cited by New York State OpenData [NYPD Arrest Data](https://data.cityofnewyork.us/Public-Safety/NYPD-Arrest-Data-Year-to-Date-/uip8-fykc).
 >
-> - The [information window](https://developers.google.com/maps/documentation/javascript/infowindows) for each marker appears above the icon after clicking on a crime marker. These informatin windows will give additional [information](#Type-of-Crime-Buttons) of the crime committed in that area. To close these window just click on the marker or another marker and the infowindow will close.
->
-> - The information in these infowindows contain: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
+> - The [information window](https://developers.google.com/maps/documentation/javascript/infowindows) for each marker appears above the icon after clicking on a crime marker. These information windows will give additional [information](#Type-of-Crime-Buttons) of the crime committed in that area. To close these window just click on the marker or another marker and the infowindow will close.
+
+___
 
 
 # Route
