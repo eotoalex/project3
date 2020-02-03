@@ -28,6 +28,7 @@ ___
 
 
 # Beta Release Notes
+
 **New Features**
 > The Routes link now renders a user route to their destination when a landmark or address is put into the modal that appears at the top of the Route page when clicked. Please reference the [Route](#Route) documentation for more information. 
 >
@@ -79,7 +80,9 @@ ___
 
 # Crime Markers
 > - The markers with the red slash over a shadowed figure is an actual crime location as cited by New York State Open Data records.
+>
 > - The pop up window for each marker works after clicking on a crime location. These informatin windows will give additional information of the crime committed in that area.
+>
 > - The information include, sex, race, crime committed, leve of offence and date of arrest.
 
 # Route
@@ -93,8 +96,6 @@ ___
 # Article Review
 > - Currently in development. This will allow the user to review and comment on articles appear in the NewsFeed.
 > - Users will also be able to ping the precise location of the articles coverage and contribute to forum on a given article or issue developed into a new forum by the commentators.
-
-
 ___
 
 ## Technologies Used
