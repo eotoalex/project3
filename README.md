@@ -70,9 +70,9 @@ ___
 >
 > - This is a Google Map API, so the user interface is no different from any google map you've used before. Additional documentation on the google map interface can be found [here](https://support.google.com/maps/answer/144349?hl=en).
 >
-> - The buttons on the right test functionality for identifying Felonys, Misdemeanors, Violations, All trains, trains near me and crimes near me.
+> - The buttons on the right test functionality for identifying types of crimes like Felonys, Misdemeanors, Violations. Below the these types of crime buttons we have the all trains, trains near me and crimes near me buttons as well.
 >
-> In reference to the crime buttons please click [here](#Crime-Markers).
+> In reference to Type of Crime Buttons please click [here](#Type-of-Crime-Buttons).
 >
 > ## Resources Near Me
 > - **Train button**  renders all trains in the New York City area as a train icon in each respective location where they are located. When clicked, each icon will display an information window about the trains that pass there, the station name, the address of the station, and (Coming Soon...) the next train to arrive at that station.
@@ -92,12 +92,13 @@ ___
 > - You can double click the headline and an additional box area with a brief summary of the news story will drop down from the headline box. You can click on this summary area to get the full article.
 
 # Crime Markers
-
+> ## Type of Crime Buttons
 > - **Felony button** Renders all felony level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
 >
 > - **Misdemeanor button** Renders all misdemeanor level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
 >
 > - **Violation button** Renders all violation level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
+___
 >
 > To reference Resources Near Me buttons please click [here](#Resources-Near-Me)
 >
