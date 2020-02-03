@@ -145,7 +145,7 @@ ___
 * Cheerio
 * JSON Web Tokens
 * Google Maps API
-* New York Crime API
+* [NYPD Arrest Data](https://data.cityofnewyork.us/Public-Safety/NYPD-Arrest-Data-Year-to-Date-/uip8-fykc)
 
 # Goals Looking Forward...
 > Crime markers visualized along the path leading to the users destination, with a crime report appearing at the bottom of the map. 
