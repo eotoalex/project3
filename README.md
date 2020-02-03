@@ -44,6 +44,7 @@ ___
 **Current Issues**
 > Earlier, the user's GPS was used to render the initial blue and red marker, which indicates the users position. Then, the users GPS began to act strange when moving the wifi was changed. Until this is resolved, the GPS is given a default location. 
 
+Back to [Table of Contents](#Contents)
 
 # Our Philosophy
 
