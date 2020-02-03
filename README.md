@@ -27,9 +27,15 @@ ___
 
 # Beta Release Notes
 **New Features**
-> The Routes link now renders a user route to their destination with an added marker (checkered flag).
+> The Routes link now renders a user route to their destination when a landmark or address is put into the modal that appears at the top of the Route page when clicked. Please reference the [Route](#Route) documentation for more information. 
+>
+> A checkered flag icon will now appear at the users routed location. Please reference the [Route](#Route) documentation for more information.
+>
+> A reference to the google object made it possible to get every instance of the polyline
 
 **Fixed Bugs**
+> Converting the users input into a valid latitude and longitude to connect to a polyline seemed almost impossible, especially when the polylines Google Maps API offered did not give me the exact latitudes and longitudes of the routes being referenced. 
+>
 > The Routes link in the navigation bar would identify a routed path but no marker.
 
 **Current Issues**
