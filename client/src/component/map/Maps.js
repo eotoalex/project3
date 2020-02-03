@@ -13,7 +13,7 @@ class Maps extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      routeSet:false,
+      routeSet:this.props.route,
       modalShow:false,
       mainPolyPath:[],
       crimePathPoly:[],
@@ -293,14 +293,18 @@ class Maps extends React.Component {
   markersAlongPolyPath = () => {
    let polyArray = [];
    let polyPath = this.state.currentPolyline[0];
+   let isDestinationSet = this.props.destination;
+   console.log("isDestinationSet => ", isDestinationSet )
    
-   if (this.state.routeSet === false){
+   if (isDestinationSet.length === [0]){
     let crimeDistanceCalc = [];
     let sortedCrimeDistances = [];
   let polyPathRoute = this.state.currentPolyline[0].path;
   // console.log("props => ",this.props)
   // console.log("PolyPath length => ", polyPathRoute)
   // // These are all the latitudes and longitudes of the polyline.
+
+
   polyPathRoute.map((item) => {
     
     polyArray.push({lat:item.lat(),lng:item.lng()})

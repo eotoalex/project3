@@ -85,7 +85,7 @@ class Navbar extends React.Component{
                   </Link>
                 </Col>
                 <Col> 
-                  <Link to="/newsreview" className="nav-link" >
+                  <Link to="*" className="nav-link" >
                     Reviews
                   </Link>
                 </Col>
@@ -95,7 +95,7 @@ class Navbar extends React.Component{
                   </Link>
                 </Col>
                 <Col> 
-                  <Link to="/comment" className="nav-link" onClick={this.handComment}>
+                  <Link to="*" className="nav-link" onClick={this.handComment}>
                     Comment
                    </Link>
                 </Col>

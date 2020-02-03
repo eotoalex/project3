@@ -19,10 +19,12 @@ ___
 
 
 # Quick Start up Guide
-> To get started click [here](https://evening-castle-24597.herokuapp.com/) to visit our site.
-> If it's taking extra long to load, please be patient as Heroku wakes up.
+> Here is video [demo]() to get your feet wet.
 >
-> Here is a quick [demo]() to get your feet wet.
+> If you want to get started on your own click [here](https://evening-castle-24597.herokuapp.com/) to visit the beta version of the app.
+> If it's taking extra long to load, please be patient as Heroku wakes up.
+
+
 
 
 # Beta Release Notes
@@ -31,12 +33,12 @@ ___
 >
 > A checkered flag icon will now appear at the users routed location. Please reference the [Route](#Route) documentation for more information.
 >
-> A reference to the google object made it possible to get every instance of the polyline
+> A reference to the google object made it possible to get every instance of the polyline latitude and longitude routes. This is crucial for recommending routes to users based on the amount of criminal activity in a given route.
 
 **Fixed Bugs**
 > Converting the users input into a valid latitude and longitude to connect to a polyline seemed almost impossible, especially when the polylines Google Maps API offered did not give me the exact latitudes and longitudes of the routes being referenced. 
 >
-> The Routes link in the navigation bar would identify a routed path but no marker.
+> The Routes linked in the navigation bar would identify a routed path but no marker.
 
 **Current Issues**
 > The GPS does not render the users exact location on the map when the map link is clicked, unless a latitude and longitude in manually put into the map position attribute within its component Map [example]().
