@@ -111,8 +111,9 @@ ___
 
 # Route
 > - When clicked, an address can be typed into the destination input box. 
-> - Thereafter, a route will indicate a safe route for the user, in the form of a blue polyline.
-> - Coming Soon (User gets to choose their route based on the crime report of a given route and crime locations render upon user request and so does a crime report for a given location or route within a 3 mile radius.)
+> - Thereafter, a route will indicate a safe path for the user in the form of a blue polyline.
+> - **Coming Soon...** The user will be given options of routes to choose from based on the crime report of a given path. 
+> - **Coming Soon...** The crime locations along the path to the user's destination will render crime icons upon user clicking to view the crime report for a given route. 
 
 # Comment
 > - **Currently in development** The comment feature will allow users to ping locations and comment on a given area.
