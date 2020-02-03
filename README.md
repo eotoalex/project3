@@ -70,15 +70,15 @@ ___
 >
 > - This is a Google Map API, so the user interface is no different from any google map you've used before. Additional documentation on the google map interface can be found [here](https://support.google.com/maps/answer/144349?hl=en).
 >
->The buttons on the right test functionality for identifying Felonys, Misdemeanors, Violations, All trains, trains near me and crimes near me.
+> - The buttons on the right test functionality for identifying Felonys, Misdemeanors, Violations, All trains, trains near me and crimes near me.
 >
 > In reference to the crime buttons please click [here](#Crime-Markers).
 >
-> **Train button**  renders all trains in the New York City area as a train icon in each respective location where they are located. When clicked, each icon will display an information window about the trains that pass there, the station name, the address of the station, and (Coming Soon...) the next train to arrive at that station.
+> - **Train button**  renders all trains in the New York City area as a train icon in each respective location where they are located. When clicked, each icon will display an information window about the trains that pass there, the station name, the address of the station, and (Coming Soon...) the next train to arrive at that station.
 >
 > - **Train near me button** renders all trains near your current location as a train icon, accompanied by a blue line connecting the user location icon to the train icon on the map. When any of these icons are clicked, an infowindow will appear above the icon stating: which trains pass there, the name of the station, an infowindow identifying how far each train is from your location, and (Coming Soon...) when the next train will be arriving at that station.
 >
-> **Crime near me button** renders all crimes near your current location as a crime icon with a red slash over a shadowed figure, accompanied by a red line connecting the user location icon with the crime icon on the map. Upon clicking on the crime icon, you will get a host of information in an infowindow above the icon stating: the crime committed, the distance the user current is from the crime, the level of offense the crime falls under, whether the assailant is male of female. 
+> - **Crime near me button** renders all crimes near your current location as a crime icon with a red slash over a shadowed figure, accompanied by a red line connecting the user location icon with the crime icon on the map. Upon clicking on the crime icon, you will get a host of information in an infowindow above the icon stating: the crime committed, the distance the user current is from the crime, the level of offense the crime falls under, whether the assailant is male of female. 
 
 # NewsFeed Functionality
 
