@@ -1,6 +1,6 @@
 # Trekky
 
-Trekky is a crime app that identifies historic crime data in relation to the users location, attempting to merge news reporting and live user commentating and bridge the gap between the conflicts between citizens and law enforcement. 
+Trekky is a crime app that identifies historic crime data in relation to the users location, attempting to merge news reporting and live user commentating, to bridge the gap between between citizens and law enforcement and build strong, safe communities. 
 ___
 
 # Contents
