@@ -74,6 +74,7 @@ ___
 >
 > In reference to the crime buttons please click [here](#Crime-Markers).
 >
+> ## Resources Near Me
 > - **Train button**  renders all trains in the New York City area as a train icon in each respective location where they are located. When clicked, each icon will display an information window about the trains that pass there, the station name, the address of the station, and (Coming Soon...) the next train to arrive at that station.
 >
 > - **Train near me button** renders all trains near your current location as a train icon, accompanied by a blue line connecting the user location icon to the train icon on the map. When any of these icons are clicked, an infowindow will appear above the icon stating: which trains pass there, the name of the station, an infowindow identifying how far each train is from your location, and (Coming Soon...) when the next train will be arriving at that station.
@@ -98,7 +99,7 @@ ___
 >
 > - **Violation button** Renders all violation level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
 >
-> To reference crime near me and train near me buttons please click [here](#Map-Usage)
+> To reference Resources Near Me buttons please click [here](##Resources-Near-Me)
 >
 > - These markers are actual crime locations as cited by New York State OpenData [NYPD Arrest Data](https://data.cityofnewyork.us/Public-Safety/NYPD-Arrest-Data-Year-to-Date-/uip8-fykc).
 >
