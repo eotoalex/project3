@@ -7,6 +7,8 @@ ___
 - [Quick Start up Guide](#Quick-Start-up-Guide)
 - [Beta Release Notes](#Beta-Release-Notes)
 - [Our Philosophy](#Our-Philosophy)
+- [Where does our data come from?](#Where-does-our-data-come-from?)
+- [The User Icon](#The-User-Icon)
 - [Map Usage](#Map-Usage)
 - [News Feed](#NewsFeed-Functionality)
 - [Crime Markers](#Crime-Markers)
@@ -15,7 +17,7 @@ ___
 - [Article Review](#Article-Review)
 - [Goals Looking Forward...](#Goals-Looking-Forward)
 - [Technologies Used](#Technologies-Used)
-- [Where does our data come from?](#Where-does-our-data-come-from?)
+- [Suggestions?](#Suggestions?)
 
 
 # Quick Start up Guide
@@ -49,26 +51,34 @@ ___
 
 
 # Where does our data come from?
-> Our data is collected from NYC OpenData, primarily NYPD Arrest Data (Year to Date). There are about 600,000+ incidents, but for the sake of testing and building new functionality and routing, only 1000 incidents are being used and rendered to the map.
+> Our data is collected from NYC OpenData, primarily NYPD Arrest Data (Year to Date). There are about 600,000+ incidents, but for the sake of testing and building new functionality and routing, only 1000 incidents are being used and rendered to this beta version of Trekky.
 
 ___
 
+# The User Icon
+> - Be aware that on loading the map, the user icon should appear as a blue circular figure with a red dot in the middle. If it does not please refresh the page.
+>
+> - For this beta version, the GPS will not pick up your current location but is given a default location as the GPS is being debugged for accurate geolocation rendering.
+___
+
 # Map Usage
-> - To access the beta version of the app click on the [Trekky](https://evening-castle-24597.herokuapp.com/) link. Please allow time for Heroku to load, as it is hosting this beta application and requires a few seconds if openned for the first time.
+> - To access the beta version of the app click on this [Trekky](https://evening-castle-24597.herokuapp.com/) link. Please allow time for Heroku to load, as it is hosting this beta application and requires a few seconds to load if openned for the first time.
 >
-> - Enable location services on your browser, which will appear as a notification prompting you to accept or decline. Accept the location finder to have your location rendered to the map. There after, you may have to refresh the page if the crime data does not render properly.
+> - Enable location services on your browser, which will appear as a notification prompting you to accept or decline. Accept the location finder to have your location rendered to the map. 
 >
-> - After registering and signing in, go to the map to see crime data in your area. 
+> - After registering and signing in, go to the map to see crime data in your area or crime near you. 
 >
-> - Now you can see historic crime data that has occurred around you within this year. (10 markers should be rendering for now, as I test the database settings.)
+> - This is a Google Map API, so the user interface is no different from any google map you've used before. Additional documentation on the google map interface can be found [here](https://support.google.com/maps/answer/144349?hl=en).
 >
-> - Though, the tools around the map are not visible the map is interactive, and given the fact that it is a Google Map API the user interface is no different from any google map you've used before. Additional documentation on the google map interface can be found [here](https://support.google.com/maps/answer/144349?hl=en).
+>The buttons on the right test functionality for identifying Felonys, Misdemeanors, Violations, All trains, trains near me and crimes near me.
 >
->The buttons on the right test functionality for identifying Felonys, Misdemeanors, Violations throughout the city that are currently stored in the database (1000 crime records).
->The train button has stored information on every train location in the city. 
->The train near me identifies trains near your current location. Upon clicking the train icon on the map, an infowindow will identify how far each train is, which trains pass there, the name of the station, etc.
+> In reference to the crime buttons please click [here](#Crime-Markers).
 >
->The crime near me button identifies the nearest crimes to your current location. Upon clicking on the crime icon, you will get a host of information in the infowindow: the distance, the crime committed, etc. 
+> **Train button**  renders all trains in the New York City area as a train icon in each respective location where they are located. When clicked, each icon will display an information window about the trains that pass there, the station name, the address of the station, and (Coming Soon...) the next train to arrive at that station.
+>
+> - **Train near me button** renders all trains near your current location as a train icon, accompanied by a blue line connecting the user location icon to the train icon on the map. When any of these icons are clicked, an infowindow will appear above the icon stating: which trains pass there, the name of the station, an infowindow identifying how far each train is from your location, and (Coming Soon...) when the next train will be arriving at that station.
+>
+> **Crime near me button** renders all crimes near your current location as a crime icon with a red slash over a shadowed figure, accompanied by a red line connecting the user location icon with the crime icon on the map. Upon clicking on the crime icon, you will get a host of information in an infowindow above the icon stating: the crime committed, the distance the user current is from the crime, the level of offense the crime falls under, whether the assailant is male of female. 
 
 # NewsFeed Functionality
 
@@ -87,6 +97,8 @@ ___
 > - **Misdemeanor button** Renders all misdemeanor level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
 >
 > - **Violation button** Renders all violation level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
+>
+> To reference crime near me and train near me buttons please click [here](#Map-Usage)
 >
 > - These markers are actual crime locations as cited by New York State OpenData [NYPD Arrest Data](https://data.cityofnewyork.us/Public-Safety/NYPD-Arrest-Data-Year-to-Date-/uip8-fykc).
 >
@@ -128,4 +140,6 @@ ___
 > Crime markers visualized along the path leading to the users destination, with a crime report appearing at the bottom of the map. 
 > Alternate routes recommended to the user, as a result of the crime report's calculation of crimes in proximity to the routes generated. 
 > Adding more API's that indicate community information like: school violence, school graduation rates, stabbings, murders, real estate prices, school graduation rates, and hospital ratings would be an ideal set of information to have rendered on a chart and the map as well. It would be ideal to have these rendered on a graph all at once to measure trends if any exist.
-> Eventually becoming a visualization tool for law enforcement agencies and citizens alike, utilizing NCIC at full exposure to law enforcement and low for citizens. The goal is to bridge the gap between law enforcement and the citizens they protect by allowing a free flow of information and dialogue along community issues.
+> Eventually becoming a visualization tool for law enforcement agencies and citizens alike, utilizing NCIC at full exposure to law enforcement and low for citizens. The goal is to bridge the gap between law enforcement and the citizens they protect by allowing a free flow of information and dialogue that covers community issues.
+
+
