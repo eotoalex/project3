@@ -1,12 +1,13 @@
 # Trekky
 
-Trekky is a crime app that identifies historic crime data in relation to the users location.  
+Trekky is a crime app that identifies historic crime data in relation to the users location, attempting to merge news reporting and live user commentating and bridge the gap between the conflicts between citizens and law enforcement. 
 ___
 
 # Contents
 - [Quick Start up Guide](#Quick-Start-up-Guide)
 - [Beta Release Notes](#Beta-Release-Notes)
 - [Our Philosophy](#Our-Philosophy)
+- [What Motivated This APP](#What-Motivated-This-APP)
 - [Where does our data come from?](#Where-does-our-data-come-from?)
 - [The User Icon](#The-User-Icon)
 - [Map Usage](#Map-Usage)
@@ -49,6 +50,12 @@ ___
 
 **Don't just find your way, know your way**
 
+# What Motivated This APP
+> It is important to have historical and real-time information to make informed decisions about what to do next. Having historical information is not current enough and have current information is not logical unless processed in respect to the context of the times in which we live. This is where Trekky takes both, merges them into one, and allows communities to come together to keep their communities safe.
+>
+>Hopefully with additional support from law enforcement agencies, we can see Trekky building a community that extends past just a simple mapping application for data. We can see users commenting on news reports and articles, commentating on where they are as they ping their locations, identifying criminal activity, taking video or images that might help law enforcement investigations, reference data from quarterly arrests and hopefully, police officers can assist people based on the urgency of these posts and create a rating system that incentivizes police officers based on the positive comments and community badges they can earn.
+>
+> Trekky was truly a marvel to think up, but it needs you to breathe, and it needs you to see. As I build out different aspects of this app, I hope you will all join me in testing various functionality. This beta version is far from finished, but we will get there.
 
 # Where does our data come from?
 > Our data is collected from NYC OpenData, primarily NYPD Arrest Data (Year to Date). There are about 600,000+ incidents, but for the sake of testing and building new functionality and routing, only 1000 incidents are being used and rendered to this beta version of Trekky.
