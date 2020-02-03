@@ -19,7 +19,7 @@ ___
 
 
 # Quick Start up Guide
-> Here is video [demo]() to get your feet wet.
+> Here is video [demo](https://www.youtube.com/watch?v=J5hwEFtVCnU) to get your feet wet.
 >
 > If you want to get started on your own click [here](https://evening-castle-24597.herokuapp.com/) to visit the beta version of the app.
 > If it's taking extra long to load, please be patient as Heroku wakes up.
@@ -42,15 +42,16 @@ ___
 > The Routes linked in the navigation bar would identify a routed path but no marker.
 
 **Current Issues**
-> The GPS does not render the users exact location on the map when the map link is clicked, unless a latitude and longitude in manually put into the map position attribute within its component Map [example]().
+> Earlier, the user's GPS was used to render the initial blue and red marker, which indicates the users position. Then, the users GPS began to act strange when moving the wifi was changed. Until this is resolved, the GPS is given a default location. 
 
 
 # Our Philosophy
+
 **Don't just find your way, know your way ;)**
 
 
 # Where does our data come from?
-> Our data is collected from NYC OpenData, primarily NYPD Arrest Data (Year to Date). There are about 600,000+ incidents, but for the sake of testing functionality and routing, only 1000 incidents are being used and rendered to the map.
+> Our data is collected from NYC OpenData, primarily NYPD Arrest Data (Year to Date). There are about 600,000+ incidents, but for the sake of testing and building new functionality and routing, only 1000 incidents are being used and rendered to the map.
 
 ___
 
@@ -72,18 +73,29 @@ ___
 >The crime near me button identifies the nearest crimes to your current location. Upon clicking on the crime icon, you will get a host of information in the infowindow: the distance, the crime committed, etc. 
 
 # NewsFeed Functionality
-> - The newsfeed scrolls continuously unless you hover over it, in which case it will stop scrolling to the next story. You can now read the headline / summary without it scrolling away.
+
+> - The NewsFeed is the teal, rectangular box centered at the top of the map but just below the navigation bar.
 >
-> - If you missed a story that scrolled by, you can click on the left arrow on the left side of the newsfeed container to go back one story. Continuous clicking will scroll backwards through the story headlines.
+> - The NewsFeed scrolls continuously to the next article headline until the mouse pointer hovers over it. When the mouse-pointer is hovering over the NewsFeed box, the feed will stop scrolling to the next headline.
 >
-> - You can double click the headline and get a brief summary of the news story. You can click this summary area to get the full article.
+> - If you missed a story that scrolled by, you can click on the left arrow on the left side of the NewsFeed box to go back one headline. Continuously clicking either the left or right arrow will scroll the headlines in their respective directions.
+>
+> - You can double click the headline and an additional box area with a brief summary of the news story will drop down from the headline box. You can click on this summary area to get the full article.
 
 # Crime Markers
-> - The markers with the red slash over a shadowed figure is an actual crime location as cited by New York State Open Data records.
+
+> - **Felony button** Renders all felony level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
 >
-> - The pop up window for each marker works after clicking on a crime location. These informatin windows will give additional information of the crime committed in that area.
+> - **Misdemeanor button** Renders all misdemeanor level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
 >
-> - The information include, sex, race, crime committed, leve of offence and date of arrest.
+> - **Violation button** Renders all violation level arrests, by location, as an icon with a red slash over a shadowed figure. When any of these icons are clicked, an infowindow will appear above the icon stating: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
+>
+> - These markers are actual crime locations as cited by New York State OpenData [NYPD Arrest Data](https://data.cityofnewyork.us/Public-Safety/NYPD-Arrest-Data-Year-to-Date-/uip8-fykc).
+>
+> - The pop up window for each marker works after clicking on a crime location. These informatin windows will give additional information of the crime committed in that area. To close these window just click on the marker or another marker and the infowindow will close.
+>
+> - The information in these infowindows contain: the sex of assailant, their race, the crime committed, the level of the offence committed and the date of arrest. 
+
 
 # Route
 > - When clicked, an address can be typed into the destination input box. 
@@ -91,10 +103,10 @@ ___
 > - Coming Soon (User gets to choose their route based on the crime report of a given route and crime locations render upon user request and so does a crime report for a given location or route within a 3 mile radius.)
 
 # Comment
-> - Currently in development. The comment feature will allow users to ping locations and comment on a given area.
+> - **Currently in development** The comment feature will allow users to ping locations and comment on a given area.
 
 # Article Review
-> - Currently in development. This will allow the user to review and comment on articles appear in the NewsFeed.
+> - **Currently in development** This will allow the user to review and comment on articles appear in the NewsFeed.
 > - Users will also be able to ping the precise location of the articles coverage and contribute to forum on a given article or issue developed into a new forum by the commentators.
 ___
 
