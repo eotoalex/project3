@@ -25,8 +25,6 @@ ___
 > If it's taking extra long to load, please be patient as Heroku wakes up.
 
 
-
-
 # Beta Release Notes
 
 **New Features**
@@ -47,7 +45,7 @@ ___
 
 # Our Philosophy
 
-**Don't just find your way, know your way ;)**
+**Don't just find your way, know your way**
 
 
 # Where does our data come from?
