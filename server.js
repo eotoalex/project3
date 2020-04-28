@@ -17,7 +17,7 @@ const SubwayStations = require ('./model/SubwayStations');
 // Defining middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname ,"client/build")));
+app.use(express.static(path.join(__dirname ,"client")));
 //  app.use(express.static(path.join(__dirname ,"./client/public")));
 
 // Set up mongoose locally and for mLab.
@@ -210,7 +210,7 @@ app.delete("/dropDB",()=>{
 // Send every other request to the react app.
 app.get("*", (req, res) => {
     //This top res.send is for the development server on heroku.
-    res.sendFile(path.join(__dirname, "./public/index.html"));
+    res.sendFile(path.join(__dirname, "./client/public/index.html"));
     // res.sendFile(path.join(__dirname, "./client/src/index.js"));
     
 });
