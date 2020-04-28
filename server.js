@@ -17,7 +17,7 @@ const SubwayStations = require ('./model/SubwayStations');
 // Defining middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname ,"client")));
+app.use(express.static(path.join(__dirname ,"client/build")));
 //  app.use(express.static(path.join(__dirname ,"./client/public")));
 
 // Set up mongoose locally and for mLab.
