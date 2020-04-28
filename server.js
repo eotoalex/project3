@@ -210,7 +210,7 @@ app.delete("/dropDB",()=>{
 // Send every other request to the react app.
 app.get("*", (req, res) => {
     //This top res.send is for the development server on heroku.
-    res.sendFile(path.join(__dirname, "./client/public/index.html"));
+    res.sendFile(path.join(__dirname, "./public/index.html"));
     // res.sendFile(path.join(__dirname, "./client/src/index.js"));
     
 });
