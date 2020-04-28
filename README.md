@@ -1,4 +1,4 @@
-# Trekky
+# Trekky ![Trekey Logo](/client/src/icons/trekey-logo.png)
 
 Trekky is a crime app that identifies historic crime data in relation to the users location.  We will successfully merge news reporting and live user commentating, to bridge the gap between between citizens and law enforcement and build strong, safe communities. 
 ___
