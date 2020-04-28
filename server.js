@@ -4,7 +4,7 @@ const path = require("path");
 const axios = require("axios");
 const app = express();
 const cheerio = require("cheerio");
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5000;
 const Users = require('./model/Users');
 const jwt = require('jsonwebtoken');
 const crimeLocationsController = require('./controllers/crimeLocationController');
@@ -18,6 +18,7 @@ const SubwayStations = require ('./model/SubwayStations');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname ,"client/build")));
+// app.use(express.static(path.join(__dirname ,"client/public")));
 
 // Set up mongoose locally and for mLab.
 const MONGODB_URL = process.env.MONGODB_URI || "mongodb://localhost/project_db";
@@ -28,6 +29,15 @@ db.once("open", () => {console.log('Connected')});
 db.on("error", function(err){
 console.log(err);
 });
+
+// For local testing of the app.
+// app.get("",  function () {
+//   res.sendFile(path.join(__dirname, "./client/public/index.html"));
+// })
+
+// app.get("/", function (req,res) {
+//   res.send(path.join(__dirname ,"./client/src/index.js"))
+// })
 
 app.get("/add/user", function(req,res){
   Users.find({}, function(err, data){
@@ -183,7 +193,6 @@ app.get('/train_latlng', (req,res) => {
       results.line = line;
       results.info = info;
 
-
       SubwayStations.create(results)
       .then((res) => {console.log("Loaded Subway info to DB...", res)})
       .catch((err) => {console.log(err)})
@@ -200,7 +209,10 @@ app.delete("/dropDB",()=>{
   
 // Send every other request to the react app.
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+    //This top res.send is for the development server on heroku.
+    res.sendFile(path.join(__dirname, "./client/public/index.html"));
+    // res.sendFile(path.join(__dirname, "./client/src/index.js"));
+    
 });
 
 app.listen(PORT, () => {
