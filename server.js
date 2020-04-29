@@ -18,7 +18,7 @@ const SubwayStations = require ('./model/SubwayStations');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname ,"client/build")));
-//  app.use(express.static(path.join(__dirname ,"./client/public")));
+// app.use(express.static(path.join(__dirname ,"client/public")));
 
 // Set up mongoose locally and for mLab.
 const MONGODB_URL = process.env.MONGODB_URI || "mongodb://localhost/project_db";
@@ -36,7 +36,7 @@ console.log(err);
 // })
 
 // app.get("/", (req, res) => {
-//   res.render(path.join(__dirname, "index.html"))
+//   console.log(res.json())
 // });
 
 app.get("/add/user", function(req,res){
