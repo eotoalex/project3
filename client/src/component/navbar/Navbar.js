@@ -17,6 +17,7 @@ class Navbar extends React.Component{
         e.preventDefault()
         localStorage.removeItem('usertoken')
         this.props.history.push(`/`)
+        console.log("the slash => ", this.props.history.push(`/`))
     }
 
     handComment = () => {
@@ -35,11 +36,11 @@ class Navbar extends React.Component{
               Login
             </Link>
             </Col>
-            {/* <Col>
+            <Col>
               <Link to="/signup" className="nav-link">
                 Register
               </Link>
-            </Col> */}
+            </Col>
           </Row>
         </Container>
       </ul>
