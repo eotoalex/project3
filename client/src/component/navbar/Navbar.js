@@ -79,26 +79,26 @@ class Navbar extends React.Component{
                       Map
                   </Link>
                 </Col>
-                <Col> 
+                {/* <Col> 
                   <Link to="/profile" className="nav-link">
                     Profile
                   </Link>
-                </Col>
-                <Col> 
+                </Col> */}
+                {/* <Col> 
                   <Link to="*" className="nav-link" >
                     Reviews
                   </Link>
-                </Col>
+                </Col> */}
                 <Col> 
                   <Link to="/routes" className="nav-link" >
                     Routes
                   </Link>
                 </Col>
-                <Col> 
+                {/* <Col> 
                   <Link to="*" className="nav-link" onClick={this.handComment}>
                     Comment
                    </Link>
-                </Col>
+                </Col> */}
               </Row>
             </Container>
           </ul>
