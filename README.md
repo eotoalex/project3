@@ -24,8 +24,7 @@ ___
 # Quick Start up Guide
 > Here is video [demo](https://www.youtube.com/watch?v=J5hwEFtVCnU) to get your feet wet.
 >
-> If you want to get started on your own click [here](https://evening-castle-24597.herokuapp.com/) to visit the beta version of the app.
-> If it's taking extra long to load, please be patient as Heroku wakes up.
+> The site is currently being maintained by an outside source, so it will be under construction for a bit. Feel free to click on the link above to check out the demo.
 
 
 # Beta Release Notes
